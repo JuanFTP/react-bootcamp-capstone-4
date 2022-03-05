@@ -1,0 +1,29 @@
+.form-control {
+	display: inline-block;
+	overflow: hidden;
+	background-color: var(--light);
+}
+
+.form-control input,
+.form-control select {
+	background-color: blue;
+	height: 48px;
+	border: 0px;
+	outline: 0px;
+	padding: 14px 16px;
+	background-color: transparent;
+}
+
+.form-control input::placeholder {
+	font-size: 0.8rem;
+}
+
+.form-control.round {
+	border-radius: 36px;
+	padding: 0px 16px;
+}
+
+.form-control .icon-area,
+.form-control .input {
+	float: left;
+}
