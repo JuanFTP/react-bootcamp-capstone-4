@@ -1,311 +1,145 @@
-import product from "./../../../media/image/product_001.jfif";
+import Title, { titleLevels } from "./../../common/Title";
+import Toolbar from "./../Toolbar/Toolbar";
+import ListProducts from "../ListProducts/ListProducts";
+import Pagination from "../Pagination/Pagination";
 
 const Products = () => {
-	return (
+	const products = [
+		{
+			id: 1,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 2,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 3,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 4,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 5,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 6,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 7,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 8,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 9,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 10,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 11,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+		{
+			id: 12,
+			image: "",
+			name: "Product name",
+			category: "Category",
+			sku: "12345678926",
+			price: 5643.22,
+		},
+	];
+
+	const pages = [
+		{
+			id: 1,
+			number: 1,
+			isActive: true,
+		},
+		{
+			id: 2,
+			number: 2,
+			isActive: false,
+		},
+		{
+			id: 3,
+			number: 3,
+			isActive: false,
+		},
+		{
+			id: 4,
+			number: 4,
+			isActive: false,
+		},
+		{
+			id: 5,
+			number: 5,
+			isActive: false,
+		},
+	];
+
+	return products.length > 0 ? (
 		<div className="row">
-			<h3>PRODUCTS</h3>
-			<div className="tools">
-				<div className="flex ai-center jc-space-between">
-					<div className="instruction">
-						<h4>Filter by</h4>
-					</div>
-					<div className="filters">
-						<div className="form-control">
-							<select name="category" id="category">
-								<option value="">Category</option>
-								<option value="0">Category 1</option>
-								<option value="1">Category 2</option>
-								<option value="2">Category 3</option>
-								<option value="3">Category 4</option>
-								<option value="4">Category 5</option>
-							</select>
-						</div>
-
-						<div className="form-control">
-							<select name="category" id="category">
-								<option value="">Price</option>
-								<option value="0">Price 1</option>
-								<option value="1">Price 2</option>
-								<option value="2">Price 3</option>
-								<option value="3">Price 4</option>
-								<option value="4">Price 5</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="grid">
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name long description</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="card product">
-					<div className="image">
-						<img src={product} alt="" />
-					</div>
-
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<h4>Product name</h4>
-								<div className="chip sm">CATEGORY</div>
-							</div>
-							<span className="sku">1235623548</span>
-						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<h3>$5623.22</h3>
-								<div className="icon-area">Icon</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="pagination">
-				<div className="flex ai-center jc-space-between">
-					<div className="icon-area">Icon</div>
-					<div className="pages">
-						<div className="page">
-							<div className="icon-area">1</div>
-						</div>
-						<div className="page active">
-							<div className="icon-area">2</div>
-						</div>
-						<div className="page">
-							<div className="icon-area">3</div>
-						</div>
-					</div>
-					<div className="icon-area">Icon</div>
-				</div>
-			</div>
+			<Title Level={titleLevels.H3}>PRODUCTS</Title>
+			<Toolbar />
+			<ListProducts products={products} />
+			<Pagination pages={pages} />
 		</div>
+	) : (
+		<Title Level={titleLevels.H3}>No products</Title>
 	);
 };
 

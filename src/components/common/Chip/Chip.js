@@ -5,7 +5,6 @@ export const chipVariants = {
 };
 
 const Chip = ({ children, variant }) => {
-	console.log(variant);
 	return (
 		<div className={`chip ${variant && chipVariants[variant]}`}>
 			{children}

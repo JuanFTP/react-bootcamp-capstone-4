@@ -1,68 +1,47 @@
-import category from "./../../../media/image/category_001.jpg";
+import Button, { buttonVariants } from "../../common/Button";
+import ListCategories from "../ListCategories/ListCategories";
+import Title, { titleLevels } from "./../../common/Title";
 
 const Categories = () => {
+	const categories = [
+		{
+			id: 1,
+			image: "",
+			name: "Category 1",
+		},
+		{
+			id: 2,
+			image: "",
+			name: "Category 2",
+		},
+		{
+			id: 3,
+			image: "",
+			name: "Category 3",
+		},
+		{
+			id: 4,
+			image: "",
+			name: "Category 4",
+		},
+		{
+			id: 5,
+			image: "",
+			name: "Category 5",
+		},
+	];
+
 	return (
 		<div className="row">
 			<div className="row">
 				<div className="flex ai-top jc-space-between">
-					<h3>CATEGORIES</h3>
-					<button className="btn btn-outline">
-						VIEW ALL CATEGORIES{" "}
-					</button>
+					<Title Level={titleLevels.H3}>CATEGORIES</Title>
+					<Button variant={buttonVariants.outline}>
+						VIEW ALL CATEGORIES
+					</Button>
 				</div>
 			</div>
-			<div className="grid max">
-				<div className="card category">
-					<div className="image">
-						<img src={category} alt="" />
-					</div>
-					<div className="data">
-						<div className="flex ai-center jc-center">
-							<h4>CATEGORY</h4>
-						</div>
-					</div>
-				</div>
-				<div className="card category">
-					<div className="image">
-						<img src={category} alt="" />
-					</div>
-					<div className="data">
-						<div className="flex ai-center jc-center">
-							<h4>CATEGORY</h4>
-						</div>
-					</div>
-				</div>
-				<div className="card category">
-					<div className="image">
-						<img src={category} alt="" />
-					</div>
-					<div className="data">
-						<div className="flex ai-center jc-center">
-							<h4>CATEGORY</h4>
-						</div>
-					</div>
-				</div>
-				<div className="card category">
-					<div className="image">
-						<img src={category} alt="" />
-					</div>
-					<div className="data">
-						<div className="flex ai-center jc-center">
-							<h4>CATEGORY</h4>
-						</div>
-					</div>
-				</div>
-				<div className="card category">
-					<div className="image">
-						<img src={category} alt="" />
-					</div>
-					<div className="data">
-						<div className="flex ai-center jc-center">
-							<h4>CATEGORY</h4>
-						</div>
-					</div>
-				</div>
-			</div>
+			{categories && <ListCategories categories={categories} />}
 		</div>
 	);
 };

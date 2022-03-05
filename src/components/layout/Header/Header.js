@@ -2,7 +2,7 @@ import { IoCartOutline } from "react-icons/io5";
 import Brand from "../../common/Brand/Brand";
 import IconArea from "./../../common/IconArea/IconArea";
 import FormControl from "./../FormControl/FormControl";
-import Chip from "./../../common/Chip/Chip";
+import Chip from "./../../common/Chip";
 
 const Header = () => {
 	return (

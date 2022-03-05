@@ -1,0 +1,22 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: 600;
+	color: var(--default);
+}
+
+h1 {
+	font-size: 4rem;
+}
+
+h2 {
+	font-size: 1.4rem;
+}
+
+h3 {
+	font-size: 1.4rem;
+	line-height: 3.5rem;
+	margin-bottom: 1.4rem;
+}

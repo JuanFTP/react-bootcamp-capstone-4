@@ -21,29 +21,6 @@
 	--transition: all ease 500ms;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-	font-weight: 600;
-	color: var(--default);
-}
-
-h1 {
-	font-size: 4rem;
-}
-
-h2 {
-	font-size: 1.4rem;
-}
-
-h3 {
-	font-size: 1.4rem;
-	line-height: 3.5rem;
-	margin-bottom: 1.4rem;
-}
-
 .flex {
 	display: flex;
 }
@@ -99,31 +76,6 @@ img {
 	color: var(--default);
 }
 
-.btn {
-	text-transform: uppercase;
-	cursor: pointer;
-	border: 0px;
-	outline: 0px;
-	height: 48px;
-	padding: 7px 24px;
-	color: var(--default);
-	font-weight: 600;
-	font-size: 1rem;
-	background-color: var(--light);
-}
-
-.btn.btn-outline {
-	background-color: transparent;
-}
-
-.btn:hover {
-	transition: var(--transition);
-}
-
-.btn:hover.btn-outline {
-	background-color: var(--light-72);
-}
-
 .row {
 	padding-top: 72px;
 }
@@ -160,47 +112,6 @@ img {
 	margin: 0px 8px;
 }
 
-.card {
-	border-radius: 16px;
-	background-color: back;
-	box-shadow: var(--shadow);
-	overflow: hidden;
-}
-
-.card .row {
-	padding: 0px;
-}
-
-.card.category .data {
-	padding: 24px 0px;
-}
-
-.card.product .data {
-	padding: 48px 32px;
-}
-
-.card.product .data h4 {
-	margin-right: 8px;
-	font-size: 1.25rem;
-}
-
-.tools {
-	height: 48px;
-	margin-bottom: 32px;
-}
-
-.tools .instruction {
-	line-height: 48px;
-}
-
-.tools .form-control {
-	margin-right: 24px;
-}
-
-.tools .form-control:last-child {
-	margin-right: 0px;
-}
-
 .grid {
 	display: grid;
 	grid-gap: 48px;
@@ -233,25 +144,6 @@ img {
 	.card.category .data {
 		padding: 12px 0px;
 	}
-}
-
-.pagination {
-	margin-top: 32px;
-	height: 48px;
-}
-
-.pagination .pages {
-	font-weight: 600;
-}
-
-.pagination .page {
-	display: inline-block;
-	margin: 0px 8px;
-}
-
-.pagination .page.active {
-	font-weight: 900;
-	background-color: var(--light);
 }
 
 .footer {
