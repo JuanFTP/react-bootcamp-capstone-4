@@ -2,35 +2,7 @@ import Button, { buttonVariants } from "../../common/Button";
 import ListCategories from "../ListCategories/ListCategories";
 import Title, { titleLevels } from "./../../common/Title";
 
-const Categories = () => {
-	const categories = [
-		{
-			id: 1,
-			image: "https://flif.info/example-images/fish.png",
-			name: "Category 1",
-		},
-		{
-			id: 2,
-			image: "",
-			name: "Category 2",
-		},
-		{
-			id: 3,
-			image: "",
-			name: "Category 3",
-		},
-		{
-			id: 4,
-			image: "",
-			name: "Category 4",
-		},
-		{
-			id: 5,
-			image: "",
-			name: "Category 5",
-		},
-	];
-
+const Categories = ({ categories }) => {
 	return (
 		<div className="row">
 			<div className="row">

@@ -4,17 +4,17 @@ const Select = ({ options, optionDefault, instruction }) => {
 			<option value="">{instruction}</option>
 			{options &&
 				options.map((option) => {
-					return optionDefault && optionDefault === option.id ? (
+					return (
 						<option
 							key={option.id}
 							value={option.id}
-							selected={true}
+							selected={
+								optionDefault && optionDefault === option.id
+									? true
+									: false
+							}
 						>
-							{option.value}
-						</option>
-					) : (
-						<option key={option.id} value={option.id}>
-							{option.value}
+							{option.name}
 						</option>
 					);
 				})}

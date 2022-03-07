@@ -7,7 +7,7 @@ import Chip from "./../../common/Chip";
 import { MdSearch } from "react-icons/md";
 import Input, { inputTypes } from "./../../common/Input";
 
-const Header = () => {
+const Header = ({ itemsOnCart }) => {
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
@@ -27,7 +27,7 @@ const Header = () => {
 							<MdOutlineShoppingCart />
 						</IconArea>
 
-						<Chip>0</Chip>
+						{itemsOnCart && <Chip>{itemsOnCart}</Chip>}
 					</div>
 				</div>
 			</div>

@@ -32,7 +32,6 @@ const getSlides = (slides, slideActive) => {
 };
 
 const Carousel = ({ slides, mH, slideActive }) => {
-	console.log(slides, mH, slideActive);
 	return (
 		<div
 			style={{

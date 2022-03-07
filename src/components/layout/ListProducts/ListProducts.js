@@ -7,14 +7,17 @@ import { chipVariants } from "../../common/Chip/Chip";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 
+const getCapitalize = (input) =>
+	input.charAt(0).toUpperCase() + input.substring(1, input.length);
+
 const getListProducts = (products) => {
 	return products.map((product) => {
 		return (
 			<Card key={product.id} variant={cardVariants.product}>
 				<ImageBackground
 					media={
-						product.image && product.image !== ""
-							? product.image
+						product.image.url && product.image.url !== ""
+							? product.image.url
 							: imgDefault
 					}
 					h={"320px"}
@@ -25,7 +28,8 @@ const getListProducts = (products) => {
 						<div className="flex ai-center jc-start">
 							<Title Level={titleLevels.H4}>{product.name}</Title>
 							<Chip variant={chipVariants.sm}>
-								{product.category}
+								{product.category.slug &&
+									getCapitalize(product.category.slug)}
 							</Chip>
 						</div>
 						<span className="sku">{product.sku}</span>

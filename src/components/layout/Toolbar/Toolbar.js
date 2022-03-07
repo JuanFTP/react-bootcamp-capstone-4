@@ -3,30 +3,7 @@ import Title, { titleLevels } from "./../../common/Title";
 import FormControl from "./../FormControl";
 import Select from "../../common/Select/Select";
 
-const Toolbar = () => {
-	const categories = [
-		{
-			id: 0,
-			value: "Category 1",
-		},
-		{
-			id: 1,
-			value: "Category 2",
-		},
-		{
-			id: 2,
-			value: "Category 3",
-		},
-		{
-			id: 3,
-			value: "Category 4",
-		},
-		{
-			id: 4,
-			value: "Category 5",
-		},
-	];
-
+const Toolbar = ({ filters }) => {
 	return (
 		<div className="toolbar">
 			<div className="flex ai-center jc-space-between">
@@ -35,7 +12,10 @@ const Toolbar = () => {
 				</div>
 				<div className="filters">
 					<FormControl>
-						<Select options={categories} instruction="Category" />
+						<Select
+							options={filters.options}
+							instruction={filters.instruction}
+						/>
 					</FormControl>
 				</div>
 			</div>

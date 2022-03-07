@@ -9,8 +9,8 @@ const getListCategories = (categories) => {
 			<Card key={category.id} variant={cardVariants.category}>
 				<ImageBackgrund
 					media={
-						category.image && category.image !== ""
-							? category.image
+						category.image.url && category.image.url !== ""
+							? category.image.url
 							: imgDefault
 					}
 					h={"200px"}

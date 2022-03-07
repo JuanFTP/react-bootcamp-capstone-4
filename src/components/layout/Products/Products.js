@@ -3,105 +3,11 @@ import Toolbar from "./../Toolbar/Toolbar";
 import ListProducts from "../ListProducts/ListProducts";
 import Pagination from "../Pagination/Pagination";
 
-const Products = () => {
-	const products = [
-		{
-			id: 1,
-			image: "https://flif.info/example-images/fish.png",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 2,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 3,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 4,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 5,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 6,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 7,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 8,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 9,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 10,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 11,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-		{
-			id: 12,
-			image: "",
-			name: "Product name",
-			category: "Category",
-			sku: "12345678926",
-			price: 5643.22,
-		},
-	];
+const Products = ({ products, categories }) => {
+	const filters = {
+		instruction: "Category",
+		options: categories,
+	};
 
 	const pages = [
 		{
@@ -131,15 +37,15 @@ const Products = () => {
 		},
 	];
 
-	return products.length > 0 ? (
+	return products && products.length > 0 ? (
 		<div className="row">
 			<Title Level={titleLevels.H3}>PRODUCTS</Title>
-			<Toolbar />
+			<Toolbar filters={filters} />
 			<ListProducts products={products} />
 			<Pagination pages={pages} />
 		</div>
 	) : (
-		<Title Level={titleLevels.H3}>No products</Title>
+		<Title Level={titleLevels.H4}>No products</Title>
 	);
 };
 
