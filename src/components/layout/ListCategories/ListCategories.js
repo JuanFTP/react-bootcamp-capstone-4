@@ -1,19 +1,20 @@
 import Card, { cardVariants } from "../../common/Card";
 import imgDefault from "./../../../media/image/category_001.jpg";
 import Title, { titleLevels } from "./../../common/Title";
+import ImageBackgrund from "./../../common/ImageBackground";
 
 const getListCategories = (categories) => {
 	return categories.map((category) => {
 		return (
 			<Card key={category.id} variant={cardVariants.category}>
-				<div className="image">
-					<img
-						src={
-							category.image !== "" ? category.image : imgDefault
-						}
-						alt=""
-					/>
-				</div>
+				<ImageBackgrund
+					media={
+						category.image && category.image !== ""
+							? category.image
+							: imgDefault
+					}
+					h={"200px"}
+				/>
 				<div className="data">
 					<div className="flex ai-center jc-center">
 						<Title Level={titleLevels.H4}>{category.name}</Title>

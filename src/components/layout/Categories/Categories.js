@@ -6,7 +6,7 @@ const Categories = () => {
 	const categories = [
 		{
 			id: 1,
-			image: "",
+			image: "https://flif.info/example-images/fish.png",
 			name: "Category 1",
 		},
 		{

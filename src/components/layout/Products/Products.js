@@ -7,7 +7,7 @@ const Products = () => {
 	const products = [
 		{
 			id: 1,
-			image: "",
+			image: "https://flif.info/example-images/fish.png",
 			name: "Product name",
 			category: "Category",
 			sku: "12345678926",

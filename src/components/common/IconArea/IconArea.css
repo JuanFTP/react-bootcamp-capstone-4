@@ -6,4 +6,7 @@
 	line-height: 48px;
 	text-align: center;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

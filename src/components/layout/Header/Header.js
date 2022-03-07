@@ -1,8 +1,11 @@
-import { IoCartOutline } from "react-icons/io5";
+import "./Header.css";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import Brand from "../../common/Brand/Brand";
 import IconArea from "./../../common/IconArea/IconArea";
 import FormControl from "./../FormControl/FormControl";
 import Chip from "./../../common/Chip";
+import { MdSearch } from "react-icons/md";
+import Input, { inputTypes } from "./../../common/Input";
 
 const Header = () => {
 	return (
@@ -10,12 +13,18 @@ const Header = () => {
 			<div className="flex ai-center jc-space-between">
 				<Brand />
 
-				<FormControl />
+				<FormControl minWidth="45%" feedback={true} round={true}>
+					<IconArea>
+						<MdSearch />
+					</IconArea>
+
+					<Input type={inputTypes.text} />
+				</FormControl>
 
 				<div className="actions">
 					<div className="stats">
 						<IconArea>
-							<IoCartOutline />
+							<MdOutlineShoppingCart />
 						</IconArea>
 
 						<Chip>0</Chip>

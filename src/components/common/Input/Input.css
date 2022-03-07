@@ -1,0 +1,13 @@
+input,
+select {
+	height: 48px;
+	width: 100%;
+	border: 0px;
+	outline: 0px;
+	padding: 14px 16px;
+	background-color: transparent !important;
+}
+
+input::placeholder {
+	font-size: 0.8rem;
+}

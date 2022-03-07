@@ -2,20 +2,23 @@ import { MdAddShoppingCart } from "react-icons/md";
 import Title, { titleLevels } from "./../../common/Title";
 import imgDefault from "./../../../media/image/product_001.jfif";
 import Card, { cardVariants } from "../../common/Card";
-import Chip from "../../common/Chip";
+import Chip from "./../../common/Chip";
 import { chipVariants } from "../../common/Chip/Chip";
-import IconArea from "../../common/IconArea/IconArea";
+import IconArea from "./../../common/IconArea/IconArea";
+import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 
 const getListProducts = (products) => {
 	return products.map((product) => {
 		return (
 			<Card key={product.id} variant={cardVariants.product}>
-				<div className="image">
-					<img
-						src={product.image !== "" ? product.image : imgDefault}
-						alt=""
-					/>
-				</div>
+				<ImageBackground
+					media={
+						product.image && product.image !== ""
+							? product.image
+							: imgDefault
+					}
+					h={"320px"}
+				/>
 
 				<div className="data">
 					<div className="row">

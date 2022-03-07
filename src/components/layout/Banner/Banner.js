@@ -1,28 +1,26 @@
 import { IoRadioButtonOff, IoRadioButtonOn } from "react-icons/io5";
-import IconArea from "./../../common/IconArea/IconArea";
+import Carousel from "../Carousel";
+import IconArea from "./../../common/IconArea";
 
-const Banner = () => {
+const Banner = ({ banners }) => {
 	return (
 		<div className="banner">
-			<div className="carousel">
-				<div className="slide">
-					<p>Slide 1</p>
-				</div>
-				<div className="slide">
-					<p>Slide 2</p>
-				</div>
-				<div className="slide">
-					<p>Slide 3</p>
-				</div>
-			</div>
+			{banners && (
+				<Carousel
+					slides={banners}
+					mH={banners[0].image.dimensions.height}
+					slideActive={banners[0].id}
+				/>
+			)}
+
 			<div className="controls">
 				<div className="flex ai-center jc-center">
 					<div className="actions">
 						<IconArea>
-							<IoRadioButtonOff />
+							<IoRadioButtonOn />
 						</IconArea>
 						<IconArea>
-							<IoRadioButtonOn />
+							<IoRadioButtonOff />
 						</IconArea>
 						<IconArea>
 							<IoRadioButtonOff />

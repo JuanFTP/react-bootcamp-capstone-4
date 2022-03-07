@@ -23,6 +23,8 @@
 
 .flex {
 	display: flex;
+	height: 100%;
+	width: 100%;
 }
 
 .flex.ai-top {
@@ -58,18 +60,6 @@ img {
 	width: 100%;
 }
 
-.header {
-	position: fixed;
-	width: 100%;
-	height: 72px;
-	background-color: var(--white);
-	padding: 12px var(--horizontal-spacing);
-}
-
-.header .form-control {
-	min-width: 45%;
-}
-
 .sku {
 	font-size: 0.75rem;
 	font-weight: 300;
@@ -78,6 +68,10 @@ img {
 
 .row {
 	padding-top: 72px;
+}
+
+.row .row {
+	padding-top: 0px;
 }
 
 .stats {
@@ -91,16 +85,6 @@ img {
 
 .stats .chip {
 	margin-top: 11px;
-}
-
-.carousel {
-	width: 100%;
-	min-height: 931px;
-	background-color: gray;
-}
-
-.carousel .slide {
-	float: left;
 }
 
 .actions {
