@@ -1,7 +1,14 @@
 import "./IconArea.css";
 
-const IconArea = ({ children }) => {
-	return <div className="icon-area">{children}</div>;
+const IconArea = ({ children, value, onClicketItem }) => {
+	return (
+		<div
+			className="icon-area"
+			onClick={() => onClicketItem && value && onClicketItem(value)}
+		>
+			{children}
+		</div>
+	);
 };
 
 export default IconArea;

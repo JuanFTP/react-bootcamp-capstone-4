@@ -1,6 +1,4 @@
-import { IoRadioButtonOff, IoRadioButtonOn } from "react-icons/io5";
 import Carousel from "../Carousel";
-import IconArea from "./../../common/IconArea";
 
 const Banner = ({ banners }) => {
 	return (
@@ -12,22 +10,6 @@ const Banner = ({ banners }) => {
 					slideActive={banners[0].id}
 				/>
 			)}
-
-			<div className="controls">
-				<div className="flex ai-center jc-center">
-					<div className="actions">
-						<IconArea>
-							<IoRadioButtonOn />
-						</IconArea>
-						<IconArea>
-							<IoRadioButtonOff />
-						</IconArea>
-						<IconArea>
-							<IoRadioButtonOff />
-						</IconArea>
-					</div>
-				</div>
-			</div>
 		</div>
 	);
 };
