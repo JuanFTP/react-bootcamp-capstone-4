@@ -1,7 +1,7 @@
 import Title, { titleLevels } from "./../../common/Title";
 import Toolbar from "./../Toolbar/Toolbar";
-import ListProducts from "../ListProducts/ListProducts";
-import Pagination from "../Pagination/Pagination";
+import ListProducts from "./../ListProducts/ListProducts";
+import Pagination from "./../Pagination/Pagination";
 
 const Products = ({ products, categories }) => {
 	const filters = {

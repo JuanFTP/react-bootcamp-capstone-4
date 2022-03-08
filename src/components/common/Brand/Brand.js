@@ -1,5 +1,7 @@
 import "./Brand.css";
-import logo from "./../../../media/image/avatar.jpg";
+import logo from "./../../../media/logo.svg";
+import { APP_NAME } from "./../../../utils/constants";
+import Title, { titleLevels } from "./../../common/Title";
 
 const Brand = () => {
 	return (
@@ -7,7 +9,7 @@ const Brand = () => {
 			<div className="image round">
 				<img src={logo} alt="" />
 			</div>
-			<h2>Store</h2>
+			<Title Level={titleLevels.H2}>{APP_NAME}</Title>
 		</div>
 	);
 };

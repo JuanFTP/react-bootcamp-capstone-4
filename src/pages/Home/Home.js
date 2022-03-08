@@ -4,9 +4,9 @@ import Banner from "./../../components/layout/Banner";
 import Categories from "./../../components/layout/Categories";
 import Products from "./../../components/layout/Products";
 import Container from "./../../components/common/Container";
-import { useFeaturedBanners } from "./../../utils/hooks/useFeaturedBanners";
-import { useFeaturedCategories } from "./../../utils/hooks/useFeaturedCategories";
-import { useFeaturedProducts } from "./../../utils/hooks/useFeaturedProducts";
+import featuredBanners from "./../../mocks/en-us/featured-banners.json";
+import productsCategories from "./../../mocks/en-us/product-categories.json";
+import featuredProducts from "./../../mocks/en-us/featured-products.json";
 
 const getBanners = (data) => {
 	return (
@@ -61,13 +61,9 @@ const getProducts = (data) => {
 };
 
 const Home = () => {
-	const resultBanners = useFeaturedBanners();
-	const banners = getBanners(resultBanners.data.results);
-	const resultCategories = useFeaturedCategories();
-	const categories = getCategories(resultCategories.data.results);
-	const resultProducts = useFeaturedProducts();
-	const products = getProducts(resultProducts.data.results);
-	console.log(products);
+	const banners = getBanners(featuredBanners.results);
+	const categories = getCategories(productsCategories.results);
+	const products = getProducts(featuredProducts.results);
 
 	return (
 		<div>

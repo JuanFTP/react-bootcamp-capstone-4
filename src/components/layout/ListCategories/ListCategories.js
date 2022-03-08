@@ -1,5 +1,5 @@
 import Card, { cardVariants } from "../../common/Card";
-import imgDefault from "./../../../media/image/category_001.jpg";
+import imgDefault from "./../../../media/category.jpg";
 import Title, { titleLevels } from "./../../common/Title";
 import ImageBackgrund from "./../../common/ImageBackground";
 
@@ -13,7 +13,7 @@ const getListCategories = (categories) => {
 							? category.image.url
 							: imgDefault
 					}
-					h={"200px"}
+					h={"195px"}
 				/>
 				<div className="data">
 					<div className="flex ai-center jc-center">

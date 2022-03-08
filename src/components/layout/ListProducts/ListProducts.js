@@ -1,6 +1,6 @@
 import { MdAddShoppingCart } from "react-icons/md";
 import Title, { titleLevels } from "./../../common/Title";
-import imgDefault from "./../../../media/image/product_001.jfif";
+import imgDefault from "./../../../media/product.jfif";
 import Card, { cardVariants } from "../../common/Card";
 import Chip from "./../../common/Chip";
 import { chipVariants } from "../../common/Chip/Chip";
