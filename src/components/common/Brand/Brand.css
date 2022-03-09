@@ -1,0 +1,9 @@
+.brand .image {
+	width: 48px;
+	float: left;
+}
+
+.brand h2 {
+	line-height: 48px;
+	float: left;
+}

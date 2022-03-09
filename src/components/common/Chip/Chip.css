@@ -1,0 +1,15 @@
+.chip {
+	text-align: center;
+	padding: 3px 6px;
+	border-radius: 22px;
+	font-size: 1rem;
+	line-height: 20px;
+	font-weight: 600;
+	color: var(--default);
+	background-color: var(--light);
+}
+
+.chip.sm {
+	font-size: 0.75rem;
+	padding: 2px 12px;
+}

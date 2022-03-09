@@ -1,0 +1,12 @@
+.carousel {
+	height: calc(100vh - 64px);
+}
+
+.carousel .slides {
+	max-height: calc(100% - 48px);
+}
+
+.carousel .controls {
+	height: 48px;
+	width: 100%;
+}

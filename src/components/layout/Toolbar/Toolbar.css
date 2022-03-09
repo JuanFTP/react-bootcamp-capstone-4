@@ -1,0 +1,16 @@
+.toolbar {
+	height: 48px;
+	margin-bottom: 32px;
+}
+
+.toolbar .instruction {
+	line-height: 48px;
+}
+
+.toolbar .form-control {
+	margin-right: 24px;
+}
+
+.toolbar .form-control:last-child {
+	margin-right: 0px;
+}

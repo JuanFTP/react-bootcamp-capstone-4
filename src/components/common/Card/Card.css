@@ -1,0 +1,31 @@
+.card {
+	border-radius: 16px;
+	background-color: back;
+	box-shadow: var(--shadow);
+	overflow: hidden;
+}
+
+.card .row {
+	padding: 0px;
+}
+
+.card.category {
+	cursor: pointer;
+}
+
+.card.category .data {
+	padding: 24px 0px;
+}
+
+.card.category .data h4 {
+	text-transform: uppercase;
+}
+
+.card.product .data {
+	padding: 24px 32px;
+}
+
+.card.product .data h4 {
+	margin-right: 8px;
+	font-size: 1.25rem;
+}
