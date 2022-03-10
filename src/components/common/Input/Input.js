@@ -11,7 +11,7 @@ const Input = ({ type }) => {
 			<input
 				value=""
 				type={type && inputTypes[type]}
-				placeholder="Type any and press enter for search"
+				placeholder="Type for search"
 				onChange={() => {
 					console.log("On change");
 				}}

@@ -29,3 +29,8 @@
 	margin-right: 8px;
 	font-size: 1.25rem;
 }
+
+.card.product .data h3 {
+	margin-right: 8px;
+	font-size: 1.5rem;
+}

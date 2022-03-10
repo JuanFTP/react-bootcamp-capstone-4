@@ -13,6 +13,7 @@ const Categories = ({ categories }) => {
 					</Button>
 				</div>
 			</div>
+			<br />
 			{categories && <ListCategories categories={categories} />}
 		</div>
 	);

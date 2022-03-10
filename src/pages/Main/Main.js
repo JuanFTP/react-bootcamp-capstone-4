@@ -1,12 +1,12 @@
-import Footer from "./../../components/layout/Footer";
-import Header from "./../../components/layout/Header";
-import Banner from "./../../components/layout/Banner";
-import Categories from "./../../components/layout/Categories";
-import Products from "./../../components/layout/Products";
-import Container from "./../../components/common/Container";
-import featuredBanners from "./../../mocks/en-us/featured-banners.json";
-import productsCategories from "./../../mocks/en-us/product-categories.json";
-import featuredProducts from "./../../mocks/en-us/featured-products.json";
+import Footer from "../../components/layout/Footer";
+import Header from "../../components/layout/Header";
+import Banner from "../../components/layout/Banner";
+import Categories from "../../components/layout/Categories";
+import Products from "../../components/layout/Products";
+import Container from "../../components/common/Container";
+import featuredBanners from "../../mocks/en-us/featured-banners.json";
+import productsCategories from "../../mocks/en-us/product-categories.json";
+import featuredProducts from "../../mocks/en-us/featured-products.json";
 
 const getBanners = (data) => {
 	return (
@@ -60,19 +60,23 @@ const getProducts = (data) => {
 	);
 };
 
-const Home = () => {
+const Main = ({ onChangeLocation }) => {
 	const banners = getBanners(featuredBanners.results);
 	const categories = getCategories(productsCategories.results);
 	const products = getProducts(featuredProducts.results);
 
 	return (
 		<div>
-			<Header />
+			<Header onChangeLocation={onChangeLocation} />
 			<Banner banners={banners} />
 
 			<Container>
 				<Categories categories={categories} />
-				<Products products={products} categories={categories} />
+				<Products
+					products={products}
+					title="RECOMMENDED PRODUCTS"
+					onChangeLocation={onChangeLocation}
+				/>
 			</Container>
 
 			<Footer />
@@ -80,4 +84,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Main;

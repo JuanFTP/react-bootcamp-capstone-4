@@ -7,11 +7,11 @@ import Chip from "./../../common/Chip";
 import { MdSearch } from "react-icons/md";
 import Input, { inputTypes } from "./../../common/Input";
 
-const Header = ({ itemsOnCart }) => {
+const Header = ({ itemsOnCart, onChangeLocation }) => {
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
-				<Brand />
+				<Brand value={"main"} onClickItem={onChangeLocation} />
 
 				<FormControl minWidth="45%" feedback={true} round={true}>
 					<IconArea>

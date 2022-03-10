@@ -1,8 +1,17 @@
+import { useState } from "react";
 import "./App.css";
-import Home from "./pages/Home";
+import View from "./pages/View";
 
 const App = () => {
-	return <Home />;
+	const [location, setLocation] = useState("main");
+
+	const onChangeLocation = (newLocation) => {
+		if (newLocation !== location) {
+			setLocation(newLocation);
+		}
+	};
+
+	return <View location={location} onChangeLocation={onChangeLocation} />;
 };
 
 export default App;

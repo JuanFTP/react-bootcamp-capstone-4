@@ -6,9 +6,12 @@ export const buttonVariants = {
 	default: "default",
 };
 
-const Button = ({ children, variant }) => {
+const Button = ({ children, variant, value, onClickItem }) => {
 	return (
-		<button className={`btn btn-${buttonVariants[variant]}`}>
+		<button
+			className={`btn btn-${buttonVariants[variant]}`}
+			onClick={() => onClickItem && value && onClickItem(value)}
+		>
 			{children}
 		</button>
 	);

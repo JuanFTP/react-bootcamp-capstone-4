@@ -1,14 +1,29 @@
 import Title, { titleLevels } from "./../../common/Title";
 import ListProducts from "./../ListProducts/ListProducts";
+import Button, { buttonVariants } from "./../../common/Button";
 
-const Products = ({ products }) => {
-	return products && products.length > 0 ? (
+const Products = ({ products, title, onChangeLocation }) => {
+	return (
 		<div className="row">
-			<Title Level={titleLevels.H3}>RECOMMENDED PRODUCTS</Title>
-			<ListProducts products={products} limit={12} />
+			<div className="row">
+				<div className="flex ai-top jc-space-between">
+					{title && <Title Level={titleLevels.H3}>{title}</Title>}
+					<Button
+						variant={buttonVariants.outline}
+						value={"products"}
+						onClickItem={onChangeLocation}
+					>
+						VIEW ALL PRODUCTS
+					</Button>
+				</div>
+			</div>
+			<br />
+			{products ? (
+				<ListProducts products={products} limit={12} />
+			) : (
+				<Title Level={titleLevels.H4}>No products</Title>
+			)}
 		</div>
-	) : (
-		<Title Level={titleLevels.H4}>No products</Title>
 	);
 };
 
