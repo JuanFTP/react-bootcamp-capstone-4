@@ -10,6 +10,11 @@ import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 const getCapitalize = (input) =>
 	input.charAt(0).toUpperCase() + input.substring(1, input.length);
 
+const getFormattedPrice = (price) =>
+	new Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(
+		price
+	);
+
 const getListProducts = (products) => {
 	return products.map((product) => {
 		return (
@@ -37,7 +42,7 @@ const getListProducts = (products) => {
 					<div className="row">
 						<div className="flex ai-center jc-space-between">
 							<Title Level={titleLevels.H3}>
-								{`$ ${product.price}`}
+								{`$ ${getFormattedPrice(product.price)}`}
 							</Title>
 							<IconArea>
 								<MdAddShoppingCart />
@@ -50,8 +55,16 @@ const getListProducts = (products) => {
 	});
 };
 
-const ListProducts = ({ products }) => {
-	return products && <div className="grid">{getListProducts(products)}</div>;
+const ListProducts = ({ products, limit }) => {
+	return (
+		products && (
+			<div className="grid">
+				{getListProducts(
+					limit && limit > 0 ? products.slice(0, limit) : products
+				)}
+			</div>
+		)
+	);
 };
 
 export default ListProducts;
