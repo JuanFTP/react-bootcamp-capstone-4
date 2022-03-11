@@ -1,20 +1,13 @@
 import Title, { titleLevels } from "./../../common/Title";
-import ListProducts from "./../ListProducts/ListProducts";
-import Button, { buttonVariants } from "./../../common/Button";
+import ListProducts from "./../ListProducts";
 
-const Products = ({ products, title, onChangeLocation }) => {
+const Products = ({ products, title, children }) => {
 	return (
 		<div className="row">
 			<div className="row">
 				<div className="flex ai-top jc-space-between">
 					{title && <Title Level={titleLevels.H3}>{title}</Title>}
-					<Button
-						variant={buttonVariants.outline}
-						value={"products"}
-						onClickItem={onChangeLocation}
-					>
-						VIEW ALL PRODUCTS
-					</Button>
+					{children}
 				</div>
 			</div>
 			<br />
