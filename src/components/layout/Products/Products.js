@@ -11,7 +11,7 @@ const Products = ({ products, title, children }) => {
 				</div>
 			</div>
 			<br />
-			{products ? (
+			{products && products.length > 0 ? (
 				<ListProducts products={products} limit={12} />
 			) : (
 				<Title Level={titleLevels.H4}>No products</Title>

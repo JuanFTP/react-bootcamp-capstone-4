@@ -82,7 +82,7 @@ const Carousel = ({ slides, slideActive }) => {
 		const interval = setInterval(() => {
 			let index = getNextIndex(slides, slideAct);
 			onClickedCheck(slides[index].id);
-		}, 5000);
+		}, 15000);
 		return () => clearInterval(interval);
 	}, [slides, slideAct, onClickedCheck]);
 

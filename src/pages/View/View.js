@@ -13,15 +13,6 @@ const getViewOfPage = (location, onChangeLocation) => {
 	const products = getProducts(featuredProducts.results);
 
 	switch (location) {
-		case "main":
-			return (
-				<Main
-					banners={banners}
-					categories={categories}
-					products={products}
-					onChangeLocation={onChangeLocation}
-				/>
-			);
 		case "products":
 			return (
 				<ProductsPage

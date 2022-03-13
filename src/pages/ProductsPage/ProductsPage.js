@@ -1,43 +1,59 @@
 import "./ProductsPage.css";
-import styled from "styled-components";
 import Header from "./../../components/layout/Header";
 import Container from "./../../components/common/Container";
 import Products from "./../../components/layout/Products";
 import Footer from "./../../components/layout/Footer";
 import Title, { titleLevels } from "./../../components/common/Title";
-import { useState } from "react";
+import Chip, { chipVariants } from "./../../components/common/Chip";
+import { useEffect, useState } from "react";
 
-const Chip = styled.span`
-	display: inline-block;
-	background-color: var(--light);
-	padding: 8px 16px;
-	font-size: 0.9rem;
-	margin: 8px 8px 8px 0px;
-	font-weight: 600;
-	border-radius: 16px;
-	color: var(--default);
-	cursor: pointer;
-
-	:hover {
-		transition: var(--transition);
-		box-shadow: var(--shadow);
-	}
-
-	&.active {
-		background-color: var(--dark);
-		color: var(--white);
-	}
-`;
-
-const getCategoriesChips = (categories) =>
+const getCategoriesChips = (categories, categoriesList, onCategorySelected) =>
 	categories &&
 	categories.map((category) => (
-		<Chip key={category.id}>{category.name}</Chip>
+		<Chip
+			key={category.id}
+			variant={chipVariants.xl}
+			onClickItem={onCategorySelected}
+			value={category.id}
+			isActive={
+				categoriesList.length > 0
+					? categoriesList.includes(category.id)
+					: false
+			}
+		>
+			{category.name}
+		</Chip>
 	));
 
+const getProductsFiltered = (categoriesList, products) => {
+	return categoriesList.length > 0
+		? products &&
+				products.filter((product) =>
+					categoriesList.includes(product.category.id)
+				)
+		: products;
+};
+
 const ProductsPage = ({ products, categories, onChangeLocation }) => {
-	const [categoriesSelected, setCategoriesSelected] = useState([]);
-	const [productsFilter, setProductsFilters] = useState([]);
+	const [productsFil, setproductsFil] = useState([]);
+	const [categoriesList, setCategoriesList] = useState([]);
+
+	const onCategorySelected = (id) => {
+		let newList = [];
+		if (categoriesList.includes(id)) {
+			newList = categoriesList.filter((categoryId) => categoryId !== id);
+			setCategoriesList(newList);
+		} else {
+			newList =
+				categoriesList.length > 0 ? [...categoriesList, id] : [id];
+			setCategoriesList(newList);
+		}
+	};
+
+	useEffect(() => {
+		const productsFiltered = getProductsFiltered(categoriesList, products);
+		setproductsFil(productsFiltered);
+	}, [categoriesList, products]);
 
 	return (
 		<div>
@@ -48,11 +64,16 @@ const ProductsPage = ({ products, categories, onChangeLocation }) => {
 					<div className="sidebar row">
 						<Title Level={titleLevels.H3}>CATEGORIES</Title>
 						<div className="categories">
-							{categories && getCategoriesChips(categories)}
+							{categories &&
+								getCategoriesChips(
+									categories,
+									categoriesList,
+									onCategorySelected
+								)}
 						</div>
 					</div>
 					<div className="results">
-						<Products products={products} title="PRODUCTS" />
+						<Products products={productsFil} title="PRODUCTS" />
 					</div>
 				</div>
 			</Container>
