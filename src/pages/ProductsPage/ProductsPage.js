@@ -1,4 +1,5 @@
 import "./ProductsPage.css";
+import PropTypes from "prop-types";
 import Container from "./../../components/common/Container";
 import ListProducts from "./../../components/layout/ListProducts";
 import Title, { titleLevels } from "./../../components/common/Title";
@@ -86,7 +87,7 @@ const ProductsPage = ({ products, categories }) => {
 		<Container inner={true}>
 			<div className="products-view flex ai-top jc-space-between">
 				<div className="sidebar row">
-					<Title Level={titleLevels.H3}>CATEGORIES</Title>
+					<Title Level={titleLevels.h3}>CATEGORIES</Title>
 					<div className="categories">
 						{categories &&
 							getCategoriesChips(
@@ -100,7 +101,7 @@ const ProductsPage = ({ products, categories }) => {
 					<div className="row">
 						<div className="row">
 							<div className="flex ai-top jc-space-between">
-								<Title Level={titleLevels.H3}>PRODUCTS</Title>
+								<Title Level={titleLevels.h3}>PRODUCTS</Title>
 							</div>
 						</div>
 						<br />
@@ -118,13 +119,18 @@ const ProductsPage = ({ products, categories }) => {
 								<ListPages pages={pages} />
 							</>
 						) : (
-							<Title Level={titleLevels.H4}>No products</Title>
+							<Title Level={titleLevels.h4}>No products</Title>
 						)}
 					</div>
 				</div>
 			</div>
 		</Container>
 	);
+};
+
+ProductsPage.propTypes = {
+	products: PropTypes.array.isRequired,
+	categories: PropTypes.array.isRequired,
 };
 
 export default ProductsPage;

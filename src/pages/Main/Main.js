@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Banner from "../../components/layout/Banner";
 import Container from "../../components/common/Container";
 import Title, { titleLevels } from "./../../components/common/Title";
@@ -14,9 +15,9 @@ const Main = ({ banners, categories, products, onChangeLocation }) => {
 				<div className="row">
 					<div className="row">
 						<div className="flex ai-top jc-space-between">
-							<Title Level={titleLevels.H3}>CATEGORIES</Title>
+							<Title Level={titleLevels.h3}>CATEGORIES</Title>
 							<Button variant={buttonVariants.outline}>
-								VIEW ALL CATEGORIES X
+								VIEW ALL CATEGORIES
 							</Button>
 						</div>
 					</div>
@@ -26,7 +27,7 @@ const Main = ({ banners, categories, products, onChangeLocation }) => {
 				<div className="row">
 					<div className="row">
 						<div className="flex ai-top jc-space-between">
-							<Title Level={titleLevels.H3}>
+							<Title Level={titleLevels.h3}>
 								RECOMMENDED PRODUCTS
 							</Title>
 							<Button
@@ -50,12 +51,19 @@ const Main = ({ banners, categories, products, onChangeLocation }) => {
 							products={products}
 						/>
 					) : (
-						<Title Level={titleLevels.H4}>No products</Title>
+						<Title Level={titleLevels.h4}>No products</Title>
 					)}
 				</div>
 			</Container>
 		</div>
 	);
+};
+
+Main.propTypes = {
+	banners: PropTypes.array.isRequired,
+	categories: PropTypes.array.isRequired,
+	products: PropTypes.array.isRequired,
+	onChangeLocation: PropTypes.func,
 };
 
 export default Main;

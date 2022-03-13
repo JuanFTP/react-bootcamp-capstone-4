@@ -1,4 +1,5 @@
 import "./Chip.css";
+import PropTypes from "prop-types";
 
 export const chipVariants = {
 	sm: "sm",
@@ -16,6 +17,14 @@ const Chip = ({ children, variant, onClickItem, value, isActive }) => {
 			{children}
 		</div>
 	);
+};
+
+Chip.propTypes = {
+	children: PropTypes.node.isRequired,
+	variant: PropTypes.oneOf(Object.keys(chipVariants)),
+	onClickItem: PropTypes.func,
+	value: PropTypes.string,
+	isActive: PropTypes.bool,
 };
 
 export default Chip;

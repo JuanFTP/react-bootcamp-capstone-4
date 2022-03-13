@@ -13,7 +13,7 @@ const Brand = ({ value, onClickItem }) => {
 			<div className="image round">
 				<img src={logo} alt="" />
 			</div>
-			<Title Level={titleLevels.H2}>{APP_NAME}</Title>
+			<Title Level={titleLevels.h2}>{APP_NAME}</Title>
 		</div>
 	);
 };

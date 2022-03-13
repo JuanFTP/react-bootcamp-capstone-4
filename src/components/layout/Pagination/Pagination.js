@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ListPages from "../ListPages/ListPages";
 import IconArea from "./../../common/IconArea/IconArea";
@@ -19,6 +20,10 @@ const Pagination = ({ pages }) => {
 			</div>
 		)
 	);
+};
+
+Pagination.propTypes = {
+	pages: PropTypes.array.isRequired,
 };
 
 export default Pagination;

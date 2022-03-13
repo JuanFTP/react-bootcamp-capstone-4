@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import featuredBanners from "../../mocks/en-us/featured-banners.json";
 import productsCategories from "../../mocks/en-us/product-categories.json";
 import featuredProducts from "../../mocks/en-us/featured-products.json";
@@ -35,6 +36,11 @@ const getViewOfPage = (location, onChangeLocation) => {
 
 const View = ({ location, onChangeLocation }) => {
 	return location && getViewOfPage(location, onChangeLocation);
+};
+
+View.propTypes = {
+	location: PropTypes.string,
+	onChangeLocation: PropTypes.func,
 };
 
 export default View;

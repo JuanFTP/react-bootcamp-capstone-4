@@ -1,4 +1,5 @@
 import "./Carousel.css";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import IconArea from "./../../common/IconArea";
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
@@ -108,6 +109,15 @@ const Carousel = ({ slides, slideActive }) => {
 			</div>
 		</div>
 	);
+};
+
+Slide.propTypes = {
+	img: PropTypes.string.isRequired,
+};
+
+Carousel.propTypes = {
+	slides: PropTypes.array.isRequired,
+	slideActive: PropTypes.string.isRequired,
 };
 
 export default Carousel;

@@ -1,4 +1,5 @@
 import "./IconArea.css";
+import PropTypes from "prop-types";
 
 const IconArea = ({ children, value, onClicketItem }) => {
 	return (
@@ -9,6 +10,12 @@ const IconArea = ({ children, value, onClicketItem }) => {
 			{children}
 		</div>
 	);
+};
+
+IconArea.propTypes = {
+	children: PropTypes.node.isRequired,
+	value: PropTypes.string,
+	onClicketItem: PropTypes.func,
 };
 
 export default IconArea;

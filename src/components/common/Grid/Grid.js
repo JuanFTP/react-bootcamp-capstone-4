@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Grid = styled.div`
 	width: 100%;
@@ -24,5 +25,13 @@ const Grid = styled.div`
 		grid-template-columns: repeat(${(props) => props.xsm}, 1fr);
 	}
 `;
+
+Grid.propTypes = {
+	default: PropTypes.number.isRequired,
+	xl: PropTypes.number.isRequired,
+	md: PropTypes.number.isRequired,
+	sm: PropTypes.number.isRequired,
+	xsm: PropTypes.number.isRequired,
+};
 
 export default Grid;

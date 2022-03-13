@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Card, { cardVariants } from "../../common/Card";
 import imgDefault from "./../../../media/category.jpg";
 import Title, { titleLevels } from "./../../common/Title";
@@ -18,7 +19,7 @@ const getListCategories = (categories) => {
 				/>
 				<div className="data">
 					<div className="flex ai-center jc-center">
-						<Title Level={titleLevels.H4}>{category.name}</Title>
+						<Title Level={titleLevels.h4}>{category.name}</Title>
 					</div>
 				</div>
 			</Card>
@@ -34,6 +35,10 @@ const ListCategories = ({ categories }) => {
 			</Grid>
 		)
 	);
+};
+
+ListCategories.propTypes = {
+	categories: PropTypes.array.isRequired,
 };
 
 export default ListCategories;

@@ -1,4 +1,5 @@
 import "./Input.css";
+import PropTypes from "prop-types";
 
 export const inputTypes = {
 	text: "text",
@@ -16,6 +17,12 @@ const Input = ({ value, type, onChangeInput }) => {
 			/>
 		</div>
 	);
+};
+
+Input.propTypes = {
+	type: PropTypes.oneOf(Object.keys(inputTypes)),
+	onChangeInput: PropTypes.func,
+	value: PropTypes.string,
 };
 
 export default Input;

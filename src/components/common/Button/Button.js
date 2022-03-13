@@ -1,4 +1,5 @@
 import "./Button.css";
+import PropTypes from "prop-types";
 
 export const buttonVariants = {
 	outline: "outline",
@@ -15,6 +16,13 @@ const Button = ({ children, variant, value, onClickItem }) => {
 			{children}
 		</button>
 	);
+};
+
+Button.propTypes = {
+	children: PropTypes.node.isRequired,
+	variant: PropTypes.oneOf(Object.keys(buttonVariants)),
+	value: PropTypes.string,
+	onClickItem: PropTypes.func,
 };
 
 export default Button;

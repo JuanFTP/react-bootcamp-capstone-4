@@ -1,4 +1,5 @@
 import "./Header.css";
+import PropTypes from "prop-types";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Brand from "../../common/Brand/Brand";
 import IconArea from "./../../common/IconArea/IconArea";
@@ -43,6 +44,11 @@ const Header = ({ itemsOnCart, onChangeLocation }) => {
 			</div>
 		</div>
 	);
+};
+
+Header.propTypes = {
+	itemsOnCart: PropTypes.number,
+	onChangeLocation: PropTypes.func,
 };
 
 export default Header;

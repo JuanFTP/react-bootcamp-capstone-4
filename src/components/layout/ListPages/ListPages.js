@@ -1,4 +1,5 @@
 import "./ListPages.css";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import IconArea from "../../common/IconArea/IconArea";
 
@@ -37,6 +38,10 @@ const ListPages = ({ pages }) => {
 			</div>
 		)
 	);
+};
+
+ListPages.propTypes = {
+	pages: PropTypes.array.isRequired,
 };
 
 export default ListPages;
