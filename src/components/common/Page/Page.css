@@ -1,9 +1,0 @@
-.page {
-	display: inline-block;
-	margin: 0px 8px;
-}
-
-.page.active {
-	font-weight: 900;
-	background-color: var(--light);
-}

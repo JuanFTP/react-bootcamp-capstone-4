@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
 import View from "./pages/View";
 
 const App = () => {
@@ -11,7 +13,13 @@ const App = () => {
 		}
 	};
 
-	return <View location={location} onChangeLocation={onChangeLocation} />;
+	return (
+		<>
+			<Header onChangeLocation={onChangeLocation} />
+			<View location={location} onChangeLocation={onChangeLocation} />
+			<Footer />
+		</>
+	);
 };
 
 export default App;

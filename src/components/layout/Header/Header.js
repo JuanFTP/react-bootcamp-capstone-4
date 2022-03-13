@@ -6,8 +6,14 @@ import FormControl from "./../FormControl/FormControl";
 import Chip from "./../../common/Chip";
 import { MdSearch } from "react-icons/md";
 import Input, { inputTypes } from "./../../common/Input";
+import { useState } from "react";
 
 const Header = ({ itemsOnCart, onChangeLocation }) => {
+	const [search, setSearch] = useState("");
+	const onChangeInput = (e) => {
+		setSearch(e.target.value);
+	};
+
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
@@ -18,7 +24,11 @@ const Header = ({ itemsOnCart, onChangeLocation }) => {
 						<MdSearch />
 					</IconArea>
 
-					<Input type={inputTypes.text} />
+					<Input
+						value={search}
+						type={inputTypes.text}
+						onChangeInput={onChangeInput}
+					/>
 				</FormControl>
 
 				<div className="actions">

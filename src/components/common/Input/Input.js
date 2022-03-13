@@ -5,16 +5,14 @@ export const inputTypes = {
 	number: "number",
 };
 
-const Input = ({ type }) => {
+const Input = ({ value, type, onChangeInput }) => {
 	return (
 		<div className="input">
 			<input
-				value=""
+				value={value}
 				type={type && inputTypes[type]}
 				placeholder="Type for search"
-				onChange={() => {
-					console.log("On change");
-				}}
+				onChange={onChangeInput}
 			/>
 		</div>
 	);

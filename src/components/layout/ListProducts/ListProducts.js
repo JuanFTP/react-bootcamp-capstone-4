@@ -6,6 +6,7 @@ import Chip from "./../../common/Chip";
 import { chipVariants } from "../../common/Chip/Chip";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
+import Grid from "./../../common/Grid/Grid";
 
 const getCapitalize = (input) =>
 	input.charAt(0).toUpperCase() + input.substring(1, input.length);
@@ -55,14 +56,19 @@ const getListProducts = (products) => {
 	});
 };
 
-const ListProducts = ({ products, limit }) => {
+const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
 	return (
 		products && (
-			<div className="grid">
-				{getListProducts(
-					limit && limit > 0 ? products.slice(0, limit) : products
-				)}
-			</div>
+			<Grid
+				default={def}
+				xl={xl}
+				md={md}
+				sm={sm}
+				xsm={xsm}
+				minmax={minmax}
+			>
+				{getListProducts(products)}
+			</Grid>
 		)
 	);
 };

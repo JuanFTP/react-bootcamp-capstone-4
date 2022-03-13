@@ -1,11 +1,10 @@
 import "./ProductsPage.css";
-import Header from "./../../components/layout/Header";
 import Container from "./../../components/common/Container";
-import Products from "./../../components/layout/Products";
-import Footer from "./../../components/layout/Footer";
+import ListProducts from "./../../components/layout/ListProducts";
 import Title, { titleLevels } from "./../../components/common/Title";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import { useEffect, useState } from "react";
+import ListPages from "../../components/layout/ListPages/ListPages";
 
 const getCategoriesChips = (categories, categoriesList, onCategorySelected) =>
 	categories &&
@@ -34,7 +33,7 @@ const getProductsFiltered = (categoriesList, products) => {
 		: products;
 };
 
-const ProductsPage = ({ products, categories, onChangeLocation }) => {
+const ProductsPage = ({ products, categories }) => {
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
 
@@ -50,36 +49,81 @@ const ProductsPage = ({ products, categories, onChangeLocation }) => {
 		}
 	};
 
+	const pages = [
+		{
+			id: 1,
+			number: 1,
+			active: true,
+		},
+		{
+			id: 2,
+			number: 2,
+			active: false,
+		},
+		{
+			id: 3,
+			number: 3,
+			active: false,
+		},
+		{
+			id: 4,
+			number: 4,
+			active: false,
+		},
+		{
+			id: 5,
+			number: 5,
+			active: false,
+		},
+	];
+
 	useEffect(() => {
 		const productsFiltered = getProductsFiltered(categoriesList, products);
 		setproductsFil(productsFiltered);
 	}, [categoriesList, products]);
 
 	return (
-		<div>
-			<Header onChangeLocation={onChangeLocation} />
-
-			<Container inner={true}>
-				<div className="flex ai-top jc-space-between">
-					<div className="sidebar row">
-						<Title Level={titleLevels.H3}>CATEGORIES</Title>
-						<div className="categories">
-							{categories &&
-								getCategoriesChips(
-									categories,
-									categoriesList,
-									onCategorySelected
-								)}
-						</div>
-					</div>
-					<div className="results">
-						<Products products={productsFil} title="PRODUCTS" />
+		<Container inner={true}>
+			<div className="products-view flex ai-top jc-space-between">
+				<div className="sidebar row">
+					<Title Level={titleLevels.H3}>CATEGORIES</Title>
+					<div className="categories">
+						{categories &&
+							getCategoriesChips(
+								categories,
+								categoriesList,
+								onCategorySelected
+							)}
 					</div>
 				</div>
-			</Container>
-
-			<Footer />
-		</div>
+				<div className="results">
+					<div className="row">
+						<div className="row">
+							<div className="flex ai-top jc-space-between">
+								<Title Level={titleLevels.H3}>PRODUCTS</Title>
+							</div>
+						</div>
+						<br />
+						{productsFil && productsFil.length > 0 ? (
+							<>
+								<ListProducts
+									def={4}
+									xl={3}
+									md={2}
+									sm={2}
+									xsm={1}
+									minmax={320}
+									products={productsFil}
+								/>
+								<ListPages pages={pages} />
+							</>
+						) : (
+							<Title Level={titleLevels.H4}>No products</Title>
+						)}
+					</div>
+				</div>
+			</div>
+		</Container>
 	);
 };
 
