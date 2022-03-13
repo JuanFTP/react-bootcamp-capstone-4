@@ -14,7 +14,7 @@ const getListCategories = (categories) => {
 							? category.image.url
 							: imgDefault
 					}
-					h={"195px"}
+					h={"204px"}
 				/>
 				<div className="data">
 					<div className="flex ai-center jc-center">
