@@ -1,4 +1,5 @@
 import "./Brand.css";
+import PropTypes from "prop-types";
 import logo from "./../../../media/logo.svg";
 import { APP_NAME } from "./../../../utils/constants";
 import Title, { titleLevels } from "./../../common/Title";
@@ -15,6 +16,11 @@ const Brand = ({ value, onClickItem }) => {
 			<Title Level={titleLevels.H2}>{APP_NAME}</Title>
 		</div>
 	);
+};
+
+Brand.propTypes = {
+	value: PropTypes.string,
+	onClickItem: PropTypes.func,
 };
 
 export default Brand;

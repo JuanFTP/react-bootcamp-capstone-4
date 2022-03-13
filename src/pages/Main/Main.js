@@ -16,7 +16,7 @@ const Main = ({ banners, categories, products, onChangeLocation }) => {
 						<div className="flex ai-top jc-space-between">
 							<Title Level={titleLevels.H3}>CATEGORIES</Title>
 							<Button variant={buttonVariants.outline}>
-								VIEW ALL CATEGORIES
+								VIEW ALL CATEGORIES X
 							</Button>
 						</div>
 					</div>
