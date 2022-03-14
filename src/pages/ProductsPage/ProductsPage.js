@@ -9,6 +9,7 @@ import Chip, { chipVariants } from "./../../components/common/Chip";
 import { useEffect, useState } from "react";
 import ListPages from "../../components/layout/ListPages/ListPages";
 import Grid from "../../components/common/Grid/Grid";
+import Button, { buttonVariants } from "./../../components/common/Button";
 
 const getCategoriesChips = (categories, categoriesList, onCategorySelected) =>
 	categories &&
@@ -37,50 +38,37 @@ const getProductsFiltered = (categoriesList, products) => {
 		: products;
 };
 
+//TODO Refinar código para generar el Skeleton
 const getSkeleton = () => {
+	const nItems = ["SK1", "SK2", "SK3", "SK4", "SK5", "SK6", "SK7", "SK8"];
+	const nPages = ["SKP1", "SKP2", "SKP3", "SKP4", "SKP5"];
 	return (
 		<>
 			<Grid default={4} xl={4} md={3} sm={2} xsm={1}>
-				<Skeleton height={320} />
-				<Skeleton height={320} />
-				<Skeleton height={320} />
-				<Skeleton height={320} />
-				<Skeleton height={320} />
-				<Skeleton height={320} />
-				<Skeleton height={320} />
-				<Skeleton height={320} />
+				{nItems.map((id) => {
+					return <Skeleton key={id} height={320} />;
+				})}
 			</Grid>
 			<div
 				className="flex ai-center jc-center"
 				style={{ marginTop: "32px" }}
 			>
-				<Skeleton
-					height={48}
-					width={48}
-					style={{ marginRight: "16px" }}
-				/>
-				<Skeleton
-					height={48}
-					width={48}
-					style={{ marginRight: "16px" }}
-				/>
-				<Skeleton
-					height={48}
-					width={48}
-					style={{ marginRight: "16px" }}
-				/>
-				<Skeleton
-					height={48}
-					width={48}
-					style={{ marginRight: "16px" }}
-				/>
-				<Skeleton height={48} width={48} />
+				{nPages.map((id) => {
+					return (
+						<Skeleton
+							key={id}
+							height={48}
+							width={48}
+							style={{ margin: "0px 8px" }}
+						/>
+					);
+				})}
 			</div>
 		</>
 	);
 };
 
-const ProductsPage = ({ products, categories }) => {
+const ProductsPage = ({ products, categories, onChangeLocation }) => {
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
 
@@ -153,6 +141,13 @@ const ProductsPage = ({ products, categories }) => {
 						<div className="row">
 							<div className="flex ai-top jc-space-between">
 								<Title Level={titleLevels.h3}>PRODUCTS</Title>
+								<Button
+									variant={buttonVariants.outline}
+									onClickItem={onChangeLocation}
+									value={"Main"}
+								>
+									GO TO HOME
+								</Button>
 							</div>
 						</div>
 						<br />
@@ -182,6 +177,7 @@ const ProductsPage = ({ products, categories }) => {
 ProductsPage.propTypes = {
 	products: PropTypes.array.isRequired,
 	categories: PropTypes.array.isRequired,
+	onChangeLocation: PropTypes.func,
 };
 
 export default ProductsPage;
