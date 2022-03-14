@@ -1,3 +1,5 @@
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./ProductsPage.css";
 import PropTypes from "prop-types";
 import Container from "./../../components/common/Container";
@@ -6,6 +8,7 @@ import Title, { titleLevels } from "./../../components/common/Title";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import { useEffect, useState } from "react";
 import ListPages from "../../components/layout/ListPages/ListPages";
+import Grid from "../../components/common/Grid/Grid";
 
 const getCategoriesChips = (categories, categoriesList, onCategorySelected) =>
 	categories &&
@@ -32,6 +35,49 @@ const getProductsFiltered = (categoriesList, products) => {
 					categoriesList.includes(product.category.id)
 				)
 		: products;
+};
+
+const getSkeleton = () => {
+	return (
+		<>
+			<Grid default={4} xl={4} md={3} sm={2} xsm={1}>
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+				<Skeleton height={320} />
+			</Grid>
+			<div
+				className="flex ai-center jc-center"
+				style={{ marginTop: "32px" }}
+			>
+				<Skeleton
+					height={48}
+					width={48}
+					style={{ marginRight: "16px" }}
+				/>
+				<Skeleton
+					height={48}
+					width={48}
+					style={{ marginRight: "16px" }}
+				/>
+				<Skeleton
+					height={48}
+					width={48}
+					style={{ marginRight: "16px" }}
+				/>
+				<Skeleton
+					height={48}
+					width={48}
+					style={{ marginRight: "16px" }}
+				/>
+				<Skeleton height={48} width={48} />
+			</div>
+		</>
+	);
 };
 
 const ProductsPage = ({ products, categories }) => {
@@ -80,7 +126,12 @@ const ProductsPage = ({ products, categories }) => {
 
 	useEffect(() => {
 		const productsFiltered = getProductsFiltered(categoriesList, products);
-		setproductsFil(productsFiltered);
+		setproductsFil([]);
+		const loaderSimulate = setInterval(() => {
+			setproductsFil(productsFiltered);
+		}, 2000);
+
+		return () => clearInterval(loaderSimulate);
 	}, [categoriesList, products]);
 
 	return (
@@ -119,7 +170,7 @@ const ProductsPage = ({ products, categories }) => {
 								<ListPages pages={pages} />
 							</>
 						) : (
-							<Title Level={titleLevels.h4}>No products</Title>
+							getSkeleton()
 						)}
 					</div>
 				</div>
