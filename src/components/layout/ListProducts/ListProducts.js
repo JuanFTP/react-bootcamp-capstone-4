@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { MdAddShoppingCart } from "react-icons/md";
 import Title, { titleLevels } from "./../../common/Title";
 import imgDefault from "./../../../media/product.jfif";
@@ -6,9 +7,15 @@ import Chip from "./../../common/Chip";
 import { chipVariants } from "../../common/Chip/Chip";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
+import Grid from "./../../common/Grid/Grid";
 
 const getCapitalize = (input) =>
 	input.charAt(0).toUpperCase() + input.substring(1, input.length);
+
+const getFormattedPrice = (price) =>
+	new Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(
+		price
+	);
 
 const getListProducts = (products) => {
 	return products.map((product) => {
@@ -26,7 +33,7 @@ const getListProducts = (products) => {
 				<div className="data">
 					<div className="row">
 						<div className="flex ai-center jc-start">
-							<Title Level={titleLevels.H4}>{product.name}</Title>
+							<Title Level={titleLevels.h4}>{product.name}</Title>
 							<Chip variant={chipVariants.sm}>
 								{product.category.slug &&
 									getCapitalize(product.category.slug)}
@@ -36,8 +43,8 @@ const getListProducts = (products) => {
 					</div>
 					<div className="row">
 						<div className="flex ai-center jc-space-between">
-							<Title Level={titleLevels.H3}>
-								{`$ ${product.price}`}
+							<Title Level={titleLevels.h3}>
+								{`$ ${getFormattedPrice(product.price)}`}
 							</Title>
 							<IconArea>
 								<MdAddShoppingCart />
@@ -50,8 +57,31 @@ const getListProducts = (products) => {
 	});
 };
 
-const ListProducts = ({ products }) => {
-	return products && <div className="grid">{getListProducts(products)}</div>;
+const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
+	return (
+		products && (
+			<Grid
+				default={def}
+				xl={xl}
+				md={md}
+				sm={sm}
+				xsm={xsm}
+				minmax={minmax}
+			>
+				{getListProducts(products)}
+			</Grid>
+		)
+	);
+};
+
+ListProducts.propTypes = {
+	products: PropTypes.array.isRequired,
+	def: PropTypes.number.isRequired,
+	xl: PropTypes.number.isRequired,
+	md: PropTypes.number.isRequired,
+	sm: PropTypes.number.isRequired,
+	xsm: PropTypes.number.isRequired,
+	minmax: PropTypes.number.isRequired,
 };
 
 export default ListProducts;

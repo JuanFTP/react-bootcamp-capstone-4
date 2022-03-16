@@ -1,4 +1,5 @@
 import Carousel from "../Carousel";
+import PropTypes from "prop-types";
 
 const Banner = ({ banners }) => {
 	return (
@@ -12,6 +13,10 @@ const Banner = ({ banners }) => {
 			)}
 		</div>
 	);
+};
+
+Banner.propTypes = {
+	banners: PropTypes.array.isRequired,
 };
 
 export default Banner;

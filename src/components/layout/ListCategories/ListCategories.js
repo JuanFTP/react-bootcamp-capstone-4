@@ -1,7 +1,9 @@
+import PropTypes from "prop-types";
 import Card, { cardVariants } from "../../common/Card";
 import imgDefault from "./../../../media/category.jpg";
 import Title, { titleLevels } from "./../../common/Title";
 import ImageBackgrund from "./../../common/ImageBackground";
+import Grid from "./../../common/Grid/Grid";
 
 const getListCategories = (categories) => {
 	return categories.map((category) => {
@@ -13,11 +15,11 @@ const getListCategories = (categories) => {
 							? category.image.url
 							: imgDefault
 					}
-					h={"195px"}
+					h={"204px"}
 				/>
 				<div className="data">
 					<div className="flex ai-center jc-center">
-						<Title Level={titleLevels.H4}>{category.name}</Title>
+						<Title Level={titleLevels.h4}>{category.name}</Title>
 					</div>
 				</div>
 			</Card>
@@ -28,9 +30,15 @@ const getListCategories = (categories) => {
 const ListCategories = ({ categories }) => {
 	return (
 		categories && (
-			<div className="grid max">{getListCategories(categories)}</div>
+			<Grid default={5} xl={4} md={3} sm={2} xsm={1} minmax={200}>
+				{getListCategories(categories)}
+			</Grid>
 		)
 	);
+};
+
+ListCategories.propTypes = {
+	categories: PropTypes.array.isRequired,
 };
 
 export default ListCategories;

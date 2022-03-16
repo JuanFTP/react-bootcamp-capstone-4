@@ -1,8 +1,25 @@
+import { useState } from "react";
 import "./App.css";
-import Home from "./pages/Home";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
+import View from "./pages/View";
 
 const App = () => {
-	return <Home />;
+	const [location, setLocation] = useState("main");
+
+	const onChangeLocation = (newLocation) => {
+		if (newLocation !== location) {
+			setLocation(newLocation);
+		}
+	};
+
+	return (
+		<>
+			<Header onChangeLocation={onChangeLocation} />
+			<View location={location} onChangeLocation={onChangeLocation} />
+			<Footer />
+		</>
+	);
 };
 
 export default App;

@@ -4,4 +4,5 @@
 	height: 72px;
 	padding: 12px var(--horizontal-spacing);
 	background-color: var(--white);
+	z-index: 1000;
 }

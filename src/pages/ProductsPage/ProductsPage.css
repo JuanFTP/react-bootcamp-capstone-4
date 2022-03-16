@@ -1,0 +1,22 @@
+.sidebar {
+	width: 24%;
+	padding-right: var(--horizontal-spacing);
+}
+
+.results {
+	width: 76%;
+}
+
+@media (max-width: 768px) {
+	.products-view {
+		display: block;
+	}
+
+	.sidebar,
+	.results {
+		width: 100%;
+	}
+}
+
+@media (max-width: 576px) {
+}

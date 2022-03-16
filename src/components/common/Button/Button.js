@@ -1,4 +1,5 @@
 import "./Button.css";
+import PropTypes from "prop-types";
 
 export const buttonVariants = {
 	outline: "outline",
@@ -6,12 +7,22 @@ export const buttonVariants = {
 	default: "default",
 };
 
-const Button = ({ children, variant }) => {
+const Button = ({ children, variant, value, onClickItem }) => {
 	return (
-		<button className={`btn btn-${buttonVariants[variant]}`}>
+		<button
+			className={`btn btn-${buttonVariants[variant]}`}
+			onClick={() => onClickItem && value && onClickItem(value)}
+		>
 			{children}
 		</button>
 	);
+};
+
+Button.propTypes = {
+	children: PropTypes.node.isRequired,
+	variant: PropTypes.oneOf(Object.keys(buttonVariants)),
+	value: PropTypes.string,
+	onClickItem: PropTypes.func,
 };
 
 export default Button;
