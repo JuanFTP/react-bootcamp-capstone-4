@@ -4,12 +4,9 @@ import logo from "./../../../media/logo.svg";
 import { APP_NAME } from "./../../../utils/constants";
 import Title, { titleLevels } from "./../../common/Title";
 
-const Brand = ({ value, onClickItem }) => {
+const Brand = ({ handleOnClick }) => {
 	return (
-		<div
-			className="brand"
-			onClick={() => onClickItem && value && onClickItem(value)}
-		>
+		<div className="brand" onClick={handleOnClick}>
 			<div className="image round">
 				<img src={logo} alt="" />
 			</div>
@@ -19,8 +16,7 @@ const Brand = ({ value, onClickItem }) => {
 };
 
 Brand.propTypes = {
-	value: PropTypes.string,
-	onClickItem: PropTypes.func,
+	handleOnClick: PropTypes.func,
 };
 
 export default Brand;

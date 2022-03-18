@@ -16,7 +16,7 @@ const Banner = ({ banners }) => {
 };
 
 Banner.propTypes = {
-	banners: PropTypes.array.isRequired,
+	banners: PropTypes.array,
 };
 
 export default Banner;

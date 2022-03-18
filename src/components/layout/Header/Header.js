@@ -8,17 +8,23 @@ import Chip from "./../../common/Chip";
 import { MdSearch } from "react-icons/md";
 import Input, { inputTypes } from "./../../common/Input";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-const Header = ({ itemsOnCart, onChangeLocation }) => {
+const Header = ({ itemsOnCart }) => {
+	const history = useHistory();
 	const [search, setSearch] = useState("");
 	const onChangeInput = (e) => {
 		setSearch(e.target.value);
 	};
 
+	const onClickBrand = () => {
+		history.push("/home");
+	};
+
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
-				<Brand value={"main"} onClickItem={onChangeLocation} />
+				<Brand handleOnClick={onClickBrand} />
 
 				<FormControl minWidth="45%" feedback={true} round={true}>
 					<IconArea>
@@ -48,7 +54,6 @@ const Header = ({ itemsOnCart, onChangeLocation }) => {
 
 Header.propTypes = {
 	itemsOnCart: PropTypes.number,
-	onChangeLocation: PropTypes.func,
 };
 
 export default Header;

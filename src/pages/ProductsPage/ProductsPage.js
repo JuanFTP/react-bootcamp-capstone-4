@@ -2,14 +2,22 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./ProductsPage.css";
 import PropTypes from "prop-types";
+import Header from "./../../components/layout/Header";
+import Footer from "./../../components/layout/Footer";
 import Container from "./../../components/common/Container";
 import ListProducts from "./../../components/layout/ListProducts";
 import Title, { titleLevels } from "./../../components/common/Title";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ListPages from "../../components/layout/ListPages/ListPages";
 import Grid from "../../components/common/Grid/Grid";
 import Button, { buttonVariants } from "./../../components/common/Button";
+import { useProductsCategories } from "./../../hooks/useProductsCategories";
+import { useFeaturedProducts } from "./../../hooks/useFeaturedProducts";
+import getCategories from "../../utils/transform/getCategories";
+import getProducts from "../../utils/transform/getProducts";
+import { useMemo } from "react";
 
 const getCategoriesChips = (categories, categoriesList, onCategorySelected) =>
 	categories &&
@@ -68,9 +76,17 @@ const getSkeleton = () => {
 	);
 };
 
-const ProductsPage = ({ products, categories, onChangeLocation }) => {
+const ProductsPage = () => {
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
+
+	const responseCategories = useProductsCategories();
+	const categories = getCategories(responseCategories.data.results);
+	const responseProducts = useFeaturedProducts();
+	const products = useMemo(
+		() => getProducts(responseProducts.data.results),
+		[responseProducts]
+	);
 
 	const onCategorySelected = (id) => {
 		let newList = [];
@@ -83,6 +99,11 @@ const ProductsPage = ({ products, categories, onChangeLocation }) => {
 			setCategoriesList(newList);
 		}
 	};
+
+	useEffect(() => {
+		const productsFiltered = getProductsFiltered(categoriesList, products);
+		setproductsFil(productsFiltered);
+	}, [categoriesList, products]);
 
 	const pages = [
 		{
@@ -112,71 +133,67 @@ const ProductsPage = ({ products, categories, onChangeLocation }) => {
 		},
 	];
 
-	useEffect(() => {
-		const productsFiltered = getProductsFiltered(categoriesList, products);
-		setproductsFil([]);
-		const loaderSimulate = setInterval(() => {
-			setproductsFil(productsFiltered);
-		}, 2000);
-
-		return () => clearInterval(loaderSimulate);
-	}, [categoriesList, products]);
-
 	return (
-		<Container inner={true}>
-			<div className="products-view flex ai-top jc-space-between">
-				<div className="sidebar row">
-					<Title Level={titleLevels.h3}>CATEGORIES</Title>
-					<div className="categories">
-						{categories &&
-							getCategoriesChips(
-								categories,
-								categoriesList,
-								onCategorySelected
-							)}
-					</div>
-				</div>
-				<div className="results">
-					<div className="row">
-						<div className="row">
-							<div className="flex ai-top jc-space-between">
-								<Title Level={titleLevels.h3}>PRODUCTS</Title>
-								<Button
-									variant={buttonVariants.outline}
-									onClickItem={onChangeLocation}
-									value={"Main"}
-								>
-									GO TO HOME
-								</Button>
-							</div>
+		<>
+			<Header />
+			<Container inner={true}>
+				<div className="products-view flex ai-top jc-space-between">
+					<div className="sidebar row">
+						<Title Level={titleLevels.h3}>CATEGORIES</Title>
+						<div className="categories">
+							{categories &&
+								getCategoriesChips(
+									categories,
+									categoriesList,
+									onCategorySelected
+								)}
 						</div>
-						<br />
-						{productsFil && productsFil.length > 0 ? (
-							<>
-								<ListProducts
-									def={4}
-									xl={3}
-									md={2}
-									sm={2}
-									xsm={1}
-									minmax={320}
-									products={productsFil}
-								/>
-								<ListPages pages={pages} />
-							</>
-						) : (
-							getSkeleton()
-						)}
+					</div>
+					<div className="results">
+						<div className="row">
+							<div className="row">
+								<div className="flex ai-top jc-space-between">
+									<Title Level={titleLevels.h3}>
+										PRODUCTS
+									</Title>
+									<Link to="/home">
+										<Button
+											variant={buttonVariants.outline}
+										>
+											GO TO HOME
+										</Button>
+									</Link>
+								</div>
+							</div>
+							<br />
+							{productsFil && productsFil.length > 0 ? (
+								<>
+									<ListProducts
+										def={4}
+										xl={3}
+										md={2}
+										sm={2}
+										xsm={1}
+										minmax={320}
+										products={productsFil}
+									/>
+									<ListPages pages={pages} />
+								</>
+							) : (
+								getSkeleton()
+							)}
+						</div>
 					</div>
 				</div>
-			</div>
-		</Container>
+			</Container>
+			<Footer />
+		</>
 	);
 };
 
 ProductsPage.propTypes = {
-	products: PropTypes.array.isRequired,
-	categories: PropTypes.array.isRequired,
+	products: PropTypes.array,
+	categories: PropTypes.array,
 	onChangeLocation: PropTypes.func,
 };
 
