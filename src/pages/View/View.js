@@ -12,7 +12,7 @@ const getViewOfPage = (location, onChangeLocation) => {
 	const banners = getBanners(featuredBanners.results);
 	const categories = getCategories(productsCategories.results);
 	const products = getProducts(featuredProducts.results);
-
+	
 	switch (location) {
 		case "products":
 			return (

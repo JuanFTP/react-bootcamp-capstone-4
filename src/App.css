@@ -1,5 +1,6 @@
 :root {
 	--default: #666666;
+	--default-72: rgba(102, 102, 102, 0.48);
 	--dark: #121212;
 	--black: #000000;
 	--black-24: rgba(0, 0, 0, 0.24);

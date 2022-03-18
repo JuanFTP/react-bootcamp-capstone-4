@@ -8,6 +8,8 @@ const getBanners = (data) => {
 					url: item.data.main_image.url,
 					dimensions: item.data.main_image.dimensions,
 				},
+				title: item.data.title,
+				description: item.data.description[0].text,
 			};
 		})
 	);
