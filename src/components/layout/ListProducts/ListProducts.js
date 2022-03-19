@@ -8,6 +8,7 @@ import { chipVariants } from "../../common/Chip/Chip";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 import Grid from "./../../common/Grid/Grid";
+import SkListProducts from "./../../../utils/skeletons/SkListProducts";
 
 const getCapitalize = (input) =>
 	input.charAt(0).toUpperCase() + input.substring(1, input.length);
@@ -59,23 +60,18 @@ const getListProducts = (products) => {
 
 const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
 	return (
-		products && (
-			<Grid
-				default={def}
-				xl={xl}
-				md={md}
-				sm={sm}
-				xsm={xsm}
-				minmax={minmax}
-			>
-				{getListProducts(products)}
-			</Grid>
-		)
+		<Grid default={def} xl={xl} md={md} sm={sm} xsm={xsm} minmax={minmax}>
+			{products && products.length > 0 ? (
+				getListProducts(products)
+			) : (
+				<SkListProducts />
+			)}
+		</Grid>
 	);
 };
 
 ListProducts.propTypes = {
-	products: PropTypes.array.isRequired,
+	products: PropTypes.array,
 	def: PropTypes.number.isRequired,
 	xl: PropTypes.number.isRequired,
 	md: PropTypes.number.isRequired,

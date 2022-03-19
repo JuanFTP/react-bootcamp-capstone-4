@@ -1,7 +1,8 @@
 import "./ListPages.css";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import IconArea from "../../common/IconArea/IconArea";
+import IconArea from "./../../common/IconArea/IconArea";
+import SkListPages from "./../../../utils/skeletons/SkListPages";
 
 const Page = styled.div`
 	color: var(--default);
@@ -32,11 +33,9 @@ const getListPages = (pages) => {
 
 const ListPages = ({ pages }) => {
 	return (
-		pages && (
-			<div className="list-pages flex ai-center jc-center">
-				{getListPages(pages)}
-			</div>
-		)
+		<div className="list-pages flex ai-center jc-center">
+			{pages && pages.length > 0 ? getListPages(pages) : <SkListPages />}
+		</div>
 	);
 };
 
