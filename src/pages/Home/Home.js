@@ -65,6 +65,8 @@ const Home = () => {
 							xsm={1}
 							minmax={320}
 							products={products}
+							limit={16}
+							offset={0}
 						/>
 					) : (
 						<Title Level={titleLevels.h4}>No products</Title>

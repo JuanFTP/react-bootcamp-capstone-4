@@ -32,6 +32,10 @@
 	background-color: var(--default);
 }
 
+a {
+	text-decoration: none;
+}
+
 .flex {
 	display: flex;
 	height: 100%;

@@ -15,9 +15,10 @@ import Button, { buttonVariants } from "./../../components/common/Button";
 import getCategories from "./../../utils/transform/getCategories";
 import getProducts from "./../../utils/transform/getProducts";
 import SkListCategoriesChips from "./../../utils/skeletons/SkListCategoriesChips";
+import { useParams } from "react-router-dom";
 
-const getProductsFiltered = (categoriesList, products) => {
-	return categoriesList.length > 0
+const getProductsFiltered = (products, categoriesList) => {
+	return categoriesList && products && categoriesList.length > 0
 		? products.filter((product) =>
 				categoriesList.includes(product.category.id)
 		  )
@@ -25,15 +26,29 @@ const getProductsFiltered = (categoriesList, products) => {
 };
 
 const ProductsPage = () => {
+	const [filterPath, setFilterPath] = useState(false);
+	const { categoryKey } = useParams();
+
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
+
 	const responseCategories = useProductsCategories();
 	const categories = getCategories(responseCategories.data.results);
 	const responseProducts = useFeaturedProducts();
+
 	const products = useMemo(
 		() => getProducts(responseProducts.data.results),
 		[responseProducts]
 	);
+
+	if (categoryKey && !filterPath && !categoriesList.includes(categoryKey)) {
+		setCategoriesList((categoriesList) =>
+			categoriesList.length > 0
+				? [...categoriesList, categoryKey]
+				: [categoryKey]
+		);
+		setFilterPath(!filterPath);
+	}
 
 	const onCategorySelected = (id) => {
 		let newList = [];
@@ -48,37 +63,9 @@ const ProductsPage = () => {
 	};
 
 	useEffect(() => {
-		const productsFiltered = getProductsFiltered(categoriesList, products);
+		const productsFiltered = getProductsFiltered(products, categoriesList);
 		setproductsFil(productsFiltered);
-	}, [categoriesList, products]);
-
-	const pages = [
-		{
-			id: 1,
-			number: 1,
-			active: true,
-		},
-		{
-			id: 2,
-			number: 2,
-			active: false,
-		},
-		{
-			id: 3,
-			number: 3,
-			active: false,
-		},
-		{
-			id: 4,
-			number: 4,
-			active: false,
-		},
-		{
-			id: 5,
-			number: 5,
-			active: false,
-		},
-	];
+	}, [products, categoriesList]);
 
 	return (
 		<>
@@ -138,9 +125,11 @@ const ProductsPage = () => {
 										xsm={1}
 										minmax={320}
 										products={productsFil}
+										limit={16}
+										offset={0}
 									/>
 
-									<ListPages pages={pages} />
+									<ListPages pages={[]} />
 								</>
 							}
 						</div>

@@ -18,8 +18,12 @@ const getFormattedPrice = (price) =>
 		price
 	);
 
-const getListProducts = (products) => {
-	return products.map((product) => {
+const getListProducts = (products, limit, offset) => {
+	const split = products.slice(
+		offset,
+		limit + offset > products.length ? products.length : limit + offset
+	);
+	return split.map((product) => {
 		return (
 			<Card key={product.id} variant={cardVariants.product}>
 				<ImageBackground
@@ -58,11 +62,21 @@ const getListProducts = (products) => {
 	});
 };
 
-const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
+const ListProducts = ({
+	products,
+	def,
+	xl,
+	md,
+	sm,
+	xsm,
+	minmax,
+	limit,
+	offset,
+}) => {
 	return (
 		<Grid default={def} xl={xl} md={md} sm={sm} xsm={xsm} minmax={minmax}>
 			{products && products.length > 0 ? (
-				getListProducts(products)
+				getListProducts(products, limit, offset)
 			) : (
 				<SkListProducts />
 			)}
@@ -78,6 +92,8 @@ ListProducts.propTypes = {
 	sm: PropTypes.number.isRequired,
 	xsm: PropTypes.number.isRequired,
 	minmax: PropTypes.number.isRequired,
+	limit: PropTypes.number.isRequired,
+	offset: PropTypes.number.isRequired,
 };
 
 export default ListProducts;

@@ -7,10 +7,10 @@ const App = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route exact path="/" component={Home} />
 				<Route exact path="/home" component={Home} />
+				<Route exact path="/" component={Home} />
+				<Route path="/products/:categoryKey" component={ProductsPage} />
 				<Route path="/products" component={ProductsPage} />
-				<Route path="/products/:category" component={ProductsPage} />
 				<Route component={Home} />
 			</Switch>
 		</Router>

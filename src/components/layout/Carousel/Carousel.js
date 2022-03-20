@@ -17,6 +17,17 @@ const Slide = styled.div`
 
 	&.active {
 		display: block;
+		animation: slideBanner 1.5s;
+	}
+
+	@keyframes slideBanner {
+		0% {
+			opacity: 50%;
+		}
+
+		100% {
+			opacity: 100%;
+		}
 	}
 
 	.data {
