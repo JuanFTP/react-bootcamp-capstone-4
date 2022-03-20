@@ -1,9 +1,9 @@
 import "./ProductsPage.css";
 import PropTypes from "prop-types";
-import { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useProductsCategories } from "./../../hooks/useProductsCategories";
-import { useFeaturedProducts } from "./../../hooks/useFeaturedProducts";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useCategories } from "./../../hooks/useCategories";
+import { useProducts } from "./../../hooks/useProducts";
 import Header from "./../../components/layout/Header";
 import Footer from "./../../components/layout/Footer";
 import Container from "./../../components/common/Container";
@@ -12,10 +12,7 @@ import Chip, { chipVariants } from "./../../components/common/Chip";
 import ListProducts from "./../../components/layout/ListProducts";
 import ListPages from "./../../components/layout/ListPages/ListPages";
 import Button, { buttonVariants } from "./../../components/common/Button";
-import getCategories from "./../../utils/transform/getCategories";
-import getProducts from "./../../utils/transform/getProducts";
 import SkListCategoriesChips from "./../../utils/skeletons/SkListCategoriesChips";
-import { useParams } from "react-router-dom";
 
 const getProductsFiltered = (products, categoriesList) => {
 	return categoriesList && products && categoriesList.length > 0
@@ -32,14 +29,8 @@ const ProductsPage = () => {
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
 
-	const responseCategories = useProductsCategories();
-	const categories = getCategories(responseCategories.data.results);
-	const responseProducts = useFeaturedProducts();
-
-	const products = useMemo(
-		() => getProducts(responseProducts.data.results),
-		[responseProducts]
-	);
+	const { categories } = useCategories();
+	const { products } = useProducts();
 
 	if (categoryKey && !filterPath && !categoriesList.includes(categoryKey)) {
 		setCategoriesList((categoriesList) =>

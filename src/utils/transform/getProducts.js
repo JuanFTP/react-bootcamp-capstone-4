@@ -13,6 +13,8 @@ const getProducts = (data) => {
 				},
 				image: item.data.mainimage,
 				price: item.data.price,
+				stock: item.data.stock,
+				url: item.data.href,
 			};
 		})
 	);

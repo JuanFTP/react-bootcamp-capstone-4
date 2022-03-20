@@ -7,21 +7,15 @@ import Title, { titleLevels } from "./../../components/common/Title";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import ListCategories from "./../../components/layout/ListCategories";
 import ListProducts from "./../../components/layout/ListProducts";
-import { useFeaturedBanners } from "./../../hooks/useFeaturedBanners";
-import getBanners from "./../../utils/transform/getBanners";
-import { useProductsCategories } from "./../../hooks/useProductsCategories";
-import getCategories from "./../../utils/transform/getCategories";
-import { useFeaturedProducts } from "./../../hooks/useFeaturedProducts";
-import getProducts from "./../../utils/transform/getProducts";
 import { Link } from "react-router-dom";
+import { useBanners } from "./../../hooks/useBanners";
+import { useCategories } from "./../../hooks/useCategories";
+import { useProducts } from "./../../hooks/useProducts";
 
 const Home = () => {
-	const responseBanners = useFeaturedBanners();
-	const banners = getBanners(responseBanners.data.results);
-	const responseCategories = useProductsCategories();
-	const categories = getCategories(responseCategories.data.results);
-	const responseProducts = useFeaturedProducts();
-	const products = getProducts(responseProducts.data.results);
+	const { banners } = useBanners();
+	const { categories } = useCategories();
+	const { products } = useProducts();
 
 	return (
 		<>
@@ -32,12 +26,7 @@ const Home = () => {
 			<Container>
 				<div className="row">
 					<div className="row">
-						<div className="flex ai-top jc-space-between">
-							<Title Level={titleLevels.h3}>CATEGORIES</Title>
-							<Button variant={buttonVariants.outline}>
-								VIEW ALL CATEGORIES
-							</Button>
-						</div>
+						<Title Level={titleLevels.h3}>CATEGORIES</Title>
 					</div>
 					<br />
 					{categories && <ListCategories categories={categories} />}
