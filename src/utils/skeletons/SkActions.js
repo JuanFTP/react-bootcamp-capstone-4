@@ -8,14 +8,12 @@ const styles = {
 	marginRight: "8px",
 };
 
-const SkListPages = () => (
+const SkActions = () => (
 	<>
-		<Skeleton style={styles} />
-		<Skeleton style={styles} />
 		<Skeleton style={styles} />
 		<Skeleton style={styles} />
 		<Skeleton style={styles} />
 	</>
 );
 
-export default SkListPages;
+export default SkActions;

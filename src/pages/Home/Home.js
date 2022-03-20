@@ -1,4 +1,8 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useBanners } from "./../../hooks/useBanners";
+import { useCategories } from "./../../hooks/useCategories";
+import { useProducts } from "./../../hooks/useProducts";
 import Header from "./../../components/layout/Header";
 import Footer from "./../../components/layout/Footer";
 import Banner from "./../../components/layout/Banner";
@@ -7,10 +11,6 @@ import Title, { titleLevels } from "./../../components/common/Title";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import ListCategories from "./../../components/layout/ListCategories";
 import ListProducts from "./../../components/layout/ListProducts";
-import { Link } from "react-router-dom";
-import { useBanners } from "./../../hooks/useBanners";
-import { useCategories } from "./../../hooks/useCategories";
-import { useProducts } from "./../../hooks/useProducts";
 
 const Home = () => {
 	const { banners } = useBanners();
@@ -29,7 +29,7 @@ const Home = () => {
 						<Title Level={titleLevels.h3}>CATEGORIES</Title>
 					</div>
 					<br />
-					{categories && <ListCategories categories={categories} />}
+					<ListCategories categories={categories} />
 				</div>
 				<div className="row">
 					<div className="row">
@@ -45,21 +45,17 @@ const Home = () => {
 						</div>
 					</div>
 					<br />
-					{products && products.length > 0 ? (
-						<ListProducts
-							def={4}
-							xl={4}
-							md={3}
-							sm={2}
-							xsm={1}
-							minmax={320}
-							products={products}
-							limit={16}
-							offset={0}
-						/>
-					) : (
-						<Title Level={titleLevels.h4}>No products</Title>
-					)}
+					<ListProducts
+						def={4}
+						xl={4}
+						md={3}
+						sm={2}
+						xsm={1}
+						minmax={320}
+						products={products}
+						limit={16}
+						offset={0}
+					/>
 				</div>
 			</Container>
 
@@ -72,7 +68,6 @@ Home.propTypes = {
 	banners: PropTypes.array,
 	categories: PropTypes.array,
 	products: PropTypes.array,
-	onChangeLocation: PropTypes.func,
 };
 
 export default Home;

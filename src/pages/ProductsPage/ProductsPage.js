@@ -12,7 +12,9 @@ import Chip, { chipVariants } from "./../../components/common/Chip";
 import ListProducts from "./../../components/layout/ListProducts";
 import ListPages from "./../../components/layout/ListPages/ListPages";
 import Button, { buttonVariants } from "./../../components/common/Button";
+import { MdClose } from "react-icons/md";
 import SkListCategoriesChips from "./../../utils/skeletons/SkListCategoriesChips";
+import IconArea from "./../../components/common/IconArea/IconArea";
 
 const getProductsFiltered = (products, categoriesList) => {
 	return categoriesList && products && categoriesList.length > 0
@@ -41,6 +43,12 @@ const ProductsPage = () => {
 		setFilterPath(!filterPath);
 	}
 
+	const onClearAllFilters = () => {
+		if (categoriesList.length > 0) {
+			setCategoriesList([]);
+		}
+	};
+
 	const onCategorySelected = (id) => {
 		let newList = [];
 		if (categoriesList.includes(id)) {
@@ -64,8 +72,18 @@ const ProductsPage = () => {
 			<Container inner={true}>
 				<div className="products-view flex ai-top jc-space-between">
 					<div className="sidebar row">
-						<Title Level={titleLevels.h3}>CATEGORIES</Title>
 						<div className="categories">
+							<div className="flex ai-top jc-space-between">
+								<Title Level={titleLevels.h3}>CATEGORIES</Title>
+								{categoriesList.length > 0 && (
+									<IconArea
+										onClicketItem={onClearAllFilters}
+										value={"all"}
+									>
+										<MdClose />
+									</IconArea>
+								)}
+							</div>
 							{categories && categories.length > 0 ? (
 								categories.map((category) => (
 									<Chip
@@ -135,7 +153,6 @@ const ProductsPage = () => {
 ProductsPage.propTypes = {
 	products: PropTypes.array,
 	categories: PropTypes.array,
-	onChangeLocation: PropTypes.func,
 };
 
 export default ProductsPage;

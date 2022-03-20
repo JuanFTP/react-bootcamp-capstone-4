@@ -2,13 +2,11 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const styles = {
-	height: "48px",
-	width: "48px",
-	marginLeft: "8px",
-	marginRight: "8px",
+	height: "240px",
+	display: "block",
 };
 
-const SkListPages = () => (
+const SkListCategoriesCards = () => (
 	<>
 		<Skeleton style={styles} />
 		<Skeleton style={styles} />
@@ -18,4 +16,4 @@ const SkListPages = () => (
 	</>
 );
 
-export default SkListPages;
+export default SkListCategoriesCards;

@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import Card, { cardVariants } from "../../common/Card";
 import imgDefault from "./../../../media/category.jpg";
 import Title, { titleLevels } from "./../../common/Title";
 import ImageBackgrund from "./../../common/ImageBackground";
 import Grid from "./../../common/Grid/Grid";
-import { Link } from "react-router-dom";
+import SkListCategoriesCards from "./../../../utils/skeletons/SkListCategoriesCards";
 
 const getListCategories = (categories) => {
 	return categories.map((category) => {
@@ -36,7 +37,11 @@ const ListCategories = ({ categories }) => {
 	return (
 		categories && (
 			<Grid default={5} xl={4} md={3} sm={2} xsm={1} minmax={200}>
-				{getListCategories(categories)}
+				{categories && categories.length > 0 ? (
+					getListCategories(categories)
+				) : (
+					<SkListCategoriesCards />
+				)}
 			</Grid>
 		)
 	);
