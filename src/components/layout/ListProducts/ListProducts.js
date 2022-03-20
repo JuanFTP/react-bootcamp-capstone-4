@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import Grid from "./../../common/Grid/Grid";
 import { MdAddShoppingCart } from "react-icons/md";
 import Title, { titleLevels } from "./../../common/Title";
-import imgDefault from "./../../../media/product.jfif";
 import Card, { cardVariants } from "../../common/Card";
-import Chip from "./../../common/Chip";
-import { chipVariants } from "../../common/Chip/Chip";
+import Chip, { chipVariants } from "../../common/Chip";
+import imgDefault from "./../../../media/product.jfif";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
-import Grid from "./../../common/Grid/Grid";
 import SkListProducts from "./../../../utils/skeletons/SkListProducts";
 
 const getCapitalize = (input) =>
@@ -25,39 +25,43 @@ const getListProducts = (products, limit, offset) => {
 	);
 	return split.map((product) => {
 		return (
-			<Card key={product.id} variant={cardVariants.product}>
-				<ImageBackground
-					media={
-						product.image.url && product.image.url !== ""
-							? product.image.url
-							: imgDefault
-					}
-					h={"320px"}
-				/>
+			<Link key={product.id} to={`/product/${product.id}`}>
+				<Card variant={cardVariants.product}>
+					<ImageBackground
+						media={
+							product.image.url && product.image.url !== ""
+								? product.image.url
+								: imgDefault
+						}
+						h={"320px"}
+					/>
 
-				<div className="data">
-					<div className="row">
-						<div className="flex ai-center jc-start">
-							<Title Level={titleLevels.h4}>{product.name}</Title>
-							<Chip variant={chipVariants.sm}>
-								{product.category.slug &&
-									getCapitalize(product.category.slug)}
-							</Chip>
+					<div className="data">
+						<div className="row">
+							<div className="flex ai-center jc-start">
+								<Title Level={titleLevels.h4}>
+									{product.name}
+								</Title>
+								<Chip variant={chipVariants.sm}>
+									{product.category.slug &&
+										getCapitalize(product.category.slug)}
+								</Chip>
+							</div>
+							<span className="sku">{product.sku}</span>
 						</div>
-						<span className="sku">{product.sku}</span>
-					</div>
-					<div className="row">
-						<div className="flex ai-center jc-space-between">
-							<Title Level={titleLevels.h3}>
-								{`$ ${getFormattedPrice(product.price)}`}
-							</Title>
-							<IconArea>
-								<MdAddShoppingCart />
-							</IconArea>
+						<div className="row">
+							<div className="flex ai-center jc-space-between">
+								<Title Level={titleLevels.h3}>
+									{`$ ${getFormattedPrice(product.price)}`}
+								</Title>
+								<IconArea>
+									<MdAddShoppingCart />
+								</IconArea>
+							</div>
 						</div>
 					</div>
-				</div>
-			</Card>
+				</Card>
+			</Link>
 		);
 	});
 };

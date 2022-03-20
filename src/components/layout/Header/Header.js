@@ -7,19 +7,31 @@ import FormControl from "./../FormControl/FormControl";
 import Chip from "./../../common/Chip";
 import { MdSearch } from "react-icons/md";
 import Input, { inputTypes } from "./../../common/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { PATHS } from "./../../../utils/constants";
 
 const Header = ({ itemsOnCart }) => {
 	const history = useHistory();
 	const [search, setSearch] = useState("");
 	const onChangeInput = (e) => {
-		setSearch(e.target.value);
+		if (e.target.value !== search) {
+			setSearch(e.target.value);
+		}
 	};
 
 	const onClickBrand = () => {
-		history.push("/home");
+		history.push(PATHS.home);
 	};
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (search !== "") {
+				history.push(`${PATHS.search}/${search}`);
+			}
+		}, 2000);
+		return () => clearInterval(interval);
+	}, [search, history]);
 
 	return (
 		<div className="header shadow">

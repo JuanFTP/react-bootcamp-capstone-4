@@ -1,20 +1,19 @@
 import "./ProductsPage.css";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useCategories } from "./../../hooks/useCategories";
-import { useProducts } from "./../../hooks/useProducts";
-import Header from "./../../components/layout/Header";
-import Footer from "./../../components/layout/Footer";
-import Container from "./../../components/common/Container";
-import Title, { titleLevels } from "./../../components/common/Title";
-import Chip, { chipVariants } from "./../../components/common/Chip";
-import ListProducts from "./../../components/layout/ListProducts";
-import ListPages from "./../../components/layout/ListPages/ListPages";
-import Button, { buttonVariants } from "./../../components/common/Button";
+import { useCategories } from "../../hooks/useCategories";
+import { useProducts } from "../../hooks/useProducts";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
+import Container from "../../components/common/Container";
+import Title, { titleLevels } from "../../components/common/Title";
+import Chip, { chipVariants } from "../../components/common/Chip";
+import ListProducts from "../../components/layout/ListProducts";
+import ListPages from "../../components/layout/ListPages/ListPages";
+import Button, { buttonVariants } from "../../components/common/Button";
 import { MdClose } from "react-icons/md";
-import SkListCategoriesChips from "./../../utils/skeletons/SkListCategoriesChips";
-import IconArea from "./../../components/common/IconArea/IconArea";
+import SkListCategoriesChips from "../../utils/skeletons/SkListCategoriesChips";
+import IconArea from "../../components/common/IconArea/IconArea";
 
 const getProductsFiltered = (products, categoriesList) => {
 	return categoriesList && products && categoriesList.length > 0
@@ -107,40 +106,30 @@ const ProductsPage = () => {
 							)}
 						</div>
 					</div>
-					<div className="results">
+					<div className="results row">
 						<div className="row">
-							<div className="row">
-								<div className="flex ai-top jc-space-between">
-									<Title Level={titleLevels.h3}>
-										PRODUCTS
-									</Title>
-									<Link to="/home">
-										<Button
-											variant={buttonVariants.outline}
-										>
-											GO TO HOME
-										</Button>
-									</Link>
-								</div>
+							<div className="flex ai-top jc-space-between">
+								<Title Level={titleLevels.h3}>PRODUCTS</Title>
+								<Link to="/home">
+									<Button variant={buttonVariants.outline}>
+										GO TO HOME
+									</Button>
+								</Link>
 							</div>
 							<br />
-							{
-								<>
-									<ListProducts
-										def={4}
-										xl={3}
-										md={2}
-										sm={2}
-										xsm={1}
-										minmax={320}
-										products={productsFil}
-										limit={16}
-										offset={0}
-									/>
+							<ListProducts
+								def={4}
+								xl={3}
+								md={2}
+								sm={2}
+								xsm={1}
+								minmax={320}
+								products={productsFil}
+								limit={16}
+								offset={0}
+							/>
 
-									<ListPages pages={[]} />
-								</>
-							}
+							<ListPages pages={[]} />
 						</div>
 					</div>
 				</div>
@@ -148,11 +137,6 @@ const ProductsPage = () => {
 			<Footer />
 		</>
 	);
-};
-
-ProductsPage.propTypes = {
-	products: PropTypes.array,
-	categories: PropTypes.array,
 };
 
 export default ProductsPage;
