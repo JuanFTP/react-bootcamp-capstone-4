@@ -29,7 +29,7 @@ const Header = ({ itemsOnCart }) => {
 			if (search !== "") {
 				history.push(`${PATHS.search}/${search}`);
 			}
-		}, 2000);
+		}, 1000);
 		return () => clearInterval(interval);
 	}, [search, history]);
 

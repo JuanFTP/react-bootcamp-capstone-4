@@ -12,10 +12,10 @@ const App = () => {
 			<Switch>
 				<Route exact path={PATHS.home} component={Home} />
 				<Route exact path={PATHS.default} component={Home} />
-				<Route path={PATHS.product} component={ProductPage} />
+				<Route exact path={PATHS.product} component={ProductPage} />
+				<Route path={PATHS.searchFilter} component={SearchPage} />
 				<Route path={PATHS.categoryFilter} component={ProductsPage} />
 				<Route path={PATHS.products} component={ProductsPage} />
-				<Route path={PATHS.search} component={SearchPage} />
 				<Route component={Home} />
 			</Switch>
 		</Router>

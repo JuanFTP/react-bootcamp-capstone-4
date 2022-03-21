@@ -3,14 +3,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const SkListProducts = () => (
 	<>
-		<Skeleton height={320} />
-		<Skeleton height={320} />
-		<Skeleton height={320} />
-		<Skeleton height={320} />
-		<Skeleton height={320} />
-		<Skeleton height={320} />
-		<Skeleton height={320} />
-		<Skeleton height={320} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
+		<Skeleton height={"100%"} />
 	</>
 );
 
