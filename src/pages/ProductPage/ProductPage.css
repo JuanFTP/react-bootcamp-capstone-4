@@ -1,10 +1,44 @@
-.gallery {
+.product-view .gallery {
 	width: 55%;
 	padding-right: 24px;
 }
 
-.data {
+.product-view .data {
 	width: 45%;
+}
+
+.product-view .controls input {
+	font-family: inherit;
+	text-align: center;
+	width: 120px;
+	font-size: 1.16rem;
+	font-weight: 600;
+	color: var(--default);
+}
+
+.product-view .controls button {
+	margin-left: 16px;
+}
+
+.table {
+	width: 100%;
+}
+
+.table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table table tbody tr td {
+	color: var(--default);
+	padding: 16px 24px;
+	border: 1px solid var(--default-48);
+}
+
+.table table tbody tr td:first-child {
+	background-color: var(--default-24);
+	width: 240px;
+	max-width: 320px !important;
 }
 
 @media (max-width: 1400px) {

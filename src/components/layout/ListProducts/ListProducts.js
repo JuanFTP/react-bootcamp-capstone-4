@@ -9,14 +9,7 @@ import imgDefault from "./../../../media/product.jfif";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 import SkListProducts from "./../../../utils/skeletons/SkListProducts";
-
-const getCapitalize = (input) =>
-	input.charAt(0).toUpperCase() + input.substring(1, input.length);
-
-const getFormattedPrice = (price) =>
-	new Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(
-		price
-	);
+import { getFormattedPrice, getFormattedSlug } from "./../../../utils/utils";
 
 const getListProducts = (products, limit, offset) => {
 	const split = products.slice(
@@ -44,7 +37,7 @@ const getListProducts = (products, limit, offset) => {
 								</Title>
 								<Chip variant={chipVariants.sm}>
 									{product.category.slug &&
-										getCapitalize(product.category.slug)}
+										getFormattedSlug(product.category.slug)}
 								</Chip>
 							</div>
 							<span className="sku">{product.sku}</span>

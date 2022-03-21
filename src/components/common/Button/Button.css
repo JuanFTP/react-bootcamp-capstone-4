@@ -15,10 +15,19 @@
 	background-color: transparent;
 }
 
+.btn.btn-primary {
+	color: var(--white);
+	background-color: var(--default);
+}
+
 .btn:hover {
 	transition: var(--transition);
 }
 
 .btn:hover.btn-outline {
 	background-color: var(--light-72);
+}
+
+.btn:hover.btn-primary {
+	background-color: var(--dark-72);
 }

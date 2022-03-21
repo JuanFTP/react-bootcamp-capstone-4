@@ -1,7 +1,12 @@
 :root {
 	--default: #666666;
-	--default-72: rgba(102, 102, 102, 0.48);
+	--default-24: rgba(102, 102, 102, 0.24);
+	--default-48: rgba(102, 102, 102, 0.48);
+	--default-72: rgba(102, 102, 102, 0.72);
 	--dark: #121212;
+	--dark-24: rgba(18, 18, 18, 0.24);
+	--dark-48: rgba(18, 18, 18, 0.48);
+	--dark-72: rgba(18, 18, 18, 0.72);
 	--black: #000000;
 	--black-24: rgba(0, 0, 0, 0.24);
 	--black-48: rgba(0, 0, 0, 0.48);
@@ -32,6 +37,12 @@
 	background-color: var(--default);
 }
 
+p {
+	font-size: 1rem;
+	line-height: 1.24rem;
+	color: var(--default);
+}
+
 a {
 	text-decoration: none;
 }
@@ -56,6 +67,10 @@ body {
 
 .flex.jc-space-between {
 	justify-content: space-between;
+}
+
+.flex.jc-start {
+	justify-content: start;
 }
 
 .flex.jc-center {

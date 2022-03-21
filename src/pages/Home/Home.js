@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useBanners } from "./../../hooks/useBanners";
 import { useCategories } from "./../../hooks/useCategories";
-import { useProducts } from "./../../hooks/useProducts";
+import { useRecommendedProducts } from "./../../hooks/useRecommendedProducts";
 import Header from "./../../components/layout/Header";
 import Footer from "./../../components/layout/Footer";
 import Banner from "./../../components/layout/Banner";
@@ -15,7 +15,7 @@ import ListProducts from "./../../components/layout/ListProducts";
 const Home = () => {
 	const { banners } = useBanners();
 	const { categories } = useCategories();
-	const { products } = useProducts();
+	const { products } = useRecommendedProducts();
 
 	return (
 		<>

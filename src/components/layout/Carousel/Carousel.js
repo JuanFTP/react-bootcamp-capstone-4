@@ -1,10 +1,10 @@
-import "./Carousel.css";
 import PropTypes from "prop-types";
+import { useCallback, useEffect, useState } from "react";
+import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
 import styled from "styled-components";
 import IconArea from "./../../common/IconArea";
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
-import { useCallback, useEffect, useState } from "react";
 import Title, { titleLevels } from "./../../common/Title";
+import "./Carousel.css";
 
 const Slide = styled.div`
 	height: 100%;
@@ -42,6 +42,10 @@ const Slide = styled.div`
 	.data h2 {
 		color: var(--white);
 		margin-bottom: 16px;
+	}
+
+	.data p {
+		color: var(--white);
 	}
 `;
 
