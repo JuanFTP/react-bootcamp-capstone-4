@@ -6,3 +6,38 @@
 .data {
 	width: 45%;
 }
+
+@media (max-width: 1400px) {
+}
+
+@media (max-width: 992px) {
+	.product-view .gallery {
+		width: 50%;
+	}
+
+	.product-view .data {
+		width: 50%;
+	}
+}
+
+@media (max-width: 768px) {
+	.product-view {
+		display: block;
+	}
+
+	.product-view .gallery,
+	.product-view .data {
+		width: 100%;
+	}
+
+	.product-view .gallery {
+		padding: 0px;
+	}
+
+	.product-view .data {
+		margin-top: 48px;
+	}
+}
+
+@media (max-width: 576px) {
+}

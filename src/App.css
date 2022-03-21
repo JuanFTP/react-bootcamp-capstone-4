@@ -36,6 +36,10 @@ a {
 	text-decoration: none;
 }
 
+body {
+	background-color: var(--white);
+}
+
 .flex {
 	display: flex;
 	height: 100%;
@@ -82,7 +86,7 @@ img {
 }
 
 .row {
-	padding-top: 72px;
+	padding-top: 48px;
 }
 
 .row .row {
@@ -127,6 +131,9 @@ img {
 }
 
 @media (max-width: 992px) {
+	.row {
+		padding-top: 24px;
+	}
 }
 
 @media (max-width: 768px) {
