@@ -6,15 +6,15 @@ export const inputTypes = {
 	number: "number",
 };
 
-const Input = ({ value, type, onChangeInput, read }) => {
+const Input = ({ type, value, placeholder, onChangeInput, read = false }) => {
 	return (
 		<div className="input">
 			<input
 				value={value}
 				type={type && inputTypes[type]}
-				placeholder="Type for search"
+				placeholder={placeholder}
 				onChange={onChangeInput}
-				readOnly={true}
+				readOnly={read}
 			/>
 		</div>
 	);
@@ -22,8 +22,9 @@ const Input = ({ value, type, onChangeInput, read }) => {
 
 Input.propTypes = {
 	type: PropTypes.oneOf(Object.keys(inputTypes)),
-	onChangeInput: PropTypes.func,
 	value: PropTypes.any.isRequired,
+	placeholder: PropTypes.string.isRequired,
+	onChangeInput: PropTypes.func,
 	read: PropTypes.bool,
 };
 

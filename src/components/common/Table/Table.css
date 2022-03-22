@@ -1,0 +1,20 @@
+.table {
+	width: 100%;
+}
+
+.table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table table tbody tr td {
+	color: var(--default);
+	padding: 16px 24px;
+	border: 1px solid var(--default-48);
+}
+
+.table table tbody tr td:first-child {
+	background-color: var(--default-24);
+	width: 240px;
+	max-width: 320px !important;
+}

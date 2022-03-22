@@ -1,60 +1,88 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const stylesList = {
-	height: "24px",
-	width: "96px",
-	borderRadius: "12px",
-	margin: "4px 4px 4px 0px",
-};
+const getTitle = () => (
+	<Skeleton height={18} style={{ width: "25%", marginBottom: "4px" }} />
+);
+
+const getIconArea = () => <Skeleton inline={true} height={48} width={48} />;
+
+const getChipSm = () => (
+	<Skeleton
+		inline={true}
+		style={{
+			height: "24px",
+			width: "96px",
+			borderRadius: "12px",
+			margin: "8px 8px 8px 0px",
+		}}
+	/>
+);
 
 const SkProductDetails = () => {
 	return (
 		<div className="row">
 			<div className="product-view flex ai-top jc-space-between">
 				<div className="gallery">
-					<Skeleton style={{ minHeight: "544px" }} />
+					<Skeleton style={{ minHeight: "100%" }} />
 				</div>
-				<div className="data">
-					<Skeleton height={48} width={"50%"} />
-					<Skeleton height={48} width={"25%"} />
-					<br />
-					<Skeleton height={24} width={"12%"} />
-					<br />
-					<Skeleton height={36} width={120} borderRadius={18} />
-					<br />
-					<Skeleton height={24} width={120} />
-					<div>
-						<Skeleton inline={true} style={stylesList} />
-						<Skeleton inline={true} style={stylesList} />
-						<Skeleton inline={true} style={stylesList} />
+				<div className="details">
+					<div className="information">
+						<Skeleton height={32} width={"50%"} />
+						<Skeleton height={32} width={"25%"} />
+						<Skeleton height={14} width={"12%"} />
 					</div>
-					<br />
-					<Skeleton height={144} />
-					<br />
-					<Skeleton height={24} width={120} />
-					<div style={{ marginTop: "4px" }}>
-						<Skeleton inline={true} height={48} width={48} />
+
+					<div className="category">
+						{getTitle()}
 						<Skeleton
-							inline={true}
-							height={48}
+							height={36}
 							width={96}
-							style={{ margin: "0px 8px" }}
-						/>
-						<Skeleton inline={true} height={48} width={48} />
-						<Skeleton
-							inline={true}
-							height={48}
-							width={160}
-							style={{ marginLeft: "16px" }}
+							borderRadius={18}
+							style={{ margin: "8px 8px 8px 0px" }}
 						/>
 					</div>
+
+					<div className="slugs">
+						{getTitle()}
+						<div>
+							{getChipSm()}
+							{getChipSm()}
+						</div>
+					</div>
+
+					<div className="description">
+						{getTitle()}
+						<Skeleton height={96} />
+					</div>
+
+					<div className="items">
+						{getTitle()}
+						<div className="controls">
+							<div className="flex ai-center jc-start">
+								{getIconArea()}
+								<Skeleton
+									inline={true}
+									height={48}
+									width={120}
+									style={{ margin: "0px 8px" }}
+								/>
+								{getIconArea()}
+								<Skeleton
+									inline={true}
+									height={48}
+									width={160}
+									style={{ marginLeft: "16px" }}
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className="specs">
+						{getTitle()}
+						<Skeleton height={256} />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div className="row">
-				<Skeleton height={24} width={"25%"} />
-				<Skeleton height={320} />
 			</div>
 		</div>
 	);

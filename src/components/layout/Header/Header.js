@@ -1,20 +1,19 @@
-import "./Header.css";
 import PropTypes from "prop-types";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import Brand from "../../common/Brand/Brand";
-import IconArea from "./../../common/IconArea/IconArea";
-import FormControl from "./../FormControl/FormControl";
-import Chip from "./../../common/Chip";
-import { MdSearch } from "react-icons/md";
-import Input, { inputTypes } from "./../../common/Input";
 import { useEffect, useState } from "react";
+import { MdOutlineShoppingCart, MdSearch } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import Brand from "../../common/Brand/Brand";
 import { PATHS } from "./../../../utils/constants";
+import Chip from "./../../common/Chip";
+import IconArea from "./../../common/IconArea/IconArea";
+import Input, { inputTypes } from "./../../common/Input";
+import FormControl from "./../FormControl/FormControl";
+import "./Header.css";
 
 const Header = ({ itemsOnCart }) => {
 	const history = useHistory();
 	const [search, setSearch] = useState("");
-	const onChangeInput = (e) => {
+	const onChangeSearch = (e) => {
 		if (e.target.value !== search) {
 			setSearch(e.target.value);
 		}
@@ -26,6 +25,8 @@ const Header = ({ itemsOnCart }) => {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
+			setSearch("");
+
 			if (search !== "") {
 				history.push(`${PATHS.search}/${search}`);
 			}
@@ -38,15 +39,17 @@ const Header = ({ itemsOnCart }) => {
 			<div className="flex ai-center jc-space-between">
 				<Brand handleOnClick={onClickBrand} />
 
-				<FormControl minWidth="45%" feedback={true} round={true}>
+				<FormControl width="45%" feedback={true} round={true}>
 					<IconArea>
 						<MdSearch />
 					</IconArea>
 
 					<Input
-						value={search}
 						type={inputTypes.text}
-						onChangeInput={onChangeInput}
+						value={search}
+						placeholder="Type any for search"
+						onChangeInput={onChangeSearch}
+						read={false}
 					/>
 				</FormControl>
 

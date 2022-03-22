@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "./../utils/constants";
-import getBanners from "./../utils/transform/getBanners";
+import getProducts from "./../utils/transform/getProducts";
 import { useLatestAPI } from "./useLatestAPI";
 
-export function useBanners() {
+export function useSearchResults(searchTerm) {
 	const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
 	const [error, setError] = useState();
-	const [banners, setBanners] = useState([]);
+	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
 		if (!apiRef || isApiMetadataLoading) {
@@ -18,17 +18,17 @@ export function useBanners() {
 
 		(async () => {
 			try {
-				const URI = `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
-					'[[at(document.type, "banner")]]'
-				)}&lang=en-us&pageSize=5`;
+				const URI = `${API_BASE_URL}/documents/search?ref=${apiRef}
+				&q=${encodeURIComponent(`[[at(document.type, "product")]]`)}
+				&q=${encodeURIComponent(`[[fulltext(document, "${searchTerm}")]]`)}
+				&lang=en-us&pageSize=20`;
 
 				const response = await axios.get(URI);
-				const allBanners = await getBanners(response.data.results);
-
-				setBanners(allBanners);
+				const allProducts = await getProducts(response.data.results);
+				setProducts(allProducts);
 			} catch (error) {
 				if (error.response) {
-					setError("Ha ocurrido un error en el servidor del clima");
+					setError("Ha ocurrido un error en el servidor");
 				} else if (error.request) {
 					setError("Verifica tu conexión a internet");
 				} else {
@@ -36,7 +36,7 @@ export function useBanners() {
 				}
 			}
 		})();
-	}, [apiRef, isApiMetadataLoading]);
+	}, [apiRef, isApiMetadataLoading, searchTerm]);
 
-	return { banners, error };
+	return { products, error };
 }

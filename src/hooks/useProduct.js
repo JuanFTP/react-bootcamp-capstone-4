@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { API_BASE_URL } from "./../utils/constants";
-import { useLatestAPI } from "./useLatestAPI";
 import getProduct from "./../utils/transform/getProduct";
+import { useLatestAPI } from "./useLatestAPI";
 
 export function useProduct(productId) {
 	const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useParams } from "react-router-dom";
-import IconArea from "../../components/common/IconArea/IconArea";
-import Input, { inputTypes } from "../../components/common/Input";
-import FormControl from "../../components/layout/FormControl/FormControl";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
+import IconArea from "./../../components/common/IconArea/IconArea";
+import Input, { inputTypes } from "./../../components/common/Input";
+import Table from "./../../components/common/Table";
 import Title, { titleLevels } from "./../../components/common/Title";
 import Footer from "./../../components/layout/Footer";
+import FormControl from "./../../components/layout/FormControl/FormControl";
 import Header from "./../../components/layout/Header";
 import { useProduct } from "./../../hooks/useProduct";
 import { PATHS } from "./../../utils/constants";
@@ -19,29 +22,6 @@ import {
 	getFormattedSlug,
 } from "./../../utils/utils";
 import "./ProductPage.css";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
-const getTable = (specs) => {
-	return (
-		<div className="table">
-			<table>
-				<tbody>
-					{specs.map((spec) => {
-						return (
-							<tr key={spec.name.replace(" ", "-")}>
-								<td>
-									<strong>{spec.name}</strong>
-								</td>
-								<td>{spec.value}</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
-		</div>
-	);
-};
 
 const ProductPage = () => {
 	const { productId } = useParams();
@@ -72,37 +52,40 @@ const ProductPage = () => {
 				{product && Object.keys(product).length > 0 ? (
 					<div className="row">
 						<div className="product-view flex ai-top jc-space-between">
-							<div
-								className="gallery"
-								style={{ minHeight: "520px" }}
-							>
-								<Skeleton height={"100%"} width={"100%"} />
+							<div className="gallery">
+								<Skeleton style={{ minHeight: "80%" }} />
 							</div>
-							<div className="data">
-								<Title Level={titleLevels.h2}>
-									{product.name}
-								</Title>
+							<div className="details">
+								<div className="information">
+									<Title Level={titleLevels.h2}>
+										{product.name}
+									</Title>
+									<Title Level={titleLevels.h2}>
+										{`$ ${getFormattedPrice(
+											product.price
+										)}`}
+									</Title>
+									<span className="sku">{product.sku}</span>
+								</div>
 
-								<Title Level={titleLevels.h2}>
-									{`$ ${getFormattedPrice(product.price)}`}
-								</Title>
-								<span className="sku">{product.sku}</span>
-								<br />
-								<Link
-									to={`${PATHS.products}/${product.category.id}`}
-								>
-									<Chip
-										variant={chipVariants.xl}
-										isActive={true}
+								<div className="category">
+									<Title Level={titleLevels.h4}>
+										Category
+									</Title>
+									<Link
+										to={`${PATHS.products}/${product.category.id}`}
 									>
-										{getCapitalize(product.category.slug)}
-									</Chip>
-								</Link>
-								<br />
-								<br />
-								<Title Level={titleLevels.h4}>Tags</Title>
-								{product.slugs && product.slugs.length > 0 && (
-									<div className="slugs">
+										<Chip variant={chipVariants.xl}>
+											{getCapitalize(
+												product.category.slug
+											)}
+										</Chip>
+									</Link>
+								</div>
+
+								<div className="slugs">
+									<Title Level={titleLevels.h4}>Slugs</Title>
+									<div>
 										{product.slugs.map((slug) => (
 											<Chip
 												key={slug}
@@ -112,55 +95,60 @@ const ProductPage = () => {
 											</Chip>
 										))}
 									</div>
-								)}
-								<br />
-								<p>{product.description}</p>
-								<br />
-								<Title Level={titleLevels.h4}>Items</Title>
-								<div className="controls">
-									<div className="flex ai-center jc-start">
-										<IconArea
-											onClicketItem={modifyPieces}
-											value="DEC"
-										>
-											<MdOutlineRemove />
-										</IconArea>
-										<FormControl
-											minWidth="96px"
-											feedback={false}
-											round={false}
-										>
-											<Input
-												variant={inputTypes.number}
-												value={pieces}
-												onChangeInput={(e) =>
-													console.log(e.target.value)
-												}
-												read={true}
-											/>
-										</FormControl>
-										<IconArea
-											onClicketItem={modifyPieces}
-											value="INC"
-										>
-											<MdAdd />
-										</IconArea>
+								</div>
 
-										<Button
-											variant={buttonVariants.primary}
-										>
-											Add to cart
-										</Button>
+								<div className="description">
+									<Title Level={titleLevels.h4}>
+										Description
+									</Title>
+									<p>{product.description}</p>
+								</div>
+
+								<div className="items">
+									<Title Level={titleLevels.h4}>
+										Items ({product.stock} available)
+									</Title>
+									<div className="controls">
+										<div className="flex ai-center jc-start">
+											<IconArea
+												onClicketItem={modifyPieces}
+												value="DEC"
+											>
+												<MdOutlineRemove />
+											</IconArea>
+											<FormControl
+												width="96px"
+												feedback={false}
+												round={false}
+											>
+												<Input
+													variant={inputTypes.number}
+													value={pieces}
+													placeholder={"0"}
+													read={true}
+												/>
+											</FormControl>
+											<IconArea
+												onClicketItem={modifyPieces}
+												value="INC"
+											>
+												<MdAdd />
+											</IconArea>
+
+											<Button
+												variant={buttonVariants.primary}
+											>
+												Add to cart
+											</Button>
+										</div>
 									</div>
 								</div>
+
+								<div className="specs">
+									<Title Level={titleLevels.h4}>Specs</Title>
+									<Table data={product.specs} />
+								</div>
 							</div>
-						</div>
-						<br />
-						<br />
-						<div className="row">
-							<Title Level={titleLevels.h4}>Specs</Title>
-							<br />
-							{getTable(product.specs)}
 						</div>
 					</div>
 				) : (
