@@ -1,19 +1,19 @@
-import "./ProductsPage.css";
 import { useEffect, useState } from "react";
+import { MdClose } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
+import Button, { buttonVariants } from "../../components/common/Button";
+import Chip, { chipVariants } from "../../components/common/Chip";
+import Container from "../../components/common/Container";
+import IconArea from "../../components/common/IconArea/IconArea";
+import Title, { titleLevels } from "../../components/common/Title";
+import Footer from "../../components/layout/Footer";
+import Header from "../../components/layout/Header";
+import ListPages from "../../components/layout/ListPages/ListPages";
+import ListProducts from "../../components/layout/ListProducts";
 import { useCategories } from "../../hooks/useCategories";
 import { useProducts } from "../../hooks/useProducts";
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
-import Container from "../../components/common/Container";
-import Title, { titleLevels } from "../../components/common/Title";
-import Chip, { chipVariants } from "../../components/common/Chip";
-import ListProducts from "../../components/layout/ListProducts";
-import ListPages from "../../components/layout/ListPages/ListPages";
-import Button, { buttonVariants } from "../../components/common/Button";
-import { MdClose } from "react-icons/md";
 import SkListCategoriesChips from "../../utils/skeletons/SkListCategoriesChips";
-import IconArea from "../../components/common/IconArea/IconArea";
+import "./ProductsPage.css";
 
 const getProductsFiltered = (products, categoriesList) => {
 	return categoriesList && products && categoriesList.length > 0
@@ -68,6 +68,7 @@ const ProductsPage = () => {
 	return (
 		<>
 			<Header />
+
 			<Container inner={true}>
 				<div className="products-view flex ai-top jc-space-between">
 					<div className="sidebar row">
@@ -134,6 +135,7 @@ const ProductsPage = () => {
 					</div>
 				</div>
 			</Container>
+
 			<Footer />
 		</>
 	);

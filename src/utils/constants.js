@@ -8,5 +8,5 @@ export const PATHS = {
 	categoryFilter: "/products/:categoryKey",
 	product: "/product/:productId",
 	search: "/search",
-	searchFilter: "/search/:q",
+	searchFilter: "/search/:searchTerm",
 };

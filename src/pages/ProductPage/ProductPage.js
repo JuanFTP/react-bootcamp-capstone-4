@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useParams } from "react-router-dom";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
@@ -13,6 +11,7 @@ import Title, { titleLevels } from "./../../components/common/Title";
 import Footer from "./../../components/layout/Footer";
 import FormControl from "./../../components/layout/FormControl/FormControl";
 import Header from "./../../components/layout/Header";
+import SwiperCarousel from "./../../components/layout/SwiperCarousel";
 import { useProduct } from "./../../hooks/useProduct";
 import { PATHS } from "./../../utils/constants";
 import SkProductDetails from "./../../utils/skeletons/SkProductDetails";
@@ -53,7 +52,7 @@ const ProductPage = () => {
 					<div className="row">
 						<div className="product-view flex ai-top jc-space-between">
 							<div className="gallery">
-								<Skeleton style={{ minHeight: "80%" }} />
+								<SwiperCarousel slides={product.images} />
 							</div>
 							<div className="details">
 								<div className="information">

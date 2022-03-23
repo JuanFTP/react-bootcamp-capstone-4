@@ -8,8 +8,8 @@ import ListProducts from "./../../components/layout/ListProducts";
 import { useSearchResults } from "./../../hooks/useSerchResults";
 
 const SearchPage = () => {
-	const { q } = useParams();
-	const { products } = useSearchResults(q);
+	const { searchTerm } = useParams();
+	const { products } = useSearchResults(searchTerm);
 	const pages = [];
 
 	return (
@@ -22,7 +22,7 @@ const SearchPage = () => {
 						{products && products.length > 0
 							? "Results "
 							: "No results "}
-						for "{q}"
+						for "{searchTerm}"
 					</Title>
 
 					{products && products.length > 0 && (

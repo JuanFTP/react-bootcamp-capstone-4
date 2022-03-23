@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Button, { buttonVariants } from "./../../components/common/Button";
+import Container from "./../../components/common/Container";
+import Title, { titleLevels } from "./../../components/common/Title";
+import Banner from "./../../components/layout/Banner";
+import Footer from "./../../components/layout/Footer";
+import Header from "./../../components/layout/Header";
+import ListCategories from "./../../components/layout/ListCategories";
+import ListProducts from "./../../components/layout/ListProducts";
 import { useBanners } from "./../../hooks/useBanners";
 import { useCategories } from "./../../hooks/useCategories";
 import { useRecommendedProducts } from "./../../hooks/useRecommendedProducts";
-import Header from "./../../components/layout/Header";
-import Footer from "./../../components/layout/Footer";
-import Banner from "./../../components/layout/Banner";
-import Container from "./../../components/common/Container";
-import Title, { titleLevels } from "./../../components/common/Title";
-import Button, { buttonVariants } from "./../../components/common/Button";
-import ListCategories from "./../../components/layout/ListCategories";
-import ListProducts from "./../../components/layout/ListProducts";
 
 const Home = () => {
 	const { banners } = useBanners();
