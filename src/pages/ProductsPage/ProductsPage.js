@@ -141,8 +141,6 @@ const ProductsPage = () => {
 									xsm={1}
 									minmax={320}
 									products={productsFil}
-									limit={16}
-									offset={0}
 								/>
 							)}
 

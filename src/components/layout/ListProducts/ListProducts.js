@@ -1,22 +1,18 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import Grid from "./../../common/Grid/Grid";
 import { MdAddShoppingCart } from "react-icons/md";
-import Title, { titleLevels } from "./../../common/Title";
+import { Link } from "react-router-dom";
 import Card, { cardVariants } from "../../common/Card";
 import Chip, { chipVariants } from "../../common/Chip";
 import imgDefault from "./../../../media/product.jfif";
-import IconArea from "./../../common/IconArea/IconArea";
-import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 import SkListProducts from "./../../../utils/skeletons/SkListProducts";
 import { getFormattedPrice, getFormattedSlug } from "./../../../utils/utils";
+import Grid from "./../../common/Grid/Grid";
+import IconArea from "./../../common/IconArea/IconArea";
+import ImageBackground from "./../../common/ImageBackground/ImageBackground";
+import Title, { titleLevels } from "./../../common/Title";
 
-const getListProducts = (products, limit, offset) => {
-	const split = products.slice(
-		offset,
-		limit + offset > products.length ? products.length : limit + offset
-	);
-	return split.map((product) => {
+const getListProducts = (products) => {
+	return products.map((product) => {
 		return (
 			<Link key={product.id} to={`/product/${product.id}`}>
 				<Card variant={cardVariants.product}>
@@ -59,21 +55,11 @@ const getListProducts = (products, limit, offset) => {
 	});
 };
 
-const ListProducts = ({
-	products,
-	def,
-	xl,
-	md,
-	sm,
-	xsm,
-	minmax,
-	limit,
-	offset,
-}) => {
+const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
 	return (
 		<Grid default={def} xl={xl} md={md} sm={sm} xsm={xsm} minmax={minmax}>
 			{products && products.length > 0 ? (
-				getListProducts(products, limit, offset)
+				getListProducts(products)
 			) : (
 				<SkListProducts />
 			)}
@@ -89,8 +75,6 @@ ListProducts.propTypes = {
 	sm: PropTypes.number.isRequired,
 	xsm: PropTypes.number.isRequired,
 	minmax: PropTypes.number.isRequired,
-	limit: PropTypes.number.isRequired,
-	offset: PropTypes.number.isRequired,
 };
 
 export default ListProducts;

@@ -54,8 +54,6 @@ const SearchPage = () => {
 								xsm={1}
 								minmax={480}
 								products={products}
-								limit={12}
-								offset={0}
 							/>
 
 							{pagination.length > 1 && (

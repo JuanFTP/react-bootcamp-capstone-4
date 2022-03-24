@@ -27,6 +27,7 @@ export function useSearchResults(searchTerm, page, pageSize) {
 				)}&lang=en-us&pageSize=${
 					pageSize && pageSize > 0 ? pageSize : 20
 				}&page=${page && page > 0 ? page : 1}`;
+				console.log(URI);
 
 				const response = await axios.get(URI);
 				const allProducts = await getProducts(response.data.results);
