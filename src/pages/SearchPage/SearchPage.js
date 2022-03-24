@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Title, { titleLevels } from "../../components/common/Title";
 import Container from "./../../components/common/Container";
@@ -9,8 +10,25 @@ import { useSearchResults } from "./../../hooks/useSerchResults";
 
 const SearchPage = () => {
 	const { searchTerm } = useParams();
-	const { products } = useSearchResults(searchTerm);
-	const pages = [];
+
+	const [page, setPage] = useState(1);
+	const pageSize = 20;
+
+	const { products, pagination } = useSearchResults(
+		searchTerm,
+		page,
+		pageSize
+	);
+
+	const onClickPage = (numberPage) => {
+		if (page !== numberPage) {
+			setPage(numberPage);
+		}
+	};
+
+	useEffect(() => {
+		setPage(1);
+	}, [searchTerm]);
 
 	return (
 		<>
@@ -40,7 +58,12 @@ const SearchPage = () => {
 								offset={0}
 							/>
 
-							<ListPages pages={pages} />
+							{pagination.length > 1 && (
+								<ListPages
+									pagination={pagination}
+									onClickPage={onClickPage}
+								/>
+							)}
 						</>
 					)}
 				</div>
