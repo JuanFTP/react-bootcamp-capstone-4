@@ -20,7 +20,7 @@ export function useCategories() {
 			try {
 				const URI = `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
 					'[[at(document.type, "category")]]'
-				)}&lang=en-us&pageSize=5`;
+				)}&lang=en-us&pageSize=10`;
 
 				const response = await axios.get(URI);
 				const allCategories = await getCategories(
@@ -30,7 +30,7 @@ export function useCategories() {
 				setCategories(allCategories);
 			} catch (error) {
 				if (error.response) {
-					setError("Ha ocurrido un error en el servidor del clima");
+					setError("Ha ocurrido un error en el servidor");
 				} else if (error.request) {
 					setError("Verifica tu conexión a internet");
 				} else {

@@ -4,7 +4,7 @@ import { API_BASE_URL } from "./../utils/constants";
 import getProducts from "./../utils/transform/getProducts";
 import { useLatestAPI } from "./useLatestAPI";
 
-export function useSearchResults(searchTerm) {
+export function useSearchResults(searchTerm, page, pageSize) {
 	const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
 	const [error, setError] = useState();
 	const [products, setProducts] = useState([]);
@@ -21,7 +21,8 @@ export function useSearchResults(searchTerm) {
 				const URI = `${API_BASE_URL}/documents/search?ref=${apiRef}
 				&q=${encodeURIComponent(`[[at(document.type, "product")]]`)}
 				&q=${encodeURIComponent(`[[fulltext(document, "${searchTerm}")]]`)}
-				&lang=en-us&pageSize=20`;
+				&lang=en-us
+				&pageSize=20`;
 
 				const response = await axios.get(URI);
 				const allProducts = await getProducts(response.data.results);

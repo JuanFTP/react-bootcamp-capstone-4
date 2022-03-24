@@ -27,11 +27,11 @@ const ProductsPage = () => {
 	const [filterPath, setFilterPath] = useState(false);
 	const { categoryKey } = useParams();
 
+	const [page, setPage] = useState(1);
+	const pageSize = 12;
+
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
-
-	const { categories } = useCategories();
-	const { products } = useProducts();
 
 	if (categoryKey && !filterPath && !categoriesList.includes(categoryKey)) {
 		setCategoriesList((categoriesList) =>
@@ -59,6 +59,15 @@ const ProductsPage = () => {
 			setCategoriesList(newList);
 		}
 	};
+
+	const onClickPage = (numberPage) => {
+		if (page !== numberPage) {
+			setPage(numberPage);
+		}
+	};
+
+	const { categories } = useCategories();
+	const { products, pagination } = useProducts(page, pageSize);
 
 	useEffect(() => {
 		const productsFiltered = getProductsFiltered(products, categoriesList);
@@ -118,19 +127,29 @@ const ProductsPage = () => {
 								</Link>
 							</div>
 							<br />
-							<ListProducts
-								def={4}
-								xl={3}
-								md={2}
-								sm={2}
-								xsm={1}
-								minmax={320}
-								products={productsFil}
-								limit={16}
-								offset={0}
-							/>
+							{categoriesList.length > 0 &&
+							productsFil.length === 0 ? (
+								<Title Level={titleLevels.h4}>
+									No matches with filter selected
+								</Title>
+							) : (
+								<ListProducts
+									def={4}
+									xl={3}
+									md={2}
+									sm={2}
+									xsm={1}
+									minmax={320}
+									products={productsFil}
+									limit={16}
+									offset={0}
+								/>
+							)}
 
-							<ListPages pages={[]} />
+							<ListPages
+								pagination={pagination}
+								onClickPage={onClickPage}
+							/>
 						</div>
 					</div>
 				</div>
