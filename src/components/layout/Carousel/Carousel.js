@@ -129,9 +129,7 @@ const Carousel = ({ slides, slideActive }) => {
 
 			<div className="controls">
 				<div className="flex ai-center jc-center">
-					<div className="actions">
-						{getControls(slides, slideAct, onClickedCheck)}
-					</div>
+					{getControls(slides, slideAct, onClickedCheck)}
 				</div>
 			</div>
 		</div>

@@ -1,15 +1,16 @@
 input,
 select {
-	font-family: inherit;
-	font-size: 1.16rem;
 	height: 100%;
 	width: 100%;
+	font-family: inherit;
 	border: 0px;
 	outline: 0px;
-	padding: 14px 16px;
+	font-size: 1rem;
+	line-height: 2rem;
+	padding: 8px 8px;
+	text-align: center;
 	color: var(--default);
 	background-color: transparent !important;
-	text-align: center;
 }
 
 input::placeholder {

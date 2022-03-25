@@ -1,5 +1,5 @@
-import "./Input.css";
 import PropTypes from "prop-types";
+import "./Input.css";
 
 export const inputTypes = {
 	text: "text",

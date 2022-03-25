@@ -1,16 +1,17 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { MdOutlineShoppingCart, MdSearch } from "react-icons/md";
+import { MdDarkMode, MdOutlineShoppingCart, MdSearch } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import Brand from "../../common/Brand/Brand";
 import { PATHS } from "./../../../utils/constants";
+import Avatar from "./../../common/Avatar/Avatar";
 import Chip from "./../../common/Chip";
 import IconArea from "./../../common/IconArea/IconArea";
 import Input, { inputTypes } from "./../../common/Input";
 import FormControl from "./../FormControl/FormControl";
 import "./Header.css";
 
-const Header = ({ itemsOnCart }) => {
+const Header = ({ itemsOnCart, userData }) => {
 	const history = useHistory();
 	const [search, setSearch] = useState("");
 	const onChangeSearch = (e) => {
@@ -39,7 +40,7 @@ const Header = ({ itemsOnCart }) => {
 			<div className="flex ai-center jc-space-between">
 				<Brand handleOnClick={onClickBrand} />
 
-				<FormControl width="45%" feedback={true} round={true}>
+				<FormControl width="40%" feedback={true} round={true}>
 					<IconArea>
 						<MdSearch />
 					</IconArea>
@@ -47,20 +48,32 @@ const Header = ({ itemsOnCart }) => {
 					<Input
 						type={inputTypes.text}
 						value={search}
-						placeholder="Type any for search"
+						placeholder="Search"
 						onChangeInput={onChangeSearch}
 						read={false}
 					/>
 				</FormControl>
 
-				<div className="actions">
-					<div className="stats">
+				<div className="tools">
+					<div className="actions">
 						<IconArea>
-							<MdOutlineShoppingCart />
+							<MdDarkMode />
 						</IconArea>
 
-						{itemsOnCart && <Chip>{itemsOnCart}</Chip>}
+						<div className="stats">
+							<IconArea>
+								<MdOutlineShoppingCart />
+							</IconArea>
+
+							{itemsOnCart && <Chip>{itemsOnCart}</Chip>}
+						</div>
 					</div>
+
+					{userData && (
+						<IconArea>
+							<Avatar rounded={true} />
+						</IconArea>
+					)}
 				</div>
 			</div>
 		</div>

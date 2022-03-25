@@ -1,5 +1,5 @@
-import "./FormControl.css";
 import PropTypes from "prop-types";
+import "./FormControl.css";
 
 const FormControl = ({ children, width, feedback, round }) => {
 	return (

@@ -1,13 +1,18 @@
 .carousel {
-	height: calc(100vh - 64px);
+	height: calc(100vh - 72px);
 }
 
 .carousel .slides {
 	height: 100%;
-	max-height: calc(100% - 48px);
+	max-height: calc(100% - 64px);
 }
 
 .carousel .controls {
+	margin-top: 16px;
 	height: 48px;
 	width: 100%;
+}
+
+.carousel .controls .icon-area {
+	margin: 8px 8px;
 }

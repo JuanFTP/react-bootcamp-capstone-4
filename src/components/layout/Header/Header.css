@@ -6,3 +6,32 @@
 	background-color: var(--white);
 	z-index: 1000;
 }
+
+.header .tools {
+	height: 48px;
+}
+
+.header .tools img {
+	margin-left: 8px;
+}
+
+.header .actions {
+	float: left;
+}
+
+.header .actions > .icon-area {
+	float: left;
+	margin-right: 8px;
+}
+
+.header .stats {
+	height: 48px;
+	padding: 0px 8px;
+	border-radius: 24px;
+	background-color: var(--light);
+}
+
+.header .stats .chip {
+	margin-top: 11px;
+	background-color: var(--white);
+}
