@@ -1,13 +1,12 @@
 input,
 select {
-	height: 100%;
+	height: 48px;
 	width: 100%;
 	font-family: inherit;
 	border: 0px;
 	outline: 0px;
 	font-size: 1rem;
-	line-height: 2rem;
-	padding: 8px 8px;
+	padding: 8px;
 	text-align: center;
 	color: var(--default);
 	background-color: transparent !important;
