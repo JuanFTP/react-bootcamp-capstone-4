@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Title, { titleLevels } from "../../components/common/Title";
+import { APP_NAME } from "../../utils/constants";
 import Container from "./../../components/common/Container";
 import Footer from "./../../components/layout/Footer";
 import Header from "./../../components/layout/Header";
@@ -14,11 +15,7 @@ const SearchPage = () => {
 	const [page, setPage] = useState(1);
 	const pageSize = 20;
 
-	const { products, pagination } = useSearchResults(
-		searchTerm,
-		page,
-		pageSize
-	);
+	const { products, pagination } = useSearchResults(searchTerm, page, pageSize);
 
 	const onClickPage = (numberPage) => {
 		if (page !== numberPage) {
@@ -27,7 +24,12 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
+		document.title = `${APP_NAME} | Results for "${searchTerm}"`;
 		setPage(1);
+
+		return () => {
+			document.title = APP_NAME;
+		};
 	}, [searchTerm]);
 
 	return (
@@ -37,9 +39,7 @@ const SearchPage = () => {
 			<Container inner={true}>
 				<div className="row">
 					<Title Level={titleLevels.h2}>
-						{products && products.length > 0
-							? "Results "
-							: "No results "}
+						{products && products.length > 0 ? "Results " : "No results "}
 						for "{searchTerm}"
 					</Title>
 
@@ -57,10 +57,7 @@ const SearchPage = () => {
 							/>
 
 							{pagination.length > 1 && (
-								<ListPages
-									pagination={pagination}
-									onClickPage={onClickPage}
-								/>
+								<ListPages pagination={pagination} onClickPage={onClickPage} />
 							)}
 						</>
 					)}
