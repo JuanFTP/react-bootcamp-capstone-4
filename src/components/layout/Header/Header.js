@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { MdDarkMode, MdOutlineShoppingCart, MdSearch } from "react-icons/md";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Brand from "../../common/Brand/Brand";
 import { PATHS } from "./../../../utils/constants";
 import Avatar from "./../../common/Avatar/Avatar";
@@ -13,7 +13,9 @@ import "./Header.css";
 
 const Header = ({ itemsOnCart, userData }) => {
 	const history = useHistory();
+	const location = useLocation();
 	const [search, setSearch] = useState("");
+
 	const onChangeSearch = (e) => {
 		if (e.target.value !== search) {
 			setSearch(e.target.value);
@@ -21,17 +23,21 @@ const Header = ({ itemsOnCart, userData }) => {
 	};
 
 	const onClickBrand = () => {
-		history.push(PATHS.home);
+		if (
+			location.pathname !== PATHS.home &&
+			location.pathname !== PATHS.default
+		) {
+			history.push(PATHS.home);
+		}
 	};
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setSearch("");
-
 			if (search !== "") {
 				history.push(`${PATHS.search}/${search}`);
 			}
 		}, 1000);
+
 		return () => clearInterval(interval);
 	}, [search, history]);
 

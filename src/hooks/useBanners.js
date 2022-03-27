@@ -10,6 +10,8 @@ export function useBanners() {
 	const [banners, setBanners] = useState([]);
 
 	useEffect(() => {
+		const controller = new AbortController();
+
 		if (!apiRef || isApiMetadataLoading) {
 			setError("No se ha podido obtener la referencia de la API");
 
@@ -22,13 +24,13 @@ export function useBanners() {
 					'[[at(document.type, "banner")]]'
 				)}&lang=en-us&pageSize=5`;
 
-				const response = await axios.get(URI);
+				const response = await axios.get(URI, { signal: controller.signal });
 				const allBanners = await getBanners(response.data.results);
 
 				setBanners(allBanners);
 			} catch (error) {
 				if (error.response) {
-					setError("Ha ocurrido un error en el servidor del clima");
+					setError("Ha ocurrido un error en el servidor");
 				} else if (error.request) {
 					setError("Verifica tu conexión a internet");
 				} else {
@@ -36,6 +38,10 @@ export function useBanners() {
 				}
 			}
 		})();
+
+		return () => {
+			controller.abort();
+		};
 	}, [apiRef, isApiMetadataLoading]);
 
 	return { banners, error };

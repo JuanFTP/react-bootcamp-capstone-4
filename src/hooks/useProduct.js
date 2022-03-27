@@ -10,6 +10,8 @@ export function useProduct(productId) {
 	const [product, setProduct] = useState([]);
 
 	useEffect(() => {
+		const controller = new AbortController();
+
 		if (!apiRef || isApiMetadataLoading) {
 			setError("No se ha podido obtener la referencia de la API");
 
@@ -22,13 +24,13 @@ export function useProduct(productId) {
 					`[[at(document.id,"${productId}")]]`
 				)}`;
 
-				const response = await axios.get(URI);
+				const response = await axios.get(URI, { signal: controller.signal });
 				const productData = getProduct(response.data.results[0]);
 
 				setProduct(productData);
 			} catch (error) {
 				if (error.response) {
-					setError("Ha ocurrido un error en el servidor del clima");
+					setError("Ha ocurrido un error en el servidor");
 				} else if (error.request) {
 					setError("Verifica tu conexión a internet");
 				} else {
@@ -36,6 +38,10 @@ export function useProduct(productId) {
 				}
 			}
 		})();
+
+		return () => {
+			controller.abort();
+		};
 	}, [apiRef, isApiMetadataLoading, productId]);
 
 	return { product, error };

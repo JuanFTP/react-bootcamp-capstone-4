@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "./../utils/constants";
-import getProducts from "./../utils/transform/getProducts";
 import getPagination from "./../utils/transform/getPagination";
+import getProducts from "./../utils/transform/getProducts";
 import { useLatestAPI } from "./useLatestAPI";
 
 export function useProducts(page, pageSize) {
@@ -12,6 +12,8 @@ export function useProducts(page, pageSize) {
 	const [pagination, setPagination] = useState([]);
 
 	useEffect(() => {
+		const controller = new AbortController();
+
 		if (!apiRef || isApiMetadataLoading) {
 			setError("No se ha podido obtener la referencia de la API");
 
@@ -26,7 +28,7 @@ export function useProducts(page, pageSize) {
 					pageSize && pageSize > 0 ? pageSize : 12
 				}&page=${page && page > 0 ? page : 1}`;
 
-				const response = await axios.get(URI);
+				const response = await axios.get(URI, { signal: controller.signal });
 				const allProducts = await getProducts(response.data.results);
 				const pages = getPagination(response.data);
 
@@ -34,7 +36,7 @@ export function useProducts(page, pageSize) {
 				setPagination(pages);
 			} catch (error) {
 				if (error.response) {
-					setError("Ha ocurrido un error en el servidor del clima");
+					setError("Ha ocurrido un error en el servidor");
 				} else if (error.request) {
 					setError("Verifica tu conexión a internet");
 				} else {
@@ -42,6 +44,10 @@ export function useProducts(page, pageSize) {
 				}
 			}
 		})();
+
+		return () => {
+			controller.abort();
+		};
 	}, [apiRef, isApiMetadataLoading, page, pageSize]);
 
 	return { products, pagination, error };

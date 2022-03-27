@@ -10,6 +10,8 @@ export function useRecommendedProducts() {
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
+		const controller = new AbortController();
+
 		if (!apiRef || isApiMetadataLoading) {
 			setError("No se ha podido obtener la referencia de la API");
 
@@ -22,13 +24,13 @@ export function useRecommendedProducts() {
 					'[[at(document.type, "product")]]&q=[[at(document.tags,["Featured"])]]'
 				)}&lang=en-us&pageSize=16`;
 
-				const response = await axios.get(URI);
+				const response = await axios.get(URI, { signal: controller.signal });
 				const allProducts = await getProducts(response.data.results);
 
 				setProducts(allProducts);
 			} catch (error) {
 				if (error.response) {
-					setError("Ha ocurrido un error en el servidor del clima");
+					setError("Ha ocurrido un error en el servidor");
 				} else if (error.request) {
 					setError("Verifica tu conexión a internet");
 				} else {
@@ -36,6 +38,10 @@ export function useRecommendedProducts() {
 				}
 			}
 		})();
+
+		return () => {
+			controller.abort();
+		};
 	}, [apiRef, isApiMetadataLoading]);
 
 	return { products, error };

@@ -10,6 +10,8 @@ export function useCategories() {
 	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
+		const controller = new AbortController();
+
 		if (!apiRef || isApiMetadataLoading) {
 			setError("No se ha podido obtener la referencia de la API");
 
@@ -22,10 +24,8 @@ export function useCategories() {
 					'[[at(document.type, "category")]]'
 				)}&lang=en-us&pageSize=10`;
 
-				const response = await axios.get(URI);
-				const allCategories = await getCategories(
-					response.data.results
-				);
+				const response = await axios.get(URI, { signal: controller.signal });
+				const allCategories = await getCategories(response.data.results);
 
 				setCategories(allCategories);
 			} catch (error) {
@@ -38,6 +38,10 @@ export function useCategories() {
 				}
 			}
 		})();
+
+		return () => {
+			controller.abort();
+		};
 	}, [apiRef, isApiMetadataLoading]);
 
 	return { categories, error };
