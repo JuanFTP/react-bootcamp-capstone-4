@@ -1,5 +1,6 @@
 .brand {
 	cursor: pointer;
+	color: var(--white);
 }
 
 .brand .image {

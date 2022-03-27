@@ -5,7 +5,10 @@ const getProduct = (item) => {
 		price: item.data.price,
 		sku: item.data.sku,
 		stock: item.data.stock,
-		category: { id: item.data.category.id, slug: item.data.category.slug },
+		category: {
+			id: item.data.category.id,
+			slug: item.data.category.slug.replace("--", " & "),
+		},
 		mainImage: item.data.mainimage,
 		images: item.data.images.map((img) => img.image),
 		description: item.data.short_description,
