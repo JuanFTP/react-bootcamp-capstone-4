@@ -34,7 +34,7 @@
 
 @media (max-width: 992px) {
 	.product-view {
-		display: block;
+		display: block !important;
 	}
 
 	.product-view .gallery,

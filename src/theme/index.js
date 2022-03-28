@@ -110,6 +110,89 @@ const GlobalStyles = createGlobalStyle`
 	body {
 		background-color: var(--white);
 	}
+
+	img {
+		display: block;
+		width: 100%;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		background-color: var(--light);
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background-color: var(--default);
+	}
+
+	.row {
+		padding-top: 48px;
+	}
+
+	.row .row {
+		padding-top: 0px;
+	}
+
+	.flex {
+		display: flex;
+		height: 100%;
+		width: 100%;
+	}
+
+	.flex.ai-top {
+		align-items: top;
+	}
+
+	.flex.ai-center {
+		align-items: center;
+	}
+
+	.flex.jc-space-between {
+		justify-content: space-between;
+	}
+
+	.flex.jc-start {
+		justify-content: start;
+	}
+
+	.flex.jc-center {
+		justify-content: center;
+	}
+
+	.overflow-hidden {
+		overflow: hidden;
+	}
+
+	.sku {
+		font-size: 0.75rem;
+		font-weight: 300;
+		color: var(--default);
+	}
+
+	@media (max-width: 1400px) {
+		:root {
+			--horizontal-spacing: 24px;
+			--vertical-spacing: 32px;
+		}
+
+		.card.category .data {
+			padding: 12px 0px;
+		}
+	}
+
+	@media (max-width: 992px) {
+		.row {
+			padding-top: 24px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		:root {
+			--horizontal-spacing: 24px;
+			--vertical-spacing: 24px;
+		}
+	}
 `;
 
 export { GlobalStyles, lightTheme, darkTheme };

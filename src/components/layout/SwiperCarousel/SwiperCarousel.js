@@ -9,8 +9,8 @@ import "swiper/swiper-bundle.min.css";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 
 const stylesMain = {
-	"--swiper-navigation-color": "var(--default)",
-	"--swiper-pagination-color": "var(--default)",
+	"--swiper-navigation-color": "#666666",
+	"--swiper-pagination-color": "#666666",
 	height: "80%",
 };
 

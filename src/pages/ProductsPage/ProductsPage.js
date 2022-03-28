@@ -130,7 +130,7 @@ const ProductsPage = () => {
 							{categoriesList.length > 0 &&
 							productsFil.length === 0 ? (
 								<Title Level={titleLevels.h4}>
-									No matches with filter selected
+									No matches with filter selected on this page
 								</Title>
 							) : (
 								<ListProducts

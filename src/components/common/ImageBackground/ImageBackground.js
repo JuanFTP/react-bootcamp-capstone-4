@@ -6,6 +6,7 @@ const ImageBackground = styled.div`
 	background-position: center center;
 	background-size: contain;
 	background-repeat: no-repeat;
+	background-color: white;
 	height: ${(props) => `${props.h}`};
 	width: 100%;
 `;

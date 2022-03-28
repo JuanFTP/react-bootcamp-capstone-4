@@ -18,13 +18,11 @@ const getListCategories = (categories) => {
 								? category.image.url
 								: imgDefault
 						}
-						h={"204px"}
+						h={"160px"}
 					/>
 					<div className="data">
 						<div className="flex ai-center jc-center">
-							<Title Level={titleLevels.h4}>
-								{category.name}
-							</Title>
+							<Title Level={titleLevels.h4}>{category.name}</Title>
 						</div>
 					</div>
 				</Card>
