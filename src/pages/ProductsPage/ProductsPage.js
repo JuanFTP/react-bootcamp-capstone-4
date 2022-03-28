@@ -80,7 +80,7 @@ const ProductsPage = () => {
 
 			<Container inner={true}>
 				<div className="products-view flex ai-top jc-space-between">
-					<div className="sidebar row">
+					<div className="sidebar">
 						<div className="categories">
 							<div className="flex ai-top jc-space-between">
 								<Title Level={titleLevels.h3}>CATEGORIES</Title>
@@ -116,7 +116,7 @@ const ProductsPage = () => {
 							)}
 						</div>
 					</div>
-					<div className="results row">
+					<div className="results">
 						<div className="row">
 							<div className="flex ai-top jc-space-between">
 								<Title Level={titleLevels.h3}>PRODUCTS</Title>

@@ -37,31 +37,29 @@ const SearchPage = () => {
 			<Header />
 
 			<Container inner={true}>
-				<div className="row">
-					<Title Level={titleLevels.h2}>
-						{products && products.length > 0 ? "Results " : "No results "}
-						for "{searchTerm}"
-					</Title>
+				<Title Level={titleLevels.h2}>
+					{products && products.length > 0 ? "Results " : "No results "}
+					for "{searchTerm}"
+				</Title>
 
-					{products && products.length > 0 && (
-						<>
-							<br />
-							<ListProducts
-								def={4}
-								xl={3}
-								md={2}
-								sm={1}
-								xsm={1}
-								minmax={480}
-								products={products}
-							/>
+				{products && products.length > 0 && (
+					<>
+						<br />
+						<ListProducts
+							def={4}
+							xl={3}
+							md={2}
+							sm={1}
+							xsm={1}
+							minmax={480}
+							products={products}
+						/>
 
-							{pagination.length > 1 && (
-								<ListPages pagination={pagination} onClickPage={onClickPage} />
-							)}
-						</>
-					)}
-				</div>
+						{pagination.length > 1 && (
+							<ListPages pagination={pagination} onClickPage={onClickPage} />
+						)}
+					</>
+				)}
 			</Container>
 
 			<Footer />

@@ -9,9 +9,8 @@ const initialState = {
 const reducer = (state, action) => {
 	switch (action.type) {
 		case "SET_THEME":
-			const newTheme = action.payload.theme;
-			localStorage.setItem("theme", newTheme);
-			return { ...state, theme: newTheme };
+			localStorage.setItem("theme", action.payload.theme);
+			return { ...state, theme: action.payload.theme };
 		default:
 			return state;
 	}

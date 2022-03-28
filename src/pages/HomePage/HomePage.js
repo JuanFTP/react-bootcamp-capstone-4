@@ -25,22 +25,17 @@ const HomePage = () => {
 
 			<Container>
 				<div className="row">
-					<div className="row">
-						<Title Level={titleLevels.h3}>CATEGORIES</Title>
-					</div>
-					<br />
+					<Title Level={titleLevels.h3}>CATEGORIES</Title>
 					<ListCategories categories={categories} />
 				</div>
 				<div className="row">
-					<div className="row">
-						<div className="flex ai-top jc-space-between">
-							<Title Level={titleLevels.h3}>RECOMMENDED PRODUCTS</Title>
-							<Link to="/products">
-								<Button variant={buttonVariants.outline}>
-									VIEW ALL PRODUCTS
-								</Button>
-							</Link>
-						</div>
+					<div className="flex ai-top jc-space-between">
+						<Title Level={titleLevels.h3}>RECOMMENDED PRODUCTS</Title>
+						<Link to="/products">
+							<Button variant={buttonVariants.outline}>
+								VIEW ALL PRODUCTS
+							</Button>
+						</Link>
 					</div>
 					<br />
 					<ListProducts
