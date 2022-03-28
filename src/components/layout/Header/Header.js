@@ -1,10 +1,16 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { MdDarkMode, MdOutlineShoppingCart, MdSearch } from "react-icons/md";
+import { useContext, useEffect, useState } from "react";
+import {
+	MdDarkMode,
+	MdLightMode,
+	MdOutlineShoppingCart,
+	MdSearch,
+} from "react-icons/md";
 import { useHistory, useLocation } from "react-router-dom";
-import Brand from "../../common/Brand/Brand";
-import { PATHS } from "./../../../utils/constants";
+import { GlobalContext } from "../../../reducers/Global";
+import { actions, PATHS } from "./../../../utils/constants";
 import Avatar from "./../../common/Avatar/Avatar";
+import Brand from "./../../common/Brand/Brand";
 import Chip from "./../../common/Chip";
 import IconArea from "./../../common/IconArea/IconArea";
 import Input, { inputTypes } from "./../../common/Input";
@@ -12,6 +18,8 @@ import FormControl from "./../FormControl/FormControl";
 import "./Header.css";
 
 const Header = ({ itemsOnCart, userData }) => {
+	const { state, dispatch } = useContext(GlobalContext);
+
 	const history = useHistory();
 	const location = useLocation();
 	const [search, setSearch] = useState("");
@@ -31,6 +39,15 @@ const Header = ({ itemsOnCart, userData }) => {
 		}
 	};
 
+	const onChangeTheme = (theme) => {
+		dispatch({
+			type: actions.SET_THEME,
+			payload: {
+				theme: theme,
+			},
+		});
+	};
+
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (search !== "") {
@@ -44,7 +61,7 @@ const Header = ({ itemsOnCart, userData }) => {
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
-				<Brand handleOnClick={onClickBrand} />
+				<Brand handleOnClick={onClickBrand} mode={state.theme} />
 
 				<FormControl width="40%" feedback={true} round={true}>
 					<IconArea>
@@ -62,9 +79,15 @@ const Header = ({ itemsOnCart, userData }) => {
 
 				<div className="tools">
 					<div className="actions">
-						<IconArea>
-							<MdDarkMode />
-						</IconArea>
+						{state.theme === "light" ? (
+							<IconArea onClicketItem={onChangeTheme} value="dark">
+								<MdLightMode />
+							</IconArea>
+						) : (
+							<IconArea onClicketItem={onChangeTheme} value="light">
+								<MdDarkMode />
+							</IconArea>
+						)}
 
 						<div className="stats">
 							<IconArea>

@@ -94,6 +94,7 @@ const GlobalStyles = createGlobalStyle`
 		font-family: ${(props) => props.theme.fontFamily};
 		font-size: ${(props) => props.theme.fontSize};
 		user-select: ${(props) => props.theme.userSelect};
+		transition: var(--transition);
 	}
 
 

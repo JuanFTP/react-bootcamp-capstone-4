@@ -10,3 +10,7 @@ export const PATHS = {
 	search: "/search",
 	searchFilter: "/search/:searchTerm",
 };
+
+export const actions = {
+	SET_THEME: "SET_THEME",
+};
