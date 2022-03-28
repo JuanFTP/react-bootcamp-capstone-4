@@ -15,7 +15,7 @@ import { PATHS } from "./../utils/constants";
 const General = () => {
 	return (
 		<Router>
-			<Header />
+			<Header/>
 
 			<Switch>
 				<Route exact path={PATHS.default} component={HomePage} />

@@ -8,51 +8,47 @@ const commonTheme = {
 
 const lightTheme = {
 	...commonTheme,
-	defaultColor: "#666666",
-	defaultColor24: "rgba(102, 102, 102, 0.24)",
-	defaultColor48: "rgba(102, 102, 102, 0.48)",
-	defaultColor72: "rgba(102, 102, 102, 0.72)",
-	darkColor: "#121212",
-	darkColor24: "rgba(18, 18, 18, 0.24)",
-	darkColor48: "rgba(18, 18, 18, 0.48)",
-	darkColor72: "rgba(18, 18, 18, 0.72)",
-	lightColor: "#F4F4F4",
-	lightColor24: "rgba(244, 244, 244, 0.24)",
-	lightColor48: "rgba(244, 244, 244, 0.48)",
-	lightColor72: "rgba(244, 244, 244, 0.72)",
-	blackColor: "#000000",
-	blackColor24: "rgba(0, 0, 0, 0.24)",
-	blackColor48: "rgba(0, 0, 0, 0.48)",
-	blackColor72: "rgba(0, 0, 0, 0.72)",
-	whiteColor: "#FFFFFF",
-	whiteColor24: "rgba(255, 255, 255, 0.24)",
-	whiteColor48: "rgba(255, 255, 255, 0.48)",
-	whiteColor72: "rgba(255, 255, 255, 0.72)",
+	color: {
+		default: {
+			hex: "#666666",
+			rgb: "102, 102, 102",
+		},
+		dark: {
+			hex: "#121212",
+			rgb: "18, 18, 18",
+		},
+		light: {
+			hex: "#F4F4F4",
+			rgb: "244, 244, 244",
+		},
+		white: {
+			hex: "#FFFFFF",
+			rgb: "255, 255, 255",
+		},
+	},
 	shadowColor: "rgba(0, 0, 0, 0.24)",
 };
 
 const darkTheme = {
 	...commonTheme,
-	defaultColor: "#F4F4F4",
-	defaultColor24: "rgba(244, 244, 244, 0.24)",
-	defaultColor48: "rgba(244, 244, 244, 0.48)",
-	defaultColor72: "rgba(244, 244, 244, 0.72)",
-	darkColor: "#FAFAFA",
-	darkColor24: "rgba(250, 250, 250, 0.24)",
-	darkColor48: "rgba(250, 250, 250, 0.48)",
-	darkColor72: "rgba(250, 250, 250, 0.72)",
-	lightColor: "#212D40",
-	lightColor24: "rgb(33, 45, 64, 0.24)",
-	lightColor48: "rgb(33, 45, 64, 0.48)",
-	lightColor72: "rgb(33, 45, 64, 0.72)",
-	blackColor: "#FFFFFF",
-	blackColor24: "rgba(255, 255, 255, 0.24)",
-	blackColor48: "rgba(255, 255, 255, 0.48)",
-	blackColor72: "rgba(255, 255, 255, 0724)",
-	whiteColor: "#11151C",
-	whiteColor24: "rgb(17, 21, 28, 0.24)",
-	whiteColor48: "rgb(17, 21, 28, 0.48)",
-	whiteColor72: "rgb(17, 21, 28, 0.72)",
+	color: {
+		default: {
+			hex: "#F4F4F4",
+			rgb: "244, 244, 244",
+		},
+		dark: {
+			hex: "#FAFAFA",
+			rgb: "250, 250, 250",
+		},
+		light: {
+			hex: "#212D40",
+			rgb: "33, 45, 64",
+		},
+		white: {
+			hex: "#11151C",
+			rgb: "17, 21, 28",
+		},
+	},
 	shadowColor: "rgba(0, 0, 0, 0.48)",
 };
 
@@ -64,26 +60,14 @@ const GlobalStyles = createGlobalStyle`
 	}
 
 	:root {
-		--default: ${(props) => props.theme.defaultColor};
-		--default-24: ${(props) => props.theme.defaultColor24};
-		--default-48: ${(props) => props.theme.defaultColor48};
-		--default-72: ${(props) => props.theme.defaultColor72};
-		--dark: ${(props) => props.theme.darkColor};
-		--dark-24: ${(props) => props.theme.darkColor24};
-		--dark-48: ${(props) => props.theme.darkColor48};
-		--dark-72: ${(props) => props.theme.darkColor72};
-		--light: ${(props) => props.theme.lightColor};
-		--light-24: ${(props) => props.theme.lightColor24};
-		--light-48: ${(props) => props.theme.lightColor48};
-		--light-72: ${(props) => props.theme.lightColor72};
-		--black: ${(props) => props.theme.blackColor};
-		--black-24: ${(props) => props.theme.blackColor24};
-		--black-48: ${(props) => props.theme.blackColor48};
-		--black-72: ${(props) => props.theme.blackColor72};
-		--white: ${(props) => props.theme.whiteColor};
-		--white-24: ${(props) => props.theme.whiteColor24};
-		--white-48: ${(props) => props.theme.whiteColor48};
-		--white-72: ${(props) => props.theme.whiteColor72};
+		--default: ${(props) => props.theme.color.default.hex};
+		--default-24: ${(props) => `rgba(${props.theme.color.default.rgb}, 0.24)`};
+		--default-48: ${(props) => `rgba(${props.theme.color.default.rgb}, 0.48)`};
+		--default-72: ${(props) => `rgba(${props.theme.color.default.rgb}, 0.72)`};
+		--dark: ${(props) => props.theme.color.dark.hex};
+		--light: ${(props) => props.theme.color.light.hex};
+		--light-72: ${(props) => `rgba(${props.theme.color.light.rgb}, 0.72)`};
+		--white: ${(props) => props.theme.color.white.hex};
 		--shadow: 0px 0px 8px 0px ${(props) => props.theme.shadowColor};
 		--horizontal-spacing: 96px;
 		--vertical-spacing: 24px;

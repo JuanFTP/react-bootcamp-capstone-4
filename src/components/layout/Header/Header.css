@@ -33,6 +33,11 @@
 	background-color: var(--light);
 }
 
+.header .stats .icon-area,
+.header .stats .chip {
+	float: left;
+}
+
 .header .stats .chip {
 	margin-top: 11px;
 	background-color: var(--white);

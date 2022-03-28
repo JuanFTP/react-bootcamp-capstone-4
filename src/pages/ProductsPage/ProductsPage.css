@@ -1,6 +1,6 @@
 .sidebar {
 	width: 24%;
-	padding-right: var(--horizontal-spacing);
+	padding-right: 16px;
 }
 
 .results {
