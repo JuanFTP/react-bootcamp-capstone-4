@@ -12,6 +12,10 @@
 		display: block !important;
 	}
 
+	.sidebar {
+		padding: 0px;
+	}
+
 	.sidebar,
 	.results {
 		width: 100%;

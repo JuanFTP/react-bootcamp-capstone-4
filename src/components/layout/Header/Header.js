@@ -52,11 +52,16 @@ const Header = ({ itemsOnCart, userData }) => {
 		const interval = setInterval(() => {
 			if (search !== "") {
 				history.push(`${PATHS.search}/${search}`);
+				setSearch("");
 			}
 		}, 1000);
 
 		return () => clearInterval(interval);
 	}, [search, history]);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [location]);
 
 	return (
 		<div className="header shadow">
@@ -81,11 +86,11 @@ const Header = ({ itemsOnCart, userData }) => {
 					<div className="actions">
 						{state.theme === "light" ? (
 							<IconArea onClicketItem={onChangeTheme} value="dark">
-								<MdLightMode />
+								<MdDarkMode />
 							</IconArea>
 						) : (
 							<IconArea onClicketItem={onChangeTheme} value="light">
-								<MdDarkMode />
+								<MdLightMode />
 							</IconArea>
 						)}
 

@@ -8,9 +8,7 @@ import IconArea from "./../../components/common/IconArea/IconArea";
 import Input, { inputTypes } from "./../../components/common/Input";
 import Table from "./../../components/common/Table";
 import Title, { titleLevels } from "./../../components/common/Title";
-import Footer from "./../../components/layout/Footer";
 import FormControl from "./../../components/layout/FormControl/FormControl";
-import Header from "./../../components/layout/Header";
 import SwiperCarousel from "./../../components/layout/SwiperCarousel";
 import { useProduct } from "./../../hooks/useProduct";
 import { PATHS } from "./../../utils/constants";
@@ -42,90 +40,82 @@ const ProductPage = () => {
 	}, [product.stock]);
 
 	return (
-		<>
-			<Header />
-
-			<Container inner={true}>
-				{product && Object.keys(product).length > 0 ? (
-					<div className="product-view flex ai-top jc-space-between">
-						<div className="gallery">
-							<SwiperCarousel slides={product.images} />
+		<Container inner={true}>
+			{product && Object.keys(product).length > 0 ? (
+				<div className="product-view flex ai-top jc-space-between">
+					<div className="gallery">
+						<SwiperCarousel slides={product.images} />
+					</div>
+					<div className="details">
+						<div className="information">
+							<Title Level={titleLevels.h2}>{product.name}</Title>
+							<Title Level={titleLevels.h2}>
+								{`$ ${getFormattedPrice(product.price)}`}
+							</Title>
+							<span className="sku">{product.sku}</span>
 						</div>
-						<div className="details">
-							<div className="information">
-								<Title Level={titleLevels.h2}>{product.name}</Title>
-								<Title Level={titleLevels.h2}>
-									{`$ ${getFormattedPrice(product.price)}`}
-								</Title>
-								<span className="sku">{product.sku}</span>
-							</div>
 
-							<div className="category">
-								<Title Level={titleLevels.h4}>Category</Title>
-								<Link to={`${PATHS.products}/${product.category.id}`}>
-									<Chip variant={chipVariants.xl}>
-										{getCapitalize(product.category.slug)}
+						<div className="category">
+							<Title Level={titleLevels.h4}>Category</Title>
+							<Link to={`${PATHS.products}/${product.category.id}`}>
+								<Chip variant={chipVariants.xl}>
+									{getCapitalize(product.category.slug)}
+								</Chip>
+							</Link>
+						</div>
+
+						<div className="slugs">
+							<Title Level={titleLevels.h4}>Slugs</Title>
+							<div>
+								{product.slugs.map((slug) => (
+									<Chip key={slug} variant={chipVariants.sm}>
+										{getFormattedSlug(slug)}
 									</Chip>
-								</Link>
+								))}
 							</div>
+						</div>
 
-							<div className="slugs">
-								<Title Level={titleLevels.h4}>Slugs</Title>
-								<div>
-									{product.slugs.map((slug) => (
-										<Chip key={slug} variant={chipVariants.sm}>
-											{getFormattedSlug(slug)}
-										</Chip>
-									))}
+						<div className="description">
+							<Title Level={titleLevels.h4}>Description</Title>
+							<p>{product.description}</p>
+						</div>
+
+						<div className="items">
+							<Title Level={titleLevels.h4}>
+								Items ({product.stock} available)
+							</Title>
+							<div className="controls">
+								<div className="flex ai-center jc-start">
+									<IconArea onClicketItem={modifyPieces} value="DEC">
+										<MdOutlineRemove />
+									</IconArea>
+									<FormControl width="96px" feedback={false} round={false}>
+										<Input
+											variant={inputTypes.number}
+											value={pieces}
+											placeholder={"0"}
+											read={true}
+										/>
+									</FormControl>
+									<IconArea onClicketItem={modifyPieces} value="INC">
+										<MdAdd />
+									</IconArea>
+
+									<Button variant={buttonVariants.primary}>Add to cart</Button>
 								</div>
 							</div>
+						</div>
 
-							<div className="description">
-								<Title Level={titleLevels.h4}>Description</Title>
-								<p>{product.description}</p>
-							</div>
-
-							<div className="items">
-								<Title Level={titleLevels.h4}>
-									Items ({product.stock} available)
-								</Title>
-								<div className="controls">
-									<div className="flex ai-center jc-start">
-										<IconArea onClicketItem={modifyPieces} value="DEC">
-											<MdOutlineRemove />
-										</IconArea>
-										<FormControl width="96px" feedback={false} round={false}>
-											<Input
-												variant={inputTypes.number}
-												value={pieces}
-												placeholder={"0"}
-												read={true}
-											/>
-										</FormControl>
-										<IconArea onClicketItem={modifyPieces} value="INC">
-											<MdAdd />
-										</IconArea>
-
-										<Button variant={buttonVariants.primary}>
-											Add to cart
-										</Button>
-									</div>
-								</div>
-							</div>
-
-							<div className="specs">
-								<Title Level={titleLevels.h4}>Specs</Title>
-								<Table data={product.specs} />
-							</div>
+						<div className="specs">
+							<Title Level={titleLevels.h4}>Specs</Title>
+							<Table data={product.specs} />
 						</div>
 					</div>
-				) : (
-					<SkProductDetails />
-				)}
-			</Container>
-
-			<Footer />
-		</>
+				</div>
+			) : (
+				<SkProductDetails />
+			)}
+		</Container>
 	);
 };
 

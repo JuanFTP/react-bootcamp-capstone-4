@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import Title, { titleLevels } from "../../components/common/Title";
 import { APP_NAME } from "../../utils/constants";
 import Container from "./../../components/common/Container";
-import Footer from "./../../components/layout/Footer";
-import Header from "./../../components/layout/Header";
 import ListPages from "./../../components/layout/ListPages/ListPages";
 import ListProducts from "./../../components/layout/ListProducts";
 import { useSearchResults } from "./../../hooks/useSerchResults";
@@ -33,37 +31,31 @@ const SearchPage = () => {
 	}, [searchTerm]);
 
 	return (
-		<>
-			<Header />
+		<Container inner={true}>
+			<Title Level={titleLevels.h2}>
+				{products && products.length > 0 ? "Results " : "No results "}
+				for "{searchTerm}"
+			</Title>
 
-			<Container inner={true}>
-				<Title Level={titleLevels.h2}>
-					{products && products.length > 0 ? "Results " : "No results "}
-					for "{searchTerm}"
-				</Title>
+			{products && products.length > 0 && (
+				<>
+					<br />
+					<ListProducts
+						def={4}
+						xl={3}
+						md={2}
+						sm={1}
+						xsm={1}
+						minmax={480}
+						products={products}
+					/>
 
-				{products && products.length > 0 && (
-					<>
-						<br />
-						<ListProducts
-							def={4}
-							xl={3}
-							md={2}
-							sm={1}
-							xsm={1}
-							minmax={480}
-							products={products}
-						/>
-
-						{pagination.length > 1 && (
-							<ListPages pagination={pagination} onClickPage={onClickPage} />
-						)}
-					</>
-				)}
-			</Container>
-
-			<Footer />
-		</>
+					{pagination.length > 1 && (
+						<ListPages pagination={pagination} onClickPage={onClickPage} />
+					)}
+				</>
+			)}
+		</Container>
 	);
 };
 

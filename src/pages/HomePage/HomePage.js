@@ -4,8 +4,6 @@ import Button, { buttonVariants } from "../../components/common/Button";
 import Container from "../../components/common/Container";
 import Title, { titleLevels } from "../../components/common/Title";
 import Banner from "../../components/layout/Banner";
-import Footer from "../../components/layout/Footer";
-import Header from "../../components/layout/Header";
 import ListCategories from "../../components/layout/ListCategories";
 import ListProducts from "../../components/layout/ListProducts";
 import { useBanners } from "../../hooks/useBanners";
@@ -19,8 +17,6 @@ const HomePage = () => {
 
 	return (
 		<>
-			<Header />
-
 			<Banner banners={banners} />
 
 			<Container>
@@ -51,8 +47,6 @@ const HomePage = () => {
 					/>
 				</div>
 			</Container>
-
-			<Footer />
 		</>
 	);
 };
