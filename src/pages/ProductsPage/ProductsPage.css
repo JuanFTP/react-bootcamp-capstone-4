@@ -1,6 +1,6 @@
 .sidebar {
 	width: 24%;
-	padding-right: var(--horizontal-spacing);
+	padding-right: 16px;
 }
 
 .results {
@@ -9,7 +9,11 @@
 
 @media (max-width: 768px) {
 	.products-view {
-		display: block;
+		display: block !important;
+	}
+
+	.sidebar {
+		padding: 0px;
 	}
 
 	.sidebar,

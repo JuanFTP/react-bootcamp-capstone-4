@@ -1,7 +1,8 @@
-import "./ListPages.css";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import IconArea from "../../common/IconArea/IconArea";
+import SkListPages from "./../../../utils/skeletons/SkListPages";
+import IconArea from "./../../common/IconArea/IconArea";
+import "./ListPages.css";
 
 const Page = styled.div`
 	color: var(--default);
@@ -20,28 +21,34 @@ const Page = styled.div`
 	}
 `;
 
-const getListPages = (pages) => {
-	return pages.map((page) => {
+const getListPages = (pagination, onClickPage) => {
+	return pagination.map((page) => {
 		return (
-			<Page key={page.id} className={page.active && "active"}>
+			<Page
+				key={page.id}
+				className={page.isActive && "active"}
+				onClick={() => onClickPage(page.number)}
+			>
 				<IconArea>{page.number}</IconArea>
 			</Page>
 		);
 	});
 };
 
-const ListPages = ({ pages }) => {
+const ListPages = ({ pagination, onClickPage }) => {
 	return (
-		pages && (
-			<div className="list-pages flex ai-center jc-center">
-				{getListPages(pages)}
-			</div>
-		)
+		<div className="list-pages flex ai-center jc-center">
+			{pagination && pagination.length > 0 ? (
+				getListPages(pagination, onClickPage)
+			) : (
+				<SkListPages />
+			)}
+		</div>
 	);
 };
 
 ListPages.propTypes = {
-	pages: PropTypes.array.isRequired,
+	pagination: PropTypes.array.isRequired,
 };
 
 export default ListPages;

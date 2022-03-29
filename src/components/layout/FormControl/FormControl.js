@@ -1,10 +1,10 @@
-import "./FormControl.css";
 import PropTypes from "prop-types";
+import "./FormControl.css";
 
-const FormControl = ({ children, minWidth, feedback, round }) => {
+const FormControl = ({ children, width, feedback, round }) => {
 	return (
 		<div
-			style={minWidth && { minWidth: `${minWidth}` }}
+			style={width && { width: `${width}` }}
 			className={`form-control ${!!feedback && "feedback"} ${
 				!!round && "round"
 			}`}
@@ -16,7 +16,7 @@ const FormControl = ({ children, minWidth, feedback, round }) => {
 
 FormControl.propTypes = {
 	children: PropTypes.node.isRequired,
-	minWidth: PropTypes.string,
+	width: PropTypes.string,
 	feedback: PropTypes.bool,
 	round: PropTypes.bool,
 };

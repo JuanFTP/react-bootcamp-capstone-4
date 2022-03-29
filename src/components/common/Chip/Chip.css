@@ -10,8 +10,10 @@
 }
 
 .chip.sm {
+	display: inline-block;
 	font-size: 0.75rem;
 	padding: 2px 12px;
+	margin: 8px 8px 8px 0px;
 }
 
 .chip.xl {

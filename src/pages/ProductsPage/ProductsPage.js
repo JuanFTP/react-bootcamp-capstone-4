@@ -1,76 +1,48 @@
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import "./ProductsPage.css";
-import PropTypes from "prop-types";
-import Container from "./../../components/common/Container";
-import ListProducts from "./../../components/layout/ListProducts";
-import Title, { titleLevels } from "./../../components/common/Title";
-import Chip, { chipVariants } from "./../../components/common/Chip";
 import { useEffect, useState } from "react";
+import { MdClose } from "react-icons/md";
+import { Link, useParams } from "react-router-dom";
+import Button, { buttonVariants } from "../../components/common/Button";
+import Chip, { chipVariants } from "../../components/common/Chip";
+import Container from "../../components/common/Container";
+import IconArea from "../../components/common/IconArea/IconArea";
+import Title, { titleLevels } from "../../components/common/Title";
 import ListPages from "../../components/layout/ListPages/ListPages";
-import Grid from "../../components/common/Grid/Grid";
-import Button, { buttonVariants } from "./../../components/common/Button";
+import ListProducts from "../../components/layout/ListProducts";
+import { useCategories } from "../../hooks/useCategories";
+import { useProducts } from "../../hooks/useProducts";
+import SkListCategoriesChips from "../../utils/skeletons/SkListCategoriesChips";
+import "./ProductsPage.css";
 
-const getCategoriesChips = (categories, categoriesList, onCategorySelected) =>
-	categories &&
-	categories.map((category) => (
-		<Chip
-			key={category.id}
-			variant={chipVariants.xl}
-			onClickItem={onCategorySelected}
-			value={category.id}
-			isActive={
-				categoriesList.length > 0
-					? categoriesList.includes(category.id)
-					: false
-			}
-		>
-			{category.name}
-		</Chip>
-	));
-
-const getProductsFiltered = (categoriesList, products) => {
-	return categoriesList.length > 0
-		? products &&
-				products.filter((product) =>
-					categoriesList.includes(product.category.id)
-				)
+const getProductsFiltered = (products, categoriesList) => {
+	return categoriesList && products && categoriesList.length > 0
+		? products.filter((product) => categoriesList.includes(product.category.id))
 		: products;
 };
 
-//TODO Refinar código para generar el Skeleton
-const getSkeleton = () => {
-	const nItems = ["SK1", "SK2", "SK3", "SK4", "SK5", "SK6", "SK7", "SK8"];
-	const nPages = ["SKP1", "SKP2", "SKP3", "SKP4", "SKP5"];
-	return (
-		<>
-			<Grid default={4} xl={4} md={3} sm={2} xsm={1}>
-				{nItems.map((id) => {
-					return <Skeleton key={id} height={320} />;
-				})}
-			</Grid>
-			<div
-				className="flex ai-center jc-center"
-				style={{ marginTop: "32px" }}
-			>
-				{nPages.map((id) => {
-					return (
-						<Skeleton
-							key={id}
-							height={48}
-							width={48}
-							style={{ margin: "0px 8px" }}
-						/>
-					);
-				})}
-			</div>
-		</>
-	);
-};
+const ProductsPage = () => {
+	const [filterPath, setFilterPath] = useState(false);
+	const { categoryKey } = useParams();
 
-const ProductsPage = ({ products, categories, onChangeLocation }) => {
+	const [page, setPage] = useState(1);
+	const pageSize = 12;
+
 	const [productsFil, setproductsFil] = useState([]);
 	const [categoriesList, setCategoriesList] = useState([]);
+
+	if (categoryKey && !filterPath && !categoriesList.includes(categoryKey)) {
+		setCategoriesList((categoriesList) =>
+			categoriesList.length > 0
+				? [...categoriesList, categoryKey]
+				: [categoryKey]
+		);
+		setFilterPath(!filterPath);
+	}
+
+	const onClearAllFilters = () => {
+		if (categoriesList.length > 0) {
+			setCategoriesList([]);
+		}
+	};
 
 	const onCategorySelected = (id) => {
 		let newList = [];
@@ -78,106 +50,91 @@ const ProductsPage = ({ products, categories, onChangeLocation }) => {
 			newList = categoriesList.filter((categoryId) => categoryId !== id);
 			setCategoriesList(newList);
 		} else {
-			newList =
-				categoriesList.length > 0 ? [...categoriesList, id] : [id];
+			newList = categoriesList.length > 0 ? [...categoriesList, id] : [id];
 			setCategoriesList(newList);
 		}
 	};
 
-	const pages = [
-		{
-			id: 1,
-			number: 1,
-			active: true,
-		},
-		{
-			id: 2,
-			number: 2,
-			active: false,
-		},
-		{
-			id: 3,
-			number: 3,
-			active: false,
-		},
-		{
-			id: 4,
-			number: 4,
-			active: false,
-		},
-		{
-			id: 5,
-			number: 5,
-			active: false,
-		},
-	];
+	const onClickPage = (numberPage) => {
+		if (page !== numberPage) {
+			setPage(numberPage);
+		}
+	};
+
+	const { categories } = useCategories();
+	const { products, pagination } = useProducts(page, pageSize);
 
 	useEffect(() => {
-		const productsFiltered = getProductsFiltered(categoriesList, products);
-		setproductsFil([]);
-		const loaderSimulate = setInterval(() => {
-			setproductsFil(productsFiltered);
-		}, 2000);
-
-		return () => clearInterval(loaderSimulate);
-	}, [categoriesList, products]);
+		const productsFiltered = getProductsFiltered(products, categoriesList);
+		setproductsFil(productsFiltered);
+	}, [products, categoriesList]);
 
 	return (
 		<Container inner={true}>
 			<div className="products-view flex ai-top jc-space-between">
-				<div className="sidebar row">
-					<Title Level={titleLevels.h3}>CATEGORIES</Title>
+				<div className="sidebar">
 					<div className="categories">
-						{categories &&
-							getCategoriesChips(
-								categories,
-								categoriesList,
-								onCategorySelected
+						<div className="flex ai-top jc-space-between">
+							<Title Level={titleLevels.h3}>CATEGORIES</Title>
+							{categoriesList.length > 0 && (
+								<IconArea onClicketItem={onClearAllFilters} value={"all"}>
+									<MdClose />
+								</IconArea>
 							)}
+						</div>
+						{categories && categories.length > 0 ? (
+							categories.map((category) => (
+								<Chip
+									key={category.id}
+									variant={chipVariants.xl}
+									onClickItem={onCategorySelected}
+									value={category.id}
+									isActive={
+										categoriesList.length > 0
+											? categoriesList.includes(category.id)
+											: false
+									}
+								>
+									{category.name}
+								</Chip>
+							))
+						) : (
+							<SkListCategoriesChips />
+						)}
 					</div>
 				</div>
 				<div className="results">
-					<div className="row">
-						<div className="row">
-							<div className="flex ai-top jc-space-between">
-								<Title Level={titleLevels.h3}>PRODUCTS</Title>
-								<Button
-									variant={buttonVariants.outline}
-									onClickItem={onChangeLocation}
-									value={"Main"}
-								>
-									GO TO HOME
-								</Button>
-							</div>
+					<div>
+						<div className="flex ai-top jc-space-between">
+							<Title Level={titleLevels.h3}>PRODUCTS</Title>
+							<Link to="/home">
+								<Button variant={buttonVariants.outline}>GO TO HOME</Button>
+							</Link>
 						</div>
-						<br />
-						{productsFil && productsFil.length > 0 ? (
-							<>
-								<ListProducts
-									def={4}
-									xl={3}
-									md={2}
-									sm={2}
-									xsm={1}
-									minmax={320}
-									products={productsFil}
-								/>
-								<ListPages pages={pages} />
-							</>
+					</div>
+					<div>
+						{categoriesList.length > 0 && productsFil.length === 0 ? (
+							<Title Level={titleLevels.h4}>
+								No matches with filter selected on this page
+							</Title>
 						) : (
-							getSkeleton()
+							<ListProducts
+								def={4}
+								xl={3}
+								md={2}
+								sm={2}
+								xsm={1}
+								minmax={320}
+								products={productsFil}
+							/>
 						)}
+
+						<ListPages pagination={pagination} onClickPage={onClickPage} />
 					</div>
 				</div>
 			</div>
 		</Container>
 	);
-};
-
-ProductsPage.propTypes = {
-	products: PropTypes.array.isRequired,
-	categories: PropTypes.array.isRequired,
-	onChangeLocation: PropTypes.func,
 };
 
 export default ProductsPage;

@@ -1,24 +1,19 @@
-import { useState } from "react";
-import "./App.css";
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
-import View from "./pages/View";
+import { ThemeProvider } from "styled-components";
+import General from "./routes/General";
+import { darkTheme, GlobalStyles, lightTheme } from "./theme";
+import { GlobalContext, initialState, reducer } from "./reducers/Global";
+import { useReducer } from "react";
 
 const App = () => {
-	const [location, setLocation] = useState("main");
-
-	const onChangeLocation = (newLocation) => {
-		if (newLocation !== location) {
-			setLocation(newLocation);
-		}
-	};
+	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
-		<>
-			<Header onChangeLocation={onChangeLocation} />
-			<View location={location} onChangeLocation={onChangeLocation} />
-			<Footer />
-		</>
+		<GlobalContext.Provider value={{ state, dispatch }}>
+			<ThemeProvider theme={state.theme === "light" ? lightTheme : darkTheme}>
+				<GlobalStyles />
+				<General />
+			</ThemeProvider>
+		</GlobalContext.Provider>
 	);
 };
 

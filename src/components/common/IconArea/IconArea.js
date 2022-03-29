@@ -14,7 +14,7 @@ const IconArea = ({ children, value, onClicketItem }) => {
 
 IconArea.propTypes = {
 	children: PropTypes.node.isRequired,
-	value: PropTypes.string,
+	value: PropTypes.any,
 	onClicketItem: PropTypes.func,
 };
 

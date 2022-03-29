@@ -2,7 +2,8 @@
 	cursor: pointer;
 }
 
-.brand .image {
+.brand img {
+	height: 48px;
 	width: 48px;
 	float: left;
 }
@@ -14,7 +15,6 @@
 
 @media (max-width: 576px) {
 	.brand {
-		height: 48px;
 		margin-right: 12px;
 		display: block;
 	}
