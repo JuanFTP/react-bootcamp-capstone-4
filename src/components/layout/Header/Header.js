@@ -78,7 +78,6 @@ const Header = ({ itemsOnCart, userData }) => {
 						value={search}
 						placeholder="Search"
 						onChangeInput={onChangeSearch}
-						read={false}
 					/>
 				</FormControl>
 

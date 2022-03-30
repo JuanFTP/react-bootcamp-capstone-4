@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import Button, { buttonVariants } from "./../../components/common/Button";
@@ -23,21 +23,15 @@ import "./ProductPage.css";
 const ProductPage = () => {
 	const { productId } = useParams();
 	const { product } = useProduct(productId);
-	const [pieces, setPieces] = useState(0);
+	const [pieces, setPieces] = useState(1);
 
-	const modifyPieces = (mode) => {
-		if (mode === "INC" && pieces < product.stock) {
-			setPieces((pieces) => pieces + 1);
-		} else if (mode === "DEC") {
-			setPieces((pieces) => (pieces > 1 && product.stock > 0 ? pieces - 1 : 1));
+	const onChangePieces = (add) => {
+		if (add) {
+			setPieces((pieces) => (pieces < product.stock ? pieces + 1 : pieces));
+		} else {
+			setPieces((pieces) => (pieces > 1 ? pieces - 1 : pieces));
 		}
 	};
-
-	useEffect(() => {
-		if (product.stock > 0) {
-			setPieces(1);
-		}
-	}, [product.stock]);
 
 	return (
 		<Container inner={true}>
@@ -86,18 +80,20 @@ const ProductPage = () => {
 							</Title>
 							<div className="controls">
 								<div className="flex ai-center jc-start">
-									<IconArea onClicketItem={modifyPieces} value="DEC">
+									<IconArea onClicketItem={onChangePieces} value={false}>
 										<MdOutlineRemove />
 									</IconArea>
+
 									<FormControl width="96px" feedback={false} round={false}>
 										<Input
 											variant={inputTypes.number}
 											value={pieces}
 											placeholder={"0"}
-											read={true}
+											isReadOnly={true}
 										/>
 									</FormControl>
-									<IconArea onClicketItem={modifyPieces} value="INC">
+
+									<IconArea onClicketItem={onChangePieces} value={true}>
 										<MdAdd />
 									</IconArea>
 
