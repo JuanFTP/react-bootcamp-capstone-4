@@ -8,12 +8,12 @@ import ListCategories from "../../components/layout/ListCategories";
 import ListProducts from "../../components/layout/ListProducts";
 import { useBanners } from "../../hooks/useBanners";
 import { useCategories } from "../../hooks/useCategories";
-import { useRecommendedProducts } from "../../hooks/useRecommendedProducts";
+import { useProducts } from "../../hooks/useProducts";
 
 const HomePage = () => {
 	const { banners } = useBanners();
 	const { categories } = useCategories();
-	const { products } = useRecommendedProducts();
+	const { products } = useProducts();
 
 	return (
 		<>
