@@ -1,8 +1,8 @@
+import { useReducer } from "react";
 import { ThemeProvider } from "styled-components";
+import { GlobalContext, initialState, reducer } from "./reducers/Global";
 import General from "./routes/General";
 import { darkTheme, GlobalStyles, lightTheme } from "./theme";
-import { GlobalContext, initialState, reducer } from "./reducers/Global";
-import { useReducer } from "react";
 
 const App = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);

@@ -30,12 +30,18 @@ const Header = ({ itemsOnCart, userData }) => {
 		}
 	};
 
-	const onClickBrand = () => {
-		if (
-			location.pathname !== PATHS.home &&
-			location.pathname !== PATHS.default
-		) {
-			history.push(PATHS.home);
+	const onClickItem = (element) => {
+		if (element === "brand") {
+			if (
+				location.pathname !== PATHS.home &&
+				location.pathname !== PATHS.default
+			) {
+				history.push(PATHS.home);
+			}
+		} else {
+			if (location.pathname !== PATHS.cart) {
+				history.push(PATHS.cart);
+			}
 		}
 	};
 
@@ -66,7 +72,7 @@ const Header = ({ itemsOnCart, userData }) => {
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
-				<Brand handleOnClick={onClickBrand} mode={state.theme} />
+				<Brand handleOnClick={onClickItem} value="brand" mode={state.theme} />
 
 				<FormControl width="40%" feedback={true} round={true}>
 					<IconArea>
@@ -94,7 +100,7 @@ const Header = ({ itemsOnCart, userData }) => {
 						)}
 
 						<div className="stats">
-							<IconArea>
+							<IconArea onClicketItem={onClickItem} value="cart">
 								<MdOutlineShoppingCart />
 							</IconArea>
 

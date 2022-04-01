@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import "swiper/modules/free-mode/free-mode.min.css";
 import "swiper/modules/navigation/navigation.min.css";
@@ -19,8 +19,7 @@ const stylesThumb = {
 };
 
 const getKeyForSwiper = (url) => {
-	const regEx =
-		/([a-zA-Z0-9]{8})-([a-zA-Z0-9]{4}-){3}([a-zA-Z0-9]{12})_[0-9]/g;
+	const regEx = /([a-zA-Z0-9]{8})-([a-zA-Z0-9]{4}-){3}([a-zA-Z0-9]{12})_[0-9]/g;
 	const matchs = url.match(regEx);
 	return matchs.length === 1 ? matchs[0] : "NO KEY";
 };
@@ -66,4 +65,4 @@ SwiperCarousel.propTypes = {
 	slides: PropTypes.array.isRequired,
 };
 
-export default SwiperCarousel;
+export default React.memo(SwiperCarousel);

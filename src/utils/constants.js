@@ -5,11 +5,14 @@ export const URI_SEARCH = `${API_BASE_URL}/documents/search`;
 export const PATHS = {
 	default: "/",
 	home: "/home",
+	product: "/product",
+	productFilterByProductId: "/product/:productId",
 	products: "/products",
-	categoryFilter: "/products/:categoryKey",
-	product: "/product/:productId",
+	productsFilterByCategory: "/products/:categoryKey",
 	search: "/search",
-	searchFilter: "/search/:searchTerm",
+	searchByTerm: "/search/:searchTerm",
+	cart: "/cart",
+	checkout: "/checkout",
 };
 
 export const actions = {

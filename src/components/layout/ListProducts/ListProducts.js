@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Card, { cardVariants } from "../../common/Card";
 import Chip, { chipVariants } from "../../common/Chip";
 import imgDefault from "./../../../media/product.jfif";
+import { PATHS } from "./../../../utils/constants";
 import SkListProducts from "./../../../utils/skeletons/SkListProducts";
 import { getFormattedPrice, getFormattedSlug } from "./../../../utils/utils";
 import Grid from "./../../common/Grid/Grid";
@@ -12,10 +13,16 @@ import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 import Title, { titleLevels } from "./../../common/Title";
 
 const getListProducts = (products) => {
+	const onAddToCart = (productId) => {
+		console.log("Has de agregar un producto al cart", productId);
+	};
+
 	return products.map((product) => {
+		const productLink = `${PATHS.product}/${product.id}`;
+
 		return (
-			<Link key={product.id} to={`/product/${product.id}`}>
-				<Card variant={cardVariants.product}>
+			<Card key={product.id} variant={cardVariants.product}>
+				<Link to={productLink}>
 					<ImageBackground
 						media={
 							product.image.url && product.image.url !== ""
@@ -24,33 +31,33 @@ const getListProducts = (products) => {
 						}
 						h={"320px"}
 					/>
+				</Link>
 
-					<div className="data">
-						<div className="row">
-							<div className="flex ai-center jc-start">
-								<Title Level={titleLevels.h4}>
-									{product.name}
-								</Title>
-								<Chip variant={chipVariants.sm}>
-									{product.category.slug &&
-										getFormattedSlug(product.category.slug)}
-								</Chip>
-							</div>
-							<span className="sku">{product.sku}</span>
+				<div className="data">
+					<div className="row">
+						<div className="flex ai-center jc-start">
+							<Link to={productLink}>
+								<Title Level={titleLevels.h4}>{product.name}</Title>
+							</Link>
+							<Chip variant={chipVariants.sm}>
+								{product.category.slug &&
+									getFormattedSlug(product.category.slug)}
+							</Chip>
 						</div>
-						<div className="row">
-							<div className="flex ai-center jc-space-between">
-								<Title Level={titleLevels.h3}>
-									{`$ ${getFormattedPrice(product.price)}`}
-								</Title>
-								<IconArea>
-									<MdAddShoppingCart />
-								</IconArea>
-							</div>
+						<span className="sku">{product.sku}</span>
+					</div>
+					<div className="row">
+						<div className="flex ai-center jc-space-between">
+							<Title Level={titleLevels.h3}>
+								{`$ ${getFormattedPrice(product.price)}`}
+							</Title>
+							<IconArea onClicketItem={onAddToCart} value={product.id}>
+								<MdAddShoppingCart />
+							</IconArea>
 						</div>
 					</div>
-				</Card>
-			</Link>
+				</div>
+			</Card>
 		);
 	});
 };

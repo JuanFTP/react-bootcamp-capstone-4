@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 import "./IconArea.css";
 
 const IconArea = ({ children, onClicketItem, value }) => {
@@ -18,4 +19,4 @@ IconArea.propTypes = {
 	value: PropTypes.any,
 };
 
-export default IconArea;
+export default React.memo(IconArea);

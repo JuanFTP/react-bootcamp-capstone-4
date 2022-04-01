@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import Button, { buttonVariants } from "../../components/common/Button";
@@ -44,16 +44,19 @@ const ProductsPage = () => {
 		}
 	};
 
-	const onCategorySelected = (id) => {
-		let newList = [];
-		if (categoriesList.includes(id)) {
-			newList = categoriesList.filter((categoryId) => categoryId !== id);
-			setCategoriesList(newList);
-		} else {
-			newList = categoriesList.length > 0 ? [...categoriesList, id] : [id];
-			setCategoriesList(newList);
-		}
-	};
+	const onCategorySelected = useCallback(
+		(id) => {
+			let newList = [];
+			if (categoriesList.includes(id)) {
+				newList = categoriesList.filter((categoryId) => categoryId !== id);
+				setCategoriesList(newList);
+			} else {
+				newList = categoriesList.length > 0 ? [...categoriesList, id] : [id];
+				setCategoriesList(newList);
+			}
+		},
+		[categoriesList]
+	);
 
 	const onClickPage = (numberPage) => {
 		if (page !== numberPage) {

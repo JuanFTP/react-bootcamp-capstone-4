@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
@@ -21,15 +21,25 @@ import {
 import "./ProductPage.css";
 
 const ProductPage = () => {
+	const history = useHistory();
 	const { productId } = useParams();
-	const { product } = useProduct(productId);
-	const [pieces, setPieces] = useState(1);
+	const {
+		product,
+		product: { stock },
+	} = useProduct(productId);
+	const [pieces, setPieces] = useState(0);
 
 	const onChangePieces = (add) => {
 		if (add) {
-			setPieces((pieces) => (pieces < product.stock ? pieces + 1 : pieces));
+			setPieces(pieces < stock ? pieces + 1 : pieces);
 		} else {
-			setPieces((pieces) => (pieces > 1 ? pieces - 1 : pieces));
+			setPieces(pieces > 0 ? pieces - 1 : pieces);
+		}
+	};
+
+	const onAddToCart = () => {
+		if (pieces > 0) {
+			history.push(PATHS.cart);
 		}
 	};
 
@@ -75,9 +85,9 @@ const ProductPage = () => {
 						</div>
 
 						<div className="items">
-							<Title Level={titleLevels.h4}>
-								Items ({product.stock} available)
-							</Title>
+							<Title
+								Level={titleLevels.h4}
+							>{`Items (${stock} available)`}</Title>
 							<div className="controls">
 								<div className="flex ai-center jc-start">
 									<IconArea onClicketItem={onChangePieces} value={false}>
@@ -97,7 +107,14 @@ const ProductPage = () => {
 										<MdAdd />
 									</IconArea>
 
-									<Button variant={buttonVariants.primary}>Add to cart</Button>
+									{stock > 0 && (
+										<Button
+											variant={buttonVariants.primary}
+											onClickItem={onAddToCart}
+										>
+											Add to cart
+										</Button>
+									)}
 								</div>
 							</div>
 						</div>

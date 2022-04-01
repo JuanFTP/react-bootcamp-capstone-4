@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 import styled from "styled-components";
 import SkListPages from "./../../../utils/skeletons/SkListPages";
 import IconArea from "./../../common/IconArea/IconArea";

@@ -1,3 +1,4 @@
+import React from "react";
 import "./Table.css";
 
 const Table = ({ data }) => {
@@ -21,4 +22,4 @@ const Table = ({ data }) => {
 	);
 };
 
-export default Table;
+export default React.memo(Table);

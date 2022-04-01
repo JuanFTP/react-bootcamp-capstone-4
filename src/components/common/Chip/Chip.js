@@ -1,5 +1,6 @@
-import "./Chip.css";
 import PropTypes from "prop-types";
+import React from "react";
+import "./Chip.css";
 
 export const chipVariants = {
 	sm: "sm",
@@ -27,4 +28,4 @@ Chip.propTypes = {
 	isActive: PropTypes.bool,
 };
 
-export default Chip;
+export default React.memo(Chip);
