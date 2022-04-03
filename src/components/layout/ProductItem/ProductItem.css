@@ -17,12 +17,31 @@
 	transition: var(--transition);
 }
 
+.item .miniature {
+	width: 160px;
+	height: 160px;
+	border-radius: 16px;
+	overflow: hidden;
+}
+
 .item .info {
 	width: 80%;
 }
 
 .item .info .data {
-	margin-left: 16px;
+	margin-left: 24px;
+}
+
+.item .info .data h3 {
+	margin-bottom: 16px;
+}
+
+.item .info .data h4 {
+	margin-bottom: 8px;
+}
+
+.item .info .data h4:last-of-type {
+	margin-bottom: 16px;
 }
 
 .item .resume {
@@ -32,4 +51,11 @@
 
 .item .resume h3 {
 	margin: 0px;
+}
+
+@media (max-width: 576px) {
+	.item .miniature {
+		min-width: 80px;
+		height: 160px;
+	}
 }

@@ -25,7 +25,7 @@ const General = () => {
 				<Route exact path={PATHS.cart} component={CartPage} />
 				<Route
 					exact
-					path={`${PATHS.cart}${PATHS.checkout}`}
+					path={PATHS.checkout}
 					component={CheckoutPage}
 				/>
 				<Route

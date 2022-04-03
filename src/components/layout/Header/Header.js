@@ -17,11 +17,12 @@ import Input, { inputTypes } from "./../../common/Input";
 import FormControl from "./../FormControl/FormControl";
 import "./Header.css";
 
-const Header = ({ itemsOnCart, userData }) => {
+const Header = ({ userData }) => {
 	const { state, dispatch } = useContext(GlobalContext);
 
 	const history = useHistory();
 	const location = useLocation();
+	const [showIconCart, setShowIconCart] = useState(true);
 	const [search, setSearch] = useState("");
 
 	const onChangeSearch = (e) => {
@@ -67,6 +68,15 @@ const Header = ({ itemsOnCart, userData }) => {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
+
+		if (
+			location.pathname === PATHS.cart ||
+			location.pathname === PATHS.checkout
+		) {
+			setShowIconCart(false);
+		} else {
+			setShowIconCart(true);
+		}
 	}, [location]);
 
 	return (
@@ -99,13 +109,15 @@ const Header = ({ itemsOnCart, userData }) => {
 							</IconArea>
 						)}
 
-						<div className="stats">
-							<IconArea onClicketItem={onClickItem} value="cart">
-								<MdOutlineShoppingCart />
-							</IconArea>
+						{showIconCart && (
+							<div className="stats">
+								<IconArea onClicketItem={onClickItem} value="cart">
+									<MdOutlineShoppingCart />
+								</IconArea>
 
-							{itemsOnCart && <Chip>{itemsOnCart}</Chip>}
-						</div>
+								{state.cart.length > 0 && <Chip>{state.cart.length}</Chip>}
+							</div>
+						)}
 					</div>
 
 					{userData && (
@@ -120,7 +132,7 @@ const Header = ({ itemsOnCart, userData }) => {
 };
 
 Header.propTypes = {
-	itemsOnCart: PropTypes.number,
+	userData: PropTypes.object,
 };
 
 export default Header;

@@ -1,63 +1,108 @@
+import { useContext, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import Container from "../../components/common/Container";
 import Title, { titleLevels } from "../../components/common/Title";
 import ListProductItems from "../../components/layout/ListProductItems/ListProductItems";
+import { useAddToCart } from "../../hooks/useAddToCart";
+import { PATHS } from "../../utils/constants";
+import { arraySumator, getFormattedPrice } from "../../utils/utils";
 import Button, { buttonVariants } from "./../../components/common/Button";
+import { useRemoveToCart } from "./../../hooks/useRemoveToCart";
+import { GlobalContext } from "./../../reducers/Global";
 import "./CartPage.css";
 
 const CartPage = () => {
-	const products = [
-		{
-			id: "A1",
-			image: "",
-			name: "Product A1",
-			stock: 0,
-			selected: 0,
-			price: 222211.0,
-		},
-		{
-			id: "A2",
-			image: "",
-			name: "Product A2",
-			stock: 0,
-			selected: 0,
-			price: 22222.0,
-		},
-	];
+	const { setDataToAdd, hasAdded } = useAddToCart();
+	const { setDataToRemove, hasRemoved } = useRemoveToCart();
+	const { state, dispatch } = useContext(GlobalContext);
+	const { cart } = state;
+	const nProducts = useMemo(() => (cart.length ? cart.length : 0), [cart]);
+	const nItems = useMemo(
+		() =>
+			cart.length > 0
+				? cart.map((item) => item.selected).reduce(arraySumator)
+				: 0,
+		[cart]
+	);
+	const total = useMemo(
+		() =>
+			nItems > 0
+				? cart.map((item) => item.price * item.selected).reduce(arraySumator)
+				: 0,
+		[cart, nItems]
+	);
 
-	const onChangeItemsSelected = (productId) => {
-		console.log(`onChangeItemsSelected ${productId}`);
+	useEffect(() => {
+		if (hasAdded) {
+			console.log("El producto fue añadido");
+		} else {
+			console.log("No se ha podido agregar el producto");
+		}
+	}, [hasAdded]);
+
+	useEffect(() => {
+		if (hasRemoved) {
+			console.log("El producto eliminado correctamente");
+		} else {
+			console.log("No se ha podido eliminar el producto");
+		}
+	}, [hasRemoved]);
+
+	const onChangeItemsSelected = (data) => {
+		const product = cart.filter((item) => item.id === data.id)[0];
+		if (!data.type) {
+			if (product.selected - 1 > 0) {
+				setDataToAdd({ cart, product, cuantity: -1, dispatch });
+			}
+		} else {
+			setDataToAdd({ cart, product, cuantity: 1, dispatch });
+		}
 	};
 
 	const onRemoveItem = (productId) => {
-		console.log(`onRemoveItem ${productId}`);
+		setDataToRemove({ cart, dispatch, productId });
 	};
 
 	return (
 		<Container inner={true}>
-			<Title Level={titleLevels.h1}>Cart</Title>
+			<div className="cart">
+				<div>
+					<div className="flex ai-top jc-space-between">
+						<Title Level={titleLevels.h1}>Cart</Title>
 
-			<div className="row cart">
+						<Link to={PATHS.home}>
+							<Button variant={buttonVariants.outline}>GO TO HOME</Button>
+						</Link>
+					</div>
+				</div>
+
 				<div className="resume">
 					<div className="flex ai-center jc-space-between">
-						<Title Level={titleLevels.h2}>0 Items</Title>
+						<Title Level={titleLevels.h2}>{`${nProducts} Product${
+							nProducts > 1 ? "s" : ""
+						} - ${nItems} Item${nItems > 1 ? "s" : ""}`}</Title>
 
-						<Title Level={titleLevels.h2}>$ 0,000.00</Title>
+						<Title Level={titleLevels.h2}>{`$ ${getFormattedPrice(
+							total
+						)}`}</Title>
 					</div>
 				</div>
 
 				<ListProductItems
-					listProductItems={products}
+					listProductItems={cart}
 					onChangeItemsSelected={onChangeItemsSelected}
 					onRemoveItem={onRemoveItem}
 				/>
 
-				<div className="actions">
-					<div className="flex ai-center jc-end">
-						<Button variant={buttonVariants.primary}>
-							PROCEED TO CHECKOUT
-						</Button>
+				{nItems > 0 && (
+					<div className="actions">
+						<div className="flex ai-center jc-end">
+							<Button variant={buttonVariants.primary}>
+								PROCEED TO CHECKOUT
+							</Button>
+						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</Container>
 	);

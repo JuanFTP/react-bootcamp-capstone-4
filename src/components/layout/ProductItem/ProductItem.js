@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../../utils/constants";
 import { getFormattedPrice } from "./../../../utils/utils";
 import Button, { buttonVariants } from "./../../common/Button";
 import IconArea from "./../../common/IconArea";
@@ -14,9 +16,9 @@ const ProductItem = ({
 	id,
 	image,
 	name,
-	stock,
-	selected,
 	price,
+	selected,
+	stock,
 	onChangeItemsSelected,
 	onRemoveItem,
 }) => {
@@ -25,14 +27,25 @@ const ProductItem = ({
 			<div className="flex ai-center">
 				<div className="info flex ai-center">
 					<div className="miniature">
-						<ImageBackground media={image} />
+						<Link to={`${PATHS.product}/${id}`}>
+							<ImageBackground media={image} h="160px" />
+						</Link>
 					</div>
 
 					<div className="data">
-						<Title Level={titleLevels.h3}>{name}</Title>
+						<Link to={`${PATHS.product}/${id}`}>
+							<Title Level={titleLevels.h3}>{name}</Title>
+						</Link>
+						<Title Level={titleLevels.h4}>{`${stock} items available`}</Title>
+						<Title Level={titleLevels.h4}>{`$ ${getFormattedPrice(
+							price
+						)} each`}</Title>
 						<div className="controls">
 							<div className="flex ai-center jc-start">
-								<IconArea onClicketItem={onChangeItemsSelected} value={false}>
+								<IconArea
+									onClicketItem={onChangeItemsSelected}
+									value={{ type: false, id }}
+								>
 									<MdOutlineRemove />
 								</IconArea>
 
@@ -45,7 +58,10 @@ const ProductItem = ({
 									/>
 								</FormControl>
 
-								<IconArea onClicketItem={onChangeItemsSelected} value={true}>
+								<IconArea
+									onClicketItem={onChangeItemsSelected}
+									value={{ type: true, id }}
+								>
 									<MdAdd />
 								</IconArea>
 
@@ -62,7 +78,9 @@ const ProductItem = ({
 				</div>
 
 				<div className="resume">
-					<Title Level={titleLevels.h3}>$ {getFormattedPrice(price)}</Title>
+					<Title Level={titleLevels.h3}>
+						$ {getFormattedPrice(price * selected)}
+					</Title>
 				</div>
 			</div>
 		</div>
@@ -71,13 +89,13 @@ const ProductItem = ({
 
 ProductItem.propTypes = {
 	id: PropTypes.string.isRequired,
-	image: PropTypes.string.isRequired,
+	image: PropTypes.string,
 	name: PropTypes.string.isRequired,
 	stock: PropTypes.number.isRequired,
 	selected: PropTypes.number.isRequired,
 	price: PropTypes.number.isRequired,
-	onChangeSelectedItems: PropTypes.func.isRequired,
-	onRemoveItem: PropTypes.func.isRequired,
+	onChangeSelectedItems: PropTypes.func,
+	onRemoveItem: PropTypes.func,
 };
 
 export default React.memo(ProductItem);

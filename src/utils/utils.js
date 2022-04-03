@@ -7,6 +7,8 @@ export const getFormattedPrice = (price) =>
 export const getFormattedSlug = (slug) =>
 	slug.toUpperCase().replace(/[-]+/g, " ");
 
+export const arraySumator = (accmulator, current) => accmulator + current;
+
 export const getErrorMessage = (error) => {
 	if (error.response) {
 		return "Ha ocurrido un error en el servidor";

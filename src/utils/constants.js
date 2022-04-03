@@ -12,11 +12,12 @@ export const PATHS = {
 	search: "/search",
 	searchByTerm: "/search/:searchTerm",
 	cart: "/cart",
-	checkout: "/checkout",
+	checkout: "/cart/checkout",
 };
 
 export const actions = {
 	SET_THEME: "SET_THEME",
 	SET_CATEGORIES: "SET_CATEGORIES",
 	SET_PRODUCT_AT_CART: "SET_PRODUCT_AT_CART",
+	SET_REMOVE_AT_CART: "SET_REMOVE_AT_CART",
 };

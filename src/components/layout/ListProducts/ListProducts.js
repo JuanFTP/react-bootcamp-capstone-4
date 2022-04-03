@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
 import { MdAddShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useAddToCart } from "../../../hooks/useAddToCart";
+import { GlobalContext } from "../../../reducers/Global";
 import Card, { cardVariants } from "../../common/Card";
 import Chip, { chipVariants } from "../../common/Chip";
 import imgDefault from "./../../../media/product.jfif";
@@ -12,11 +15,7 @@ import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 import Title, { titleLevels } from "./../../common/Title";
 
-const getListProducts = (products) => {
-	const onAddToCart = (productId) => {
-		console.log("Has de agregar un producto al cart", productId);
-	};
-
+const getListProducts = (products, onAddToCart) => {
 	return products.map((product) => {
 		const productLink = `${PATHS.product}/${product.id}`;
 
@@ -51,7 +50,7 @@ const getListProducts = (products) => {
 							<Title Level={titleLevels.h3}>
 								{`$ ${getFormattedPrice(product.price)}`}
 							</Title>
-							<IconArea onClicketItem={onAddToCart} value={product.id}>
+							<IconArea onClicketItem={onAddToCart} value={product}>
 								<MdAddShoppingCart />
 							</IconArea>
 						</div>
@@ -63,10 +62,25 @@ const getListProducts = (products) => {
 };
 
 const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
+	const { state, dispatch } = useContext(GlobalContext);
+	const { setDataToAdd, hasAdded } = useAddToCart();
+
+	useEffect(() => {
+		if (hasAdded) {
+			console.log("El producto fue añadido");
+		} else {
+			console.log("No se ha podido agregar el producto");
+		}
+	}, [hasAdded]);
+
+	const onAddToCart = (product) => {
+		setDataToAdd({ cart: state.cart, product, cuantity: 1, dispatch });
+	};
+
 	return (
 		<Grid default={def} xl={xl} md={md} sm={sm} xsm={xsm} minmax={minmax}>
 			{products && products.length > 0 ? (
-				getListProducts(products)
+				getListProducts(products, onAddToCart)
 			) : (
 				<SkListProducts />
 			)}
@@ -84,4 +98,4 @@ ListProducts.propTypes = {
 	minmax: PropTypes.number.isRequired,
 };
 
-export default ListProducts;
+export default React.memo(ListProducts);
