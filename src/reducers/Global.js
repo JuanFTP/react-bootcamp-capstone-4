@@ -11,13 +11,15 @@ const initialState = {
 	categories: [],
 };
 
+let newCart = [];
+
 const reducer = (state, action) => {
 	switch (action.type) {
 		case actions.SET_THEME:
 			localStorage.setItem("theme", action.payload.theme);
 			return { ...state, theme: action.payload.theme };
 		case actions.SET_PRODUCT_AT_CART:
-			let newCart = [];
+			newCart = [];
 			if (action.payload.index < 0) {
 				newCart =
 					state.cart.length > 0
@@ -33,9 +35,13 @@ const reducer = (state, action) => {
 			localStorage.setItem("cart", JSON.stringify(newCart));
 			return { ...state, cart: newCart };
 		case actions.SET_REMOVE_AT_CART:
+			newCart = state.cart.filter(
+				(item) => item.id !== action.payload.productId
+			);
+			localStorage.setItem("cart", JSON.stringify(newCart));
 			return {
 				...state,
-				cart: state.cart.filter((item) => item.id !== action.payload.productId),
+				cart: newCart,
 			};
 		default:
 			return state;

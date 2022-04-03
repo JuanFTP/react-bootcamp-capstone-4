@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
@@ -10,7 +10,10 @@ import Table from "./../../components/common/Table";
 import Title, { titleLevels } from "./../../components/common/Title";
 import FormControl from "./../../components/layout/FormControl/FormControl";
 import SwiperCarousel from "./../../components/layout/SwiperCarousel";
+import { useAddToCart } from "./../../hooks/useAddToCart";
 import { useProduct } from "./../../hooks/useProduct";
+import { useRemoveToCart } from "./../../hooks/useRemoveToCart";
+import { GlobalContext } from "./../../reducers/Global";
 import { PATHS } from "./../../utils/constants";
 import SkProductDetails from "./../../utils/skeletons/SkProductDetails";
 import {
@@ -21,27 +24,68 @@ import {
 import "./ProductPage.css";
 
 const ProductPage = () => {
-	const history = useHistory();
 	const { productId } = useParams();
+	const { setDataToAdd, hasAdded } = useAddToCart();
+	const { setDataToRemove, hasRemoved } = useRemoveToCart();
+	const { state, dispatch } = useContext(GlobalContext);
+	const [index, setIndex] = useState(-1);
+	const [legend, setLegend] = useState("ADD TO CART");
+	const { cart } = state;
 	const {
 		product,
 		product: { stock },
 	} = useProduct(productId);
 	const [pieces, setPieces] = useState(0);
 
-	const onChangePieces = (add) => {
-		if (add) {
-			setPieces(pieces < stock ? pieces + 1 : pieces);
+	const onChangePieces = useCallback(
+		(add) => {
+			if (add) {
+				setPieces(pieces < stock ? pieces + 1 : pieces);
+			} else {
+				setPieces(pieces > 0 ? pieces - 1 : pieces);
+			}
+		},
+		[stock, pieces]
+	);
+
+	const onAddToCart = () => {
+		if (index > 0) {
+			if (pieces === 0) {
+				setDataToRemove({ cart, dispatch, productId: product.id });
+			} else {
+				let diff = pieces - cart[index].selected;
+				setDataToAdd({ cart, product, cuantity: diff, dispatch });
+			}
 		} else {
-			setPieces(pieces > 0 ? pieces - 1 : pieces);
+			if (pieces > 0) {
+				setDataToAdd({ cart, product, cuantity: pieces, dispatch });
+			}
 		}
 	};
 
-	const onAddToCart = () => {
-		if (pieces > 0) {
-			history.push(PATHS.cart);
+	useEffect(() => {
+		if (hasAdded) {
+			console.log("El producto fue añadido");
 		}
-	};
+	}, [hasAdded]);
+
+	useEffect(() => {
+		if (hasRemoved) {
+			console.log("El producto eliminado correctamente");
+		}
+	}, [hasRemoved]);
+
+	useEffect(() => {
+		if (product.id) {
+			setIndex(cart.map((item) => item.id).indexOf(product.id));
+			if (index >= 0) {
+				setPieces(cart[index] ? cart[index].selected : 0);
+				setLegend("UPDATE CART");
+			} else {
+				setLegend("ADD TO CART");
+			}
+		}
+	}, [product, cart, index]);
 
 	return (
 		<Container inner={true}>
@@ -97,7 +141,7 @@ const ProductPage = () => {
 									<FormControl width="96px" feedback={false} round={false}>
 										<Input
 											variant={inputTypes.number}
-											value={pieces}
+											value={pieces ? pieces : 0}
 											placeholder={"0"}
 											isReadOnly={true}
 										/>
@@ -112,7 +156,7 @@ const ProductPage = () => {
 											variant={buttonVariants.primary}
 											onClickItem={onAddToCart}
 										>
-											Add to cart
+											{legend}
 										</Button>
 									)}
 								</div>
