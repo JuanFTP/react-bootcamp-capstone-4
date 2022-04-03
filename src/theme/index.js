@@ -145,6 +145,10 @@ const GlobalStyles = createGlobalStyle`
 		justify-content: center;
 	}
 
+	.flex.jc-end {
+		justify-content: end;
+	}
+
 	.overflow-hidden {
 		overflow: hidden;
 	}

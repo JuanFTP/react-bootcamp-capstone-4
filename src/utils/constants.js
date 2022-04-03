@@ -18,4 +18,5 @@ export const PATHS = {
 export const actions = {
 	SET_THEME: "SET_THEME",
 	SET_CATEGORIES: "SET_CATEGORIES",
+	SET_PRODUCT_AT_CART: "SET_PRODUCT_AT_CART",
 };

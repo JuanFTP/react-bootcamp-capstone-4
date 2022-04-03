@@ -5,6 +5,7 @@ const GlobalContext = createContext();
 
 const initialState = {
 	theme: localStorage.getItem("theme") || "light",
+	cart: [],
 	categories: [],
 };
 
@@ -13,8 +14,9 @@ const reducer = (state, action) => {
 		case actions.SET_THEME:
 			localStorage.setItem("theme", action.payload.theme);
 			return { ...state, theme: action.payload.theme };
-		case actions.SET_CATEGORIES:
-			return { ...state, categories: action.payload.categories };
+		case actions.SET_PRODUCT_AT_CART:
+			console.log("Agregar producto al carrito");
+			return state;
 		default:
 			return state;
 	}
