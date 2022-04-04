@@ -14,6 +14,7 @@ import Grid from "./../../common/Grid/Grid";
 import IconArea from "./../../common/IconArea/IconArea";
 import ImageBackground from "./../../common/ImageBackground/ImageBackground";
 import Title, { titleLevels } from "./../../common/Title";
+import { toast } from "react-toastify";
 
 const getListProducts = (products, onAddToCart) => {
 	return products.map((product) => {
@@ -67,9 +68,13 @@ const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
 
 	useEffect(() => {
 		if (statusAdd.added) {
-			console.log("Product: " + statusAdd.id + "has been added");
+			toast.success("The product has been added to the cart.");
 		} else {
-			console.log("Product: " + statusAdd.id + "has not been added");
+			if (statusAdd.id !== "") {
+				toast.warning(
+					"Sorry, the product has not been added as it has reached the stock limit."
+				);
+			}
 		}
 	}, [statusAdd]);
 

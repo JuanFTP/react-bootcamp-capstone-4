@@ -1,5 +1,6 @@
 import { useContext, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Container from "../../components/common/Container";
 import Title, { titleLevels } from "../../components/common/Title";
 import ListProductItems from "../../components/layout/ListProductItems/ListProductItems";
@@ -35,16 +36,21 @@ const CartPage = () => {
 	useEffect(() => {
 		if (statusAdd.added) {
 			console.log(`The product: ${statusAdd.id} has been update`);
+			toast.success("The product has been updated.");
 		} else {
-			console.log(`The product: ${statusAdd.id} has not been update`);
+			if (statusAdd.id !== "") {
+				toast.warning("You have already selected all the available items.");
+			}
 		}
 	}, [statusAdd]);
 
 	useEffect(() => {
 		if (statusRemove.removed) {
-			console.log(`The product: ${statusRemove.id} has been removed`);
+			toast.success("The product has been removed.");
 		} else {
-			console.log(`The product: ${statusRemove.id} has not been removed`);
+			if (statusRemove.id !== "") {
+				toast.error("Sorry, has been a problem occurred.");
+			}
 		}
 	}, [statusRemove]);
 

@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
@@ -65,17 +66,21 @@ const ProductPage = () => {
 
 	useEffect(() => {
 		if (statusAdd.added) {
-			console.log(`The product: ${statusAdd.id} has been update`);
+			toast.success("The product has been updated.");
 		} else {
-			console.log(`The product: ${statusAdd.id} has not been update`);
+			if (statusAdd.id !== "") {
+				toast.warning("You have already selected all the available items.");
+			}
 		}
 	}, [statusAdd]);
 
 	useEffect(() => {
 		if (statusRemove.removed) {
-			console.log(`The product: ${statusRemove.id} has been removed`);
+			toast.success("The product has been removed.");
 		} else {
-			console.log(`The product: ${statusRemove.id} has not been removed`);
+			if (statusRemove.id !== "") {
+				toast.error("Sorry, has been a problem occurred.");
+			}
 		}
 	}, [statusRemove]);
 
@@ -83,7 +88,7 @@ const ProductPage = () => {
 		if (product.id) {
 			setIndex(cart.map((item) => item.id).indexOf(product.id));
 			if (index >= 0) {
-				setPieces(cart[index] && cart[index].selected);
+				setPieces(cart[index] ? cart[index].selected : 0);
 				setLegend("UPDATE CART");
 			} else {
 				setLegend("ADD TO CART");
