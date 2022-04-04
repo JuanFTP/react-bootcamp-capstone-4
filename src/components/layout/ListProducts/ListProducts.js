@@ -63,15 +63,15 @@ const getListProducts = (products, onAddToCart) => {
 
 const ListProducts = ({ products, def, xl, md, sm, xsm, minmax }) => {
 	const { state, dispatch } = useContext(GlobalContext);
-	const { setDataToAdd, hasAdded } = useAddToCart();
+	const { setDataToAdd, statusAdd } = useAddToCart();
 
 	useEffect(() => {
-		if (hasAdded) {
-			console.log("El producto fue añadido");
+		if (statusAdd.added) {
+			console.log("Product: " + statusAdd.id + "has been added");
 		} else {
-			console.log("No se ha podido agregar el producto");
+			console.log("Product: " + statusAdd.id + "has not been added");
 		}
-	}, [hasAdded]);
+	}, [statusAdd]);
 
 	const onAddToCart = (product) => {
 		setDataToAdd({ cart: state.cart, product, cuantity: 1, dispatch });

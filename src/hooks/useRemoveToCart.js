@@ -8,7 +8,7 @@ export function useRemoveToCart() {
 		dispatch: {},
 	});
 
-	const [hasRemoved, setHasRemoved] = useState(false);
+	const [statusRemove, setStatusRemove] = useState({ removed: false, id: "" });
 	const { cart, productId, dispatch } = dataToRemove;
 
 	useEffect(() => {
@@ -26,12 +26,12 @@ export function useRemoveToCart() {
 					},
 				});
 
-				setHasRemoved(true);
+				setStatusRemove({ removed: true, id: productId });
 			} else {
-				setHasRemoved(false);
+				setStatusRemove({ removed: false, id: productId });
 			}
 		}
 	}, [cart, dispatch, productId]);
 
-	return { setDataToRemove, hasRemoved };
+	return { setDataToRemove, statusRemove };
 }

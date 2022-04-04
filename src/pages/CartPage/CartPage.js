@@ -12,8 +12,8 @@ import { GlobalContext } from "./../../reducers/Global";
 import "./CartPage.css";
 
 const CartPage = () => {
-	const { setDataToAdd, hasAdded } = useAddToCart();
-	const { setDataToRemove, hasRemoved } = useRemoveToCart();
+	const { setDataToAdd, statusAdd } = useAddToCart();
+	const { setDataToRemove, statusRemove } = useRemoveToCart();
 	const { state, dispatch } = useContext(GlobalContext);
 	const { cart } = state;
 	const nProducts = useMemo(() => (cart.length ? cart.length : 0), [cart]);
@@ -33,20 +33,20 @@ const CartPage = () => {
 	);
 
 	useEffect(() => {
-		if (hasAdded) {
-			console.log("El producto fue añadido");
+		if (statusAdd.added) {
+			console.log(`The product: ${statusAdd.id} has been update`);
 		} else {
-			console.log("No se ha podido agregar el producto");
+			console.log(`The product: ${statusAdd.id} has not been update`);
 		}
-	}, [hasAdded]);
+	}, [statusAdd]);
 
 	useEffect(() => {
-		if (hasRemoved) {
-			console.log("El producto eliminado correctamente");
+		if (statusRemove.removed) {
+			console.log(`The product: ${statusRemove.id} has been removed`);
 		} else {
-			console.log("No se ha podido eliminar el producto");
+			console.log(`The product: ${statusRemove.id} has not been removed`);
 		}
-	}, [hasRemoved]);
+	}, [statusRemove]);
 
 	const onChangeItemsSelected = (data) => {
 		const product = cart.filter((item) => item.id === data.id)[0];
@@ -97,9 +97,11 @@ const CartPage = () => {
 				{nItems > 0 && (
 					<div className="actions">
 						<div className="flex ai-center jc-end">
-							<Button variant={buttonVariants.primary}>
-								PROCEED TO CHECKOUT
-							</Button>
+							<Link to={PATHS.checkout}>
+								<Button variant={buttonVariants.primary}>
+									PROCEED TO CHECKOUT
+								</Button>
+							</Link>
 						</div>
 					</div>
 				)}

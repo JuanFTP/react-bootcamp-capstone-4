@@ -9,7 +9,7 @@ export function useAddToCart() {
 		dispatch: {},
 	});
 
-	const [hasAdded, setHasAdded] = useState(false);
+	const [statusAdd, setStatusAdd] = useState({ added: false, id: "" });
 	const { cart, product, cuantity, dispatch } = dataToAdd;
 
 	useEffect(() => {
@@ -39,12 +39,12 @@ export function useAddToCart() {
 					},
 				});
 
-				setHasAdded(true);
+				setStatusAdd({ added: true, id: product.id });
 			} else {
-				setHasAdded(false);
+				setStatusAdd({ added: false, id: product.id });
 			}
 		}
 	}, [cart, cuantity, dispatch, product]);
 
-	return { setDataToAdd, hasAdded };
+	return { setDataToAdd, statusAdd };
 }

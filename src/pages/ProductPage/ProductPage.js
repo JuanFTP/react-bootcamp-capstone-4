@@ -25,8 +25,8 @@ import "./ProductPage.css";
 
 const ProductPage = () => {
 	const { productId } = useParams();
-	const { setDataToAdd, hasAdded } = useAddToCart();
-	const { setDataToRemove, hasRemoved } = useRemoveToCart();
+	const { setDataToAdd, statusAdd } = useAddToCart();
+	const { setDataToRemove, statusRemove } = useRemoveToCart();
 	const { state, dispatch } = useContext(GlobalContext);
 	const [index, setIndex] = useState(-1);
 	const [legend, setLegend] = useState("ADD TO CART");
@@ -49,7 +49,7 @@ const ProductPage = () => {
 	);
 
 	const onAddToCart = () => {
-		if (index > 0) {
+		if (index >= 0) {
 			if (pieces === 0) {
 				setDataToRemove({ cart, dispatch, productId: product.id });
 			} else {
@@ -64,22 +64,26 @@ const ProductPage = () => {
 	};
 
 	useEffect(() => {
-		if (hasAdded) {
-			console.log("El producto fue añadido");
+		if (statusAdd.added) {
+			console.log(`The product: ${statusAdd.id} has been update`);
+		} else {
+			console.log(`The product: ${statusAdd.id} has not been update`);
 		}
-	}, [hasAdded]);
+	}, [statusAdd]);
 
 	useEffect(() => {
-		if (hasRemoved) {
-			console.log("El producto eliminado correctamente");
+		if (statusRemove.removed) {
+			console.log(`The product: ${statusRemove.id} has been removed`);
+		} else {
+			console.log(`The product: ${statusRemove.id} has not been removed`);
 		}
-	}, [hasRemoved]);
+	}, [statusRemove]);
 
 	useEffect(() => {
 		if (product.id) {
 			setIndex(cart.map((item) => item.id).indexOf(product.id));
 			if (index >= 0) {
-				setPieces(cart[index] ? cart[index].selected : 0);
+				setPieces(cart[index] && cart[index].selected);
 				setLegend("UPDATE CART");
 			} else {
 				setLegend("ADD TO CART");
