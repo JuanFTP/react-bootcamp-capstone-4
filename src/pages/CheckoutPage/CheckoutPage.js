@@ -107,13 +107,15 @@ const CheckoutPage = () => {
 					<div className="resume">
 						<Title Level={titleLevels.h3}>Resume</Title>
 
-						<Table
-							variant={tableVariants.resume}
-							data={{
-								cols: ["Product name", "Unit price", "Cuantity", "Subtotal"],
-								rows: cart,
-							}}
-						/>
+						{cart.length > 0 && (
+							<Table
+								variant={tableVariants.resume}
+								data={{
+									cols: ["Product name", "Unit price", "Cuantity", "Subtotal"],
+									rows: cart,
+								}}
+							/>
+						)}
 					</div>
 
 					<div className="actions">
