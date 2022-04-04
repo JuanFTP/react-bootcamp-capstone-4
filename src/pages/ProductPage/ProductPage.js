@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { tableVariants } from "../../components/common/Table/Table";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
@@ -174,7 +175,7 @@ const ProductPage = () => {
 
 						<div className="specs">
 							<Title Level={titleLevels.h4}>Specs</Title>
-							<Table data={product.specs} />
+							<Table data={product.specs} variant={tableVariants.simple} />
 						</div>
 					</div>
 				</div>

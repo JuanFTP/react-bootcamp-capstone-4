@@ -1,0 +1,55 @@
+.form {
+	margin-top: 24px;
+	padding: 48px;
+	border-radius: 16px;
+	border: solid 1px var(--light-72);
+}
+
+.form .resume,
+.form .actions {
+	margin-top: 32px;
+}
+
+.form h3 {
+	margin-bottom: 24px;
+}
+
+.form .data .form-control {
+	color: var(--default);
+	background-color: transparent !important;
+	width: 45%;
+	margin: 8px 2.5%;
+}
+
+.form .data .form-control input,
+.form .data .form-control textarea {
+	text-align: left;
+	padding: 8px 12px;
+	margin-top: 8px;
+	color: inherit !important;
+	background-color: var(--light-72) !important;
+}
+
+.form .data .form-control textarea {
+	font-family: inherit;
+	font-size: 0.9rem;
+	display: block;
+	border: 0px;
+	height: 96px;
+	width: 100%;
+	resize: none;
+}
+
+.form .data .form-control span {
+	background-color: green;
+	height: 0.75rem;
+	line-height: 0.75rem;
+	font-weight: 600;
+	font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+	.form .data .form-control {
+		width: 95%;
+	}
+}
