@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button, { buttonVariants } from "../../components/common/Button";
+import ErrorBoundary from "../../components/common/ErrorBoundary/ErrorBoundary";
 import Table from "../../components/common/Table";
 import { tableVariants } from "../../components/common/Table/Table";
 import Title, { titleLevels } from "../../components/common/Title";
@@ -110,12 +111,6 @@ const CheckoutPage = () => {
 			} else {
 				history.push(PATHS.cart);
 			}
-			/* if (
-				hasTouched &&
-				window.confirm("You have unsaved changes, do you want to continue?")
-			) {
-				history.push(PATHS.cart);
-			} */
 		},
 		[history, hasTouched]
 	);
@@ -156,7 +151,6 @@ const CheckoutPage = () => {
 				<form action="#" className="form" onSubmit={handleOnSubmit}>
 					<div className="data">
 						<Title Level={titleLevels.h3}>Personal data</Title>
-
 						{renderFormControls(formData, handleOnChange)}
 					</div>
 
@@ -164,13 +158,20 @@ const CheckoutPage = () => {
 						<Title Level={titleLevels.h3}>Resume</Title>
 
 						{cart && cart.length > 0 && (
-							<Table
-								variant={tableVariants.resume}
-								data={{
-									cols: ["Product name", "Unit price", "Cuantity", "Subtotal"],
-									rows: cart,
-								}}
-							/>
+							<ErrorBoundary>
+								<Table
+									variant={tableVariants.resume}
+									data={{
+										cols: [
+											"Product name",
+											"Unit price",
+											"Cuantity",
+											"Subtotal",
+										],
+										rows: cart,
+									}}
+								/>
+							</ErrorBoundary>
 						)}
 					</div>
 

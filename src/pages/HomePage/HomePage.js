@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Button, { buttonVariants } from "../../components/common/Button";
 import Container from "../../components/common/Container";
+import ErrorBoundary from "../../components/common/ErrorBoundary/ErrorBoundary";
 import Title, { titleLevels } from "../../components/common/Title";
 import Banner from "../../components/layout/Banner";
 import ListCategories from "../../components/layout/ListCategories";
@@ -17,12 +18,17 @@ const HomePage = () => {
 
 	return (
 		<>
-			<Banner banners={banners} />
+			<ErrorBoundary>
+				<Banner banners={banners} />
+			</ErrorBoundary>
 
 			<Container>
 				<div className="row">
 					<Title Level={titleLevels.h3}>CATEGORIES</Title>
-					<ListCategories categories={categories} />
+
+					<ErrorBoundary>
+						<ListCategories categories={categories} />
+					</ErrorBoundary>
 				</div>
 				<div className="row">
 					<div className="flex ai-top jc-space-between">
@@ -34,17 +40,19 @@ const HomePage = () => {
 						</Link>
 					</div>
 					<br />
-					<ListProducts
-						def={4}
-						xl={4}
-						md={3}
-						sm={2}
-						xsm={1}
-						minmax={320}
-						products={products}
-						limit={16}
-						offset={0}
-					/>
+					<ErrorBoundary>
+						<ListProducts
+							def={4}
+							xl={4}
+							md={3}
+							sm={2}
+							xsm={1}
+							minmax={320}
+							products={products}
+							limit={16}
+							offset={0}
+						/>
+					</ErrorBoundary>
 				</div>
 			</Container>
 		</>

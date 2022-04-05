@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ErrorBoundary from "../../components/common/ErrorBoundary/ErrorBoundary";
 import Title, { titleLevels } from "../../components/common/Title";
 import { APP_NAME } from "../../utils/constants";
 import Container from "./../../components/common/Container";
@@ -40,15 +41,17 @@ const SearchPage = () => {
 			{products && products.length > 0 && (
 				<>
 					<br />
-					<ListProducts
-						def={4}
-						xl={3}
-						md={2}
-						sm={1}
-						xsm={1}
-						minmax={480}
-						products={products}
-					/>
+					<ErrorBoundary>
+						<ListProducts
+							def={4}
+							xl={3}
+							md={2}
+							sm={1}
+							xsm={1}
+							minmax={480}
+							products={products}
+						/>
+					</ErrorBoundary>
 
 					{pagination.length > 1 && (
 						<ListPages pagination={pagination} onClickPage={onClickPage} />

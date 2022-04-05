@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Button, { buttonVariants } from "../../components/common/Button";
 import Chip, { chipVariants } from "../../components/common/Chip";
 import Container from "../../components/common/Container";
+import ErrorBoundary from "../../components/common/ErrorBoundary/ErrorBoundary";
 import IconArea from "../../components/common/IconArea/IconArea";
 import Title, { titleLevels } from "../../components/common/Title";
 import ListPages from "../../components/layout/ListPages/ListPages";
@@ -121,18 +122,22 @@ const ProductsPage = () => {
 								No matches with filter selected on this page
 							</Title>
 						) : (
-							<ListProducts
-								def={4}
-								xl={3}
-								md={2}
-								sm={2}
-								xsm={1}
-								minmax={320}
-								products={productsFil}
-							/>
+							<ErrorBoundary>
+								<ListProducts
+									def={4}
+									xl={3}
+									md={2}
+									sm={2}
+									xsm={1}
+									minmax={320}
+									products={productsFil}
+								/>
+							</ErrorBoundary>
 						)}
 
-						<ListPages pagination={pagination} onClickPage={onClickPage} />
+						<ErrorBoundary>
+							<ListPages pagination={pagination} onClickPage={onClickPage} />
+						</ErrorBoundary>
 					</div>
 				</div>
 			</div>

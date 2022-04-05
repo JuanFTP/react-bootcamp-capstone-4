@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Container from "../../components/common/Container";
+import ErrorBoundary from "../../components/common/ErrorBoundary/ErrorBoundary";
 import Title, { titleLevels } from "../../components/common/Title";
 import ListProductItems from "../../components/layout/ListProductItems/ListProductItems";
 import { useAddToCart } from "../../hooks/useAddToCart";
@@ -84,12 +85,14 @@ const CartPage = () => {
 						)}`}</Title>
 					</div>
 				</div>
-
-				<ListProductItems
-					listProductItems={cart}
-					onChangeItemsSelected={onChangeItemsSelected}
-					onRemoveItem={onRemoveItem}
-				/>
+				
+				<ErrorBoundary>
+					<ListProductItems
+						listProductItems={cart}
+						onChangeItemsSelected={onChangeItemsSelected}
+						onRemoveItem={onRemoveItem}
+					/>
+				</ErrorBoundary>
 
 				<div className="actions">
 					<div className="flex ai-center jc-space-between">

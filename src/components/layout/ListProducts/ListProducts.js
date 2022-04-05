@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { useContext, useEffect } from "react";
 import { MdAddShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAddToCart } from "../../../hooks/useAddToCart";
 import { GlobalContext } from "../../../reducers/Global";
 import Card, { cardVariants } from "../../common/Card";
@@ -10,11 +11,10 @@ import imgDefault from "./../../../media/product.jfif";
 import { PATHS } from "./../../../utils/constants";
 import SkListProducts from "./../../../utils/skeletons/SkListProducts";
 import { getFormattedPrice, getFormattedSlug } from "./../../../utils/utils";
-import Grid from "./../../common/Grid/Grid";
-import IconArea from "./../../common/IconArea/IconArea";
-import ImageBackground from "./../../common/ImageBackground/ImageBackground";
+import Grid from "./../../common/Grid";
+import IconArea from "./../../common/IconArea";
+import ImageBackground from "./../../common/ImageBackground";
 import Title, { titleLevels } from "./../../common/Title";
-import { toast } from "react-toastify";
 
 const getListProducts = (products, onAddToCart) => {
 	return products.map((product) => {

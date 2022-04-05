@@ -6,6 +6,7 @@ import { tableVariants } from "../../components/common/Table/Table";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
+import ErrorBoundary from "./../../components/common/ErrorBoundary/ErrorBoundary";
 import IconArea from "./../../components/common/IconArea/IconArea";
 import Input, { inputTypes } from "./../../components/common/Input";
 import Table from "./../../components/common/Table";
@@ -142,35 +143,37 @@ const ProductPage = () => {
 							<Title
 								Level={titleLevels.h4}
 							>{`Items (${stock} available)`}</Title>
-							<div className="controls">
-								<div className="flex ai-center jc-start">
-									<IconArea onClicketItem={onChangePieces} value={false}>
-										<MdOutlineRemove />
-									</IconArea>
+							<ErrorBoundary>
+								<div className="controls">
+									<div className="flex ai-center jc-start">
+										<IconArea onClicketItem={onChangePieces} value={false}>
+											<MdOutlineRemove />
+										</IconArea>
 
-									<FormControl width="96px" feedback={false} round={false}>
-										<Input
-											variant={inputTypes.number}
-											value={pieces ? pieces : 0}
-											placeholder={"0"}
-											isReadOnly={true}
-										/>
-									</FormControl>
+										<FormControl width="96px" feedback={false} round={false}>
+											<Input
+												variant={inputTypes.number}
+												value={pieces ? pieces : 0}
+												placeholder={"0"}
+												isReadOnly={true}
+											/>
+										</FormControl>
 
-									<IconArea onClicketItem={onChangePieces} value={true}>
-										<MdAdd />
-									</IconArea>
+										<IconArea onClicketItem={onChangePieces} value={true}>
+											<MdAdd />
+										</IconArea>
 
-									{stock > 0 && (
-										<Button
-											variant={buttonVariants.primary}
-											onClickItem={onAddToCart}
-										>
-											{legend}
-										</Button>
-									)}
+										{stock > 0 && (
+											<Button
+												variant={buttonVariants.primary}
+												onClickItem={onAddToCart}
+											>
+												{legend}
+											</Button>
+										)}
+									</div>
 								</div>
-							</div>
+							</ErrorBoundary>
 						</div>
 
 						<div className="specs">
