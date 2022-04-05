@@ -35,7 +35,6 @@ const CartPage = () => {
 
 	useEffect(() => {
 		if (statusAdd.added) {
-			console.log(`The product: ${statusAdd.id} has been update`);
 			toast.success("The product has been updated.");
 		} else {
 			if (statusAdd.id !== "") {
@@ -72,15 +71,7 @@ const CartPage = () => {
 	return (
 		<Container inner={true}>
 			<div className="cart">
-				<div>
-					<div className="flex ai-top jc-space-between">
-						<Title Level={titleLevels.h1}>Cart</Title>
-
-						<Link to={PATHS.home}>
-							<Button variant={buttonVariants.outline}>GO TO HOME</Button>
-						</Link>
-					</div>
-				</div>
+				<Title Level={titleLevels.h1}>Cart</Title>
 
 				<div className="resume">
 					<div className="flex ai-center jc-space-between">
@@ -100,17 +91,21 @@ const CartPage = () => {
 					onRemoveItem={onRemoveItem}
 				/>
 
-				{nItems > 0 && (
-					<div className="actions">
-						<div className="flex ai-center jc-end">
+				<div className="actions">
+					<div className="flex ai-center jc-space-between">
+						<Link to={PATHS.home}>
+							<Button variant={buttonVariants.outline}>GO TO HOME</Button>
+						</Link>
+
+						{nItems > 0 && (
 							<Link to={PATHS.checkout}>
 								<Button variant={buttonVariants.primary}>
 									PROCEED TO CHECKOUT
 								</Button>
 							</Link>
-						</div>
+						)}
 					</div>
-				)}
+				</div>
 			</div>
 		</Container>
 	);

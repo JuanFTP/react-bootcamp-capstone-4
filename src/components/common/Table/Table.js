@@ -35,6 +35,10 @@ const Table = ({ data, variant }) => {
 			return getFormattedPrice(listOfPrice.reduce(arraySumator));
 		};
 
+		const getSubtotal = (units, price) => {
+			return getFormattedPrice(units * price);
+		};
+
 		return (
 			<div className="table resume">
 				<table>
@@ -49,9 +53,9 @@ const Table = ({ data, variant }) => {
 						{data.rows.map((row) => (
 							<tr key={row.id}>
 								<td>{row.name}</td>
-								<td>$ {getFormattedPrice(row.price)}</td>
+								<td>{`$ ${getFormattedPrice(row.price)}`}</td>
 								<td>{row.selected}</td>
-								<td>$ {getFormattedPrice(row.price * row.selected)}</td>
+								<td>{`$ ${getSubtotal(row.selected, row.price)}`}</td>
 							</tr>
 						))}
 					</tbody>
@@ -59,7 +63,9 @@ const Table = ({ data, variant }) => {
 						<tr>
 							<td colSpan={3}>Total</td>
 							<td>
-								$ {getTotal(data.rows.map((row) => row.price * row.selected))}
+								{`$ ${getTotal(
+									data.rows.map((row) => row.price * row.selected)
+								)}`}
 							</td>
 						</tr>
 					</tfoot>

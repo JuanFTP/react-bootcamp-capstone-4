@@ -1,5 +1,4 @@
 .form {
-	margin-top: 24px;
 	padding: 48px;
 	border-radius: 16px;
 	border: solid 1px var(--light-72);
@@ -14,15 +13,27 @@
 	margin-bottom: 24px;
 }
 
+.form .data {
+	overflow: hidden;
+}
+
 .form .data .form-control {
+	float: left;
 	color: var(--default);
-	background-color: transparent !important;
 	width: 45%;
 	margin: 8px 2.5%;
+	height: 92px;
+	background-color: transparent !important;
+}
+
+.form .data .form-control.textarea {
+	height: 142px;
 }
 
 .form .data .form-control input,
 .form .data .form-control textarea {
+	font-weight: 300;
+	font-family: inherit;
 	text-align: left;
 	padding: 8px 12px;
 	margin-top: 8px;
@@ -31,8 +42,6 @@
 }
 
 .form .data .form-control textarea {
-	font-family: inherit;
-	font-size: 0.9rem;
 	display: block;
 	border: 0px;
 	height: 96px;
@@ -40,8 +49,10 @@
 	resize: none;
 }
 
-.form .data .form-control span {
-	background-color: green;
+.form .data .form-control p {
+	color: orange;
+	display: inline-block;
+	margin: 0px;
 	height: 0.75rem;
 	line-height: 0.75rem;
 	font-weight: 600;
