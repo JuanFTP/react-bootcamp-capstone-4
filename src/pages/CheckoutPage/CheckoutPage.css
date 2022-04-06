@@ -1,0 +1,66 @@
+.form {
+	padding: 48px;
+	border-radius: 16px;
+	border: solid 1px var(--light-72);
+}
+
+.form .resume,
+.form .actions {
+	margin-top: 32px;
+}
+
+.form h3 {
+	margin-bottom: 24px;
+}
+
+.form .data {
+	overflow: hidden;
+}
+
+.form .data .form-control {
+	float: left;
+	color: var(--default);
+	width: 45%;
+	margin: 8px 2.5%;
+	height: 92px;
+	background-color: transparent !important;
+}
+
+.form .data .form-control.textarea {
+	height: 142px;
+}
+
+.form .data .form-control input,
+.form .data .form-control textarea {
+	font-weight: 300;
+	font-family: inherit;
+	text-align: left;
+	padding: 8px 12px;
+	margin-top: 8px;
+	color: inherit !important;
+	background-color: var(--light-72) !important;
+}
+
+.form .data .form-control textarea {
+	display: block;
+	border: 0px;
+	height: 96px;
+	width: 100%;
+	resize: none;
+}
+
+.form .data .form-control p {
+	color: orange;
+	display: inline-block;
+	margin: 0px;
+	height: 0.75rem;
+	line-height: 0.75rem;
+	font-weight: 600;
+	font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+	.form .data .form-control {
+		width: 95%;
+	}
+}

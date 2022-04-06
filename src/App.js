@@ -1,29 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-import { useFeaturedBanners } from './utils/hooks/useFeaturedBanners';
+import { useReducer } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ThemeProvider } from "styled-components";
+import { GlobalContext, initialState, reducer } from "./reducers/Global";
+import General from "./routes/General";
+import { darkTheme, GlobalStyles, lightTheme } from "./theme";
 
-function App() {
-  const { data, isLoading } = useFeaturedBanners();
-  console.log(data, isLoading);
+const App = () => {
+	const [state, dispatch] = useReducer(reducer, initialState);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+	return (
+		<GlobalContext.Provider value={{ state, dispatch }}>
+			<ThemeProvider theme={state.theme === "light" ? lightTheme : darkTheme}>
+				<GlobalStyles />
+				<General />
+				<ToastContainer
+					position="bottom-left"
+					autoClose={4000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
+			</ThemeProvider>
+		</GlobalContext.Provider>
+	);
+};
 
 export default App;

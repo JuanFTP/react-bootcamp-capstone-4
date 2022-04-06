@@ -1,0 +1,25 @@
+.brand {
+	cursor: pointer;
+}
+
+.brand img {
+	height: 48px;
+	width: 48px;
+	float: left;
+}
+
+.brand h2 {
+	line-height: 48px;
+	float: left;
+}
+
+@media (max-width: 576px) {
+	.brand {
+		margin-right: 12px;
+		display: block;
+	}
+	
+	.brand h2 {
+		display: none;
+	}
+}

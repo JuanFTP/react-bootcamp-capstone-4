@@ -1,0 +1,11 @@
+.icon-area {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	height: 48px;
+	width: 48px;
+	font-size: 1.6rem;
+	cursor: pointer;
+	color: var(--default);
+}

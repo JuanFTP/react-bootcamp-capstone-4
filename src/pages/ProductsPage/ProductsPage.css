@@ -1,0 +1,26 @@
+.sidebar {
+	width: 24%;
+	padding-right: 16px;
+}
+
+.results {
+	width: 76%;
+}
+
+@media (max-width: 768px) {
+	.products-view {
+		display: block !important;
+	}
+
+	.sidebar {
+		padding: 0px;
+	}
+
+	.sidebar,
+	.results {
+		width: 100%;
+	}
+}
+
+@media (max-width: 576px) {
+}

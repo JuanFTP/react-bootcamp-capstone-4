@@ -1,0 +1,38 @@
+.table {
+	width: 100%;
+}
+
+.table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table table thead tr th,
+.table table tbody tr td,
+.table table tfoot tr td {
+	color: var(--default);
+	text-align: left;
+	padding: 16px 24px;
+	border: 1px solid var(--default-48);
+}
+
+.table.resume thead tr {
+	background-color: var(--default-24);
+}
+
+.table.resume tfoot td:first-child {
+	font-weight: 600;
+	text-align: right;
+	border: none;
+}
+
+.table.resume tfoot td:last-child {
+	font-weight: 600;
+	background-color: var(--default-24);
+}
+
+.table.simple tbody tr td:first-child {
+	max-width: 200px;
+	max-width: 320px !important;
+	background-color: var(--default-24);
+}

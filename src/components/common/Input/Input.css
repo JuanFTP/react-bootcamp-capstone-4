@@ -1,0 +1,25 @@
+input,
+select {
+	height: 48px;
+	width: 100%;
+	font-family: inherit;
+	border: 0px;
+	outline: 0px;
+	font-size: 1rem;
+	padding: 8px;
+	text-align: center;
+	color: var(--default);
+	background-color: transparent !important;
+}
+
+input::placeholder {
+	font-size: 0.8rem;
+}
+
+input[type="text"] {
+	text-align: left;
+}
+
+input[type="number"] {
+	font-weight: 600;
+}

@@ -1,0 +1,7 @@
+.container {
+	padding: 0px var(--horizontal-spacing);
+}
+
+.container.inner {
+	padding-top: 120px;
+}

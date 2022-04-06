@@ -1,0 +1,23 @@
+.form-control {
+	display: inline-block;
+	background-color: var(--light);
+}
+
+.form-control.feedback {
+	overflow: hidden;
+	padding: 0px 8px;
+}
+
+.form-control.round {
+	border-radius: 24px;
+}
+
+.form-control.feedback .icon-area,
+.form-control.feedback .input,
+.form-control.feedback .select {
+	float: left;
+}
+
+.form-control.feedback .input {
+	width: calc(100% - 48px);
+}
