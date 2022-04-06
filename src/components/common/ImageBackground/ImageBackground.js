@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
 const ImageBackground = styled.div`
 	background-image: url(${(props) => `${props.media}`});
@@ -16,4 +17,4 @@ ImageBackground.propTypes = {
 	h: PropTypes.string,
 };
 
-export default ImageBackground;
+export default React.memo(ImageBackground);

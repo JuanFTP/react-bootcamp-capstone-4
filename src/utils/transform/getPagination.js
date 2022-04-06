@@ -3,7 +3,7 @@ const getPagination = ({ page, total_pages, version }) => {
 
 	for (let index = 0; index < total_pages; index++) {
 		pages.push({
-			id: `${version}-pag-${index + 1}`,
+			id: `${version}-page-${index + 1}`,
 			number: index + 1,
 			isActive: index + 1 === page ? true : false,
 		});

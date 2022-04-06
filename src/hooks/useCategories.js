@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { API_BASE_URL } from "./../utils/constants";
+import { URI_SEARCH } from "./../utils/constants";
 import getCategories from "./../utils/transform/getCategories";
+import { getErrorMessage } from "./../utils/utils";
 import { useLatestAPI } from "./useLatestAPI";
 
 export function useCategories() {
@@ -20,7 +21,7 @@ export function useCategories() {
 
 		(async () => {
 			try {
-				const URI = `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
+				const URI = `${URI_SEARCH}?ref=${apiRef}&q=${encodeURIComponent(
 					'[[at(document.type, "category")]]'
 				)}&lang=en-us&pageSize=10`;
 
@@ -29,13 +30,7 @@ export function useCategories() {
 
 				setCategories(allCategories);
 			} catch (error) {
-				if (error.response) {
-					setError("Ha ocurrido un error en el servidor");
-				} else if (error.request) {
-					setError("Verifica tu conexión a internet");
-				} else {
-					setError("Error al cargar los datos");
-				}
+				setError(getErrorMessage(error));
 			}
 		})();
 

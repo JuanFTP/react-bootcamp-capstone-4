@@ -1,5 +1,6 @@
-import "./Title.css";
 import PropTypes from "prop-types";
+import React from "react";
+import "./Title.css";
 
 export const titleLevels = {
 	h1: "h1",
@@ -17,4 +18,4 @@ Title.propTypes = {
 	Level: PropTypes.oneOf(Object.keys(titleLevels)),
 };
 
-export default Title;
+export default React.memo(Title);

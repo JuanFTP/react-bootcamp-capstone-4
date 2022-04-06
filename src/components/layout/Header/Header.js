@@ -17,11 +17,12 @@ import Input, { inputTypes } from "./../../common/Input";
 import FormControl from "./../FormControl/FormControl";
 import "./Header.css";
 
-const Header = ({ itemsOnCart, userData }) => {
+const Header = ({ userData }) => {
 	const { state, dispatch } = useContext(GlobalContext);
 
 	const history = useHistory();
 	const location = useLocation();
+	const [showIconCart, setShowIconCart] = useState(true);
 	const [search, setSearch] = useState("");
 
 	const onChangeSearch = (e) => {
@@ -30,12 +31,18 @@ const Header = ({ itemsOnCart, userData }) => {
 		}
 	};
 
-	const onClickBrand = () => {
-		if (
-			location.pathname !== PATHS.home &&
-			location.pathname !== PATHS.default
-		) {
-			history.push(PATHS.home);
+	const onClickItem = (element) => {
+		if (element === "brand") {
+			if (
+				location.pathname !== PATHS.home &&
+				location.pathname !== PATHS.default
+			) {
+				history.push(PATHS.home);
+			}
+		} else {
+			if (location.pathname !== PATHS.cart) {
+				history.push(PATHS.cart);
+			}
 		}
 	};
 
@@ -61,12 +68,21 @@ const Header = ({ itemsOnCart, userData }) => {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
+
+		if (
+			location.pathname === PATHS.cart ||
+			location.pathname === PATHS.checkout
+		) {
+			setShowIconCart(false);
+		} else {
+			setShowIconCart(true);
+		}
 	}, [location]);
 
 	return (
 		<div className="header shadow">
 			<div className="flex ai-center jc-space-between">
-				<Brand handleOnClick={onClickBrand} mode={state.theme} />
+				<Brand handleOnClick={onClickItem} value="brand" mode={state.theme} />
 
 				<FormControl width="40%" feedback={true} round={true}>
 					<IconArea>
@@ -78,7 +94,6 @@ const Header = ({ itemsOnCart, userData }) => {
 						value={search}
 						placeholder="Search"
 						onChangeInput={onChangeSearch}
-						read={false}
 					/>
 				</FormControl>
 
@@ -94,13 +109,15 @@ const Header = ({ itemsOnCart, userData }) => {
 							</IconArea>
 						)}
 
-						<div className="stats">
-							<IconArea>
-								<MdOutlineShoppingCart />
-							</IconArea>
+						{showIconCart && (
+							<div className="stats">
+								<IconArea onClicketItem={onClickItem} value="cart">
+									<MdOutlineShoppingCart />
+								</IconArea>
 
-							{itemsOnCart && <Chip>{itemsOnCart}</Chip>}
-						</div>
+								{state.cart.length > 0 && <Chip>{state.cart.length}</Chip>}
+							</div>
+						)}
 					</div>
 
 					{userData && (
@@ -115,7 +132,7 @@ const Header = ({ itemsOnCart, userData }) => {
 };
 
 Header.propTypes = {
-	itemsOnCart: PropTypes.number,
+	userData: PropTypes.object,
 };
 
 export default Header;

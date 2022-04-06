@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { MdAdd, MdOutlineRemove } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { tableVariants } from "../../components/common/Table/Table";
 import Button, { buttonVariants } from "./../../components/common/Button";
 import Chip, { chipVariants } from "./../../components/common/Chip";
 import Container from "./../../components/common/Container";
+import ErrorBoundary from "./../../components/common/ErrorBoundary/ErrorBoundary";
 import IconArea from "./../../components/common/IconArea/IconArea";
 import Input, { inputTypes } from "./../../components/common/Input";
 import Table from "./../../components/common/Table";
 import Title, { titleLevels } from "./../../components/common/Title";
 import FormControl from "./../../components/layout/FormControl/FormControl";
 import SwiperCarousel from "./../../components/layout/SwiperCarousel";
+import { useAddToCart } from "./../../hooks/useAddToCart";
 import { useProduct } from "./../../hooks/useProduct";
+import { useRemoveToCart } from "./../../hooks/useRemoveToCart";
+import { GlobalContext } from "./../../reducers/Global";
 import { PATHS } from "./../../utils/constants";
 import SkProductDetails from "./../../utils/skeletons/SkProductDetails";
 import {
@@ -22,22 +28,75 @@ import "./ProductPage.css";
 
 const ProductPage = () => {
 	const { productId } = useParams();
-	const { product } = useProduct(productId);
+	const { setDataToAdd, statusAdd } = useAddToCart();
+	const { setDataToRemove, statusRemove } = useRemoveToCart();
+	const { state, dispatch } = useContext(GlobalContext);
+	const [index, setIndex] = useState(-1);
+	const [legend, setLegend] = useState("ADD TO CART");
+	const { cart } = state;
+	const {
+		product,
+		product: { stock },
+	} = useProduct(productId);
 	const [pieces, setPieces] = useState(0);
 
-	const modifyPieces = (mode) => {
-		if (mode === "INC" && pieces < product.stock) {
-			setPieces((pieces) => pieces + 1);
-		} else if (mode === "DEC") {
-			setPieces((pieces) => (pieces > 1 && product.stock > 0 ? pieces - 1 : 1));
+	const onChangePieces = useCallback(
+		(add) => {
+			if (add) {
+				setPieces(pieces < stock ? pieces + 1 : pieces);
+			} else {
+				setPieces(pieces > 0 ? pieces - 1 : pieces);
+			}
+		},
+		[stock, pieces]
+	);
+
+	const onAddToCart = () => {
+		if (index >= 0) {
+			if (pieces === 0) {
+				setDataToRemove({ cart, dispatch, productId: product.id });
+			} else {
+				let diff = pieces - cart[index].selected;
+				setDataToAdd({ cart, product, cuantity: diff, dispatch });
+			}
+		} else {
+			if (pieces > 0) {
+				setDataToAdd({ cart, product, cuantity: pieces, dispatch });
+			}
 		}
 	};
 
 	useEffect(() => {
-		if (product.stock > 0) {
-			setPieces(1);
+		if (statusAdd.added) {
+			toast.success("The product has been updated.");
+		} else {
+			if (statusAdd.id !== "") {
+				toast.warning("You have already selected all the available items.");
+			}
 		}
-	}, [product.stock]);
+	}, [statusAdd]);
+
+	useEffect(() => {
+		if (statusRemove.removed) {
+			toast.success("The product has been removed.");
+		} else {
+			if (statusRemove.id !== "") {
+				toast.error("Sorry, has been a problem occurred.");
+			}
+		}
+	}, [statusRemove]);
+
+	useEffect(() => {
+		if (product.id) {
+			setIndex(cart.map((item) => item.id).indexOf(product.id));
+			if (index >= 0) {
+				setPieces(cart[index] ? cart[index].selected : 0);
+				setLegend("UPDATE CART");
+			} else {
+				setLegend("ADD TO CART");
+			}
+		}
+	}, [product, cart, index]);
 
 	return (
 		<Container inner={true}>
@@ -81,34 +140,45 @@ const ProductPage = () => {
 						</div>
 
 						<div className="items">
-							<Title Level={titleLevels.h4}>
-								Items ({product.stock} available)
-							</Title>
-							<div className="controls">
-								<div className="flex ai-center jc-start">
-									<IconArea onClicketItem={modifyPieces} value="DEC">
-										<MdOutlineRemove />
-									</IconArea>
-									<FormControl width="96px" feedback={false} round={false}>
-										<Input
-											variant={inputTypes.number}
-											value={pieces}
-											placeholder={"0"}
-											read={true}
-										/>
-									</FormControl>
-									<IconArea onClicketItem={modifyPieces} value="INC">
-										<MdAdd />
-									</IconArea>
+							<Title
+								Level={titleLevels.h4}
+							>{`Items (${stock} available)`}</Title>
+							<ErrorBoundary>
+								<div className="controls">
+									<div className="flex ai-center jc-start">
+										<IconArea onClicketItem={onChangePieces} value={false}>
+											<MdOutlineRemove />
+										</IconArea>
 
-									<Button variant={buttonVariants.primary}>Add to cart</Button>
+										<FormControl width="96px" feedback={false} round={false}>
+											<Input
+												variant={inputTypes.number}
+												value={pieces ? pieces : 0}
+												placeholder={"0"}
+												isReadOnly={true}
+											/>
+										</FormControl>
+
+										<IconArea onClicketItem={onChangePieces} value={true}>
+											<MdAdd />
+										</IconArea>
+
+										{stock > 0 && (
+											<Button
+												variant={buttonVariants.primary}
+												onClickItem={onAddToCart}
+											>
+												{legend}
+											</Button>
+										)}
+									</div>
 								</div>
-							</div>
+							</ErrorBoundary>
 						</div>
 
 						<div className="specs">
 							<Title Level={titleLevels.h4}>Specs</Title>
-							<Table data={product.specs} />
+							<Table data={product.specs} variant={tableVariants.simple} />
 						</div>
 					</div>
 				</div>

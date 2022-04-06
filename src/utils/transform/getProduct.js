@@ -9,7 +9,7 @@ const getProduct = (item) => {
 			id: item.data.category.id,
 			slug: item.data.category.slug.replace("--", " & "),
 		},
-		mainImage: item.data.mainimage,
+		image: item.data.mainimage,
 		images: item.data.images.map((img) => img.image),
 		description: item.data.short_description,
 		specs: item.data.specs.map((spec) => ({

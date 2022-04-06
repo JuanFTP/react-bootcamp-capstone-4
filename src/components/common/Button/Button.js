@@ -1,5 +1,6 @@
-import "./Button.css";
 import PropTypes from "prop-types";
+import React from "react";
+import "./Button.css";
 
 export const buttonVariants = {
 	outline: "outline",
@@ -7,11 +8,11 @@ export const buttonVariants = {
 	default: "default",
 };
 
-const Button = ({ children, variant, value, onClickItem }) => {
+const Button = ({ children, variant, onClickItem, value }) => {
 	return (
 		<button
 			className={`btn btn-${buttonVariants[variant]}`}
-			onClick={() => onClickItem && value && onClickItem(value)}
+			onClick={() => onClickItem && onClickItem(value)}
 		>
 			{children}
 		</button>
@@ -25,4 +26,4 @@ Button.propTypes = {
 	onClickItem: PropTypes.func,
 };
 
-export default Button;
+export default React.memo(Button);
